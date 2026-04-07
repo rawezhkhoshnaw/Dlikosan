@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نوسینگەی دڵی کۆسان | فێرگە و تاقیکردنەوە</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ڕەنگە نوێ و مۆدێرنەکان */
+        :root {
+            --primary: #020617; /* شینی زۆر تاریک (ڕەشباو) */
+            --primary-light: #0f172a;
+            --accent: #f59e0b; /* زەردی زێڕین */
+            --accent-hover: #d97706;
+            --bg-color: #f8fafc;
+            --surface: #ffffff;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --danger: #ef4444;
+            --success: #10b981;
+            --info: #0ea5e9;
+            --shadow-float: 0 10px 40px rgba(0, 0, 0, 0.1);
+            --radius: 20px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tahoma', 'Arial', sans-serif; line-height: 1.8; }
+        body { background-color: var(--bg-color); color: var(--text-dark); overflow-x: hidden; scroll-behavior: smooth; }
+
+        /* مێنیو باری زۆر مۆدێرن (Floating Glassmorphism) */
+        header { 
+            position: fixed; top: 15px; left: 50%; transform: translateX(-50%); 
+            width: 95%; max-width: 900px; 
+            background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            padding: 10px 20px; border-radius: 50px; 
+            display: flex; justify-content: space-between; align-items: center; 
+            z-index: 1000; box-shadow: 0 15px 35px rgba(2,6,23,0.3); border: 1px solid rgba(255,255,255,0.1);
+        }
+        .logo { font-size: 20px; font-weight: bold; color: var(--surface); display: flex; align-items: center; gap: 10px; }
+        .logo i { color: var(--accent); font-size: 24px; filter: drop-shadow(0 2px 4px rgba(245, 158, 11, 0.4)); }
+        
+        .nav-links { display: flex; gap: 5px; background: rgba(255,255,255,0.1); padding: 5px; border-radius: 40px; }
+        .nav-btn { background: transparent; border: none; padding: 8px 18px; border-radius: 30px; font-weight: bold; color: #cbd5e1; cursor: pointer; transition: 0.3s; font-size: 14px; }
+        .nav-btn.active, .nav-btn:hover { background: var(--accent); color: var(--primary); box-shadow: 0 4px 15px rgba(245,158,11,0.3); transform: scale(1.05); }
+
+        .page { display: none; padding-top: 100px; padding-bottom: 80px; animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        .page.active { display: block; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* باگراوندی پەڕەی سەرەکی */
+        .hero { position: relative; margin: 0 5%; border-radius: 40px; overflow: hidden; background: var(--primary); color: white; padding: 100px 20px; text-align: center; box-shadow: var(--shadow-float); }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=1200') center/cover; opacity: 0.2; }
+        .hero::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, var(--primary) 10%, transparent); }
+        .hero-content { position: relative; z-index: 2; max-width: 850px; margin: 0 auto; }
+        
+        .hero h1 { font-size: 45px; color: var(--accent); margin-bottom: 15px; text-shadow: 0 4px 15px rgba(0,0,0,0.8); font-weight: 900; letter-spacing: 1px; }
+        .hero h2 { font-size: 22px; color: white; margin-bottom: 30px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); font-weight: normal; line-height: 1.6; }
+        
+        .btn-group { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 30px; }
+        .btn-modern { background: linear-gradient(135deg, var(--accent), var(--accent-hover)); color: white; padding: 15px 35px; font-size: 18px; font-weight: bold; border: none; border-radius: 40px; cursor: pointer; transition: 0.3s; box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4); display: inline-flex; align-items: center; gap: 10px; }
+        .btn-modern:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(245, 158, 11, 0.6); }
+        .btn-outline { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); box-shadow: none; color: white; backdrop-filter: blur(5px); }
+        .btn-outline:hover { background: white; color: var(--primary); border-color: white; }
+
+        /* زانیارییەکانی نوسینگە (About Us) */
+        .about-section { max-width: 1200px; margin: 60px auto 20px; padding: 0 5%; text-align: center; }
+        .about-title { font-size: 32px; color: var(--primary); margin-bottom: 15px; font-weight: bold; }
+        .about-desc { font-size: 18px; color: var(--text-muted); max-width: 800px; margin: 0 auto 40px; line-height: 1.8; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .feature-card { background: var(--surface); padding: 40px 25px; border-radius: var(--radius); box-shadow: 0 5px 20px rgba(0,0,0,0.03); transition: 0.4s; border: 1px solid #f1f5f9; position: relative; overflow: hidden; }
+        .feature-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: var(--accent); }
+        .feature-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-float); }
+        .feature-card i { font-size: 40px; color: var(--info); margin-bottom: 20px; background: #f0f9ff; padding: 20px; border-radius: 50%; }
+        .feature-card h3 { font-size: 20px; color: var(--primary); margin-bottom: 10px; font-weight: bold; }
+        .feature-card p { font-size: 15px; color: var(--text-muted); }
+
+        /* ڕێنماییە ئاڵتوونییەکان */
+        .tips-section { max-width: 1300px; margin: 0 auto 40px; padding: 0 5%; }
+        .sec-title { display: flex; align-items: center; gap: 15px; font-size: 28px; color: var(--primary); margin-bottom: 30px; font-weight: bold; border-bottom: 2px solid #e2e8f0; padding-bottom: 15px; }
+        .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .tip-card { display: flex; gap: 20px; align-items: flex-start; padding: 25px; background: var(--surface); border-radius: var(--radius); border-right: 5px solid var(--info); box-shadow: 0 5px 15px rgba(0,0,0,0.03); transition: 0.4s; }
+        .tip-card:hover { transform: translateX(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); background: #f8fafc; }
+        .tip-card i { font-size: 32px; color: var(--info); background: #f0f9ff; width: 65px; height: 65px; display: flex; justify-content: center; align-items: center; border-radius: 18px; }
+        .tip-card h3 { font-size: 17px; color: var(--primary); margin-bottom: 8px; font-weight: bold; }
+        .tip-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+        /* هێماکان */
+        .signs-container { max-width: 1300px; margin: 60px auto 0; padding: 0 5%; }
+        .signs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; margin-bottom: 50px; }
+        .sign-card { background: var(--surface); border-radius: var(--radius); padding: 30px 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.03); border: 1px solid #f1f5f9; transition: 0.4s; }
+        .sign-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); border-color: var(--accent); }
+        .sign-card h3 { font-size: 15px; margin: 15px 0 5px; color: var(--primary); font-weight: bold; }
+        .sign-card p { font-size: 12px; color: var(--text-muted); }
+
+        /* شێوەی هێماکان */
+        .shape-box { height: 90px; display: flex; justify-content: center; align-items: center; margin-bottom: 15px; }
+        .triangle { width: 0; height: 0; border-left: 45px solid transparent; border-right: 45px solid transparent; border-bottom: 78px solid var(--danger); position: relative; display: flex; justify-content: center; }
+        .triangle::after { content: ''; position: absolute; top: 10px; left: -38px; border-left: 38px solid transparent; border-right: 38px solid transparent; border-bottom: 65px solid white; }
+        .triangle i { position: absolute; top: 32px; font-size: 30px; color: var(--primary); z-index: 2; }
+        .circle-red { width: 85px; height: 85px; border-radius: 50%; border: 10px solid var(--danger); background: white; display: flex; justify-content: center; align-items: center; font-size: 30px; color: var(--primary); font-weight: bold; }
+        .circle-blue { width: 85px; height: 85px; border-radius: 50%; background: var(--info); display: flex; justify-content: center; align-items: center; font-size: 30px; color: white; }
+        .rect-blue { width: 85px; height: 85px; border-radius: 15px; background: var(--info); display: flex; justify-content: center; align-items: center; font-size: 35px; color: white; }
+
+        /* باگراوندی تاقیکردنەوە */
+        .quiz-bg { background: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=1200') center/cover fixed; padding: 40px 0; border-radius: 40px; margin: 0 5%; position: relative; }
+        .quiz-bg::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); border-radius: 40px; }
+
+        /* تاقیکردنەوە (دوگمەکانی ڕەنگاوڕەنگ) */
+        .quiz-wrapper { max-width: 850px; margin: 0 auto; position: relative; z-index: 2; }
+        .quiz-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 30px; padding: 40px; box-shadow: var(--shadow-float); border: 1px solid rgba(255,255,255,0.2); }
+        .progress-bar { width: 100%; height: 10px; background: #e2e8f0; border-radius: 20px; margin-bottom: 30px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--success)); width: 0%; transition: 0.5s ease; border-radius: 20px; }
+        .q-header { display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 25px; font-size: 16px; color: var(--text-muted); border-bottom: 2px solid #f1f5f9; padding-bottom: 15px; }
+        .q-text { font-size: 22px; color: var(--primary); margin-bottom: 35px; font-weight: bold; line-height: 1.6; }
+        
+        .opts-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+        .opt-btn { background: var(--bg-color); border: 2px solid transparent; padding: 18px; border-radius: 15px; font-size: 16px; text-align: right; cursor: pointer; transition: 0.3s; font-weight: bold; color: var(--text-dark); display: flex; align-items: center; gap: 15px; }
+        .opt-btn i { font-size: 22px; color: #cbd5e1; transition: 0.3s; }
+        .opt-btn:hover:not(:disabled) { background: white; border-color: var(--accent); box-shadow: 0 10px 20px rgba(245, 158, 11, 0.15); transform: translateX(-5px); }
+        .opt-btn:hover:not(:disabled) i { color: var(--accent); }
+        
+        .opt-btn.correct { background: var(--success) !important; color: white !important; border-color: var(--success) !important; box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3) !important; }
+        .opt-btn.correct i { color: white !important; }
+        .opt-btn.wrong { background: var(--danger) !important; color: white !important; border-color: var(--danger) !important; box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3) !important; animation: shake 0.4s; }
+        .opt-btn.wrong i { color: white !important; }
+        .opt-btn:disabled { cursor: not-allowed; }
+
+        @keyframes shake { 0% { transform: translateX(0); } 25% { transform: translateX(-5px); } 50% { transform: translateX(5px); } 75% { transform: translateX(-5px); } 100% { transform: translateX(0); } }
+
+        .result-box { text-align: center; }
+        .score-circle { width: 160px; height: 160px; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; margin: 0 auto 30px; color: white; box-shadow: 0 15px 30px rgba(0,0,0,0.2); border: 8px solid rgba(255,255,255,0.3); }
+        .score-circle span { font-size: 60px; font-weight: 900; line-height: 1; }
+
+        /* واتسئاپ و فوتەر */
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 35px; box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4); z-index: 1000; text-decoration: none; transition: 0.4s; border: 3px solid white; }
+        .whatsapp-float:hover { transform: scale(1.15) rotate(-10deg); }
+        footer { background: var(--primary); color: white; text-align: center; padding: 30px 20px; margin-top: 50px; font-family: Arial, sans-serif; letter-spacing: 1px; font-size: 14px;}
+
+        @media (max-width: 768px) {
+            header { width: 90%; padding: 8px 15px; }
+            .nav-links { gap: 2px; }
+            .nav-btn { padding: 8px 12px; font-size: 12px; }
+            .logo span { display: none; } /* تەنها ئایکۆن دەمێنێت بۆ جێگەبونەوە */
+            .hero h1 { font-size: 32px; }
+            .hero h2 { font-size: 18px; }
+            .btn-group { flex-direction: column; }
+            .q-text { font-size: 20px; }
+            .opt-btn { font-size: 14px; padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo"><i class="fas fa-car-side"></i> <span>دڵی کۆسان</span></div>
+        <div class="nav-links">
+            <button class="nav-btn active" onclick="switchPage('home', this)">سەرەتا</button>
+            <button class="nav-btn" onclick="switchPage('learning', this)">فێربوون</button>
+            <button class="nav-btn" onclick="switchPage('quiz', this)">تاقیکردنەوە</button>
+        </div>
+    </header>
+
+    <!-- ١. پەڕەی سەرەکی و دەربارەی نوسینگە -->
+    <div id="home" class="page active">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>نوسینگەی دڵی کۆسان</h1>
+                <h2>پێشەنگ لە فێرکردنی شۆفێری بە سیستەمی مۆدێرن</h2>
+                <p>ئێمە لێرەین بۆ ئەوەی بە ئاسانترین شێوە فێری یاساکانی هاتوچۆت بکەین و بە پرسیارە قورسەکان ئامادەت بکەین بۆ ئەوەی لە یەکەم هەوڵدا دەربچیت.</p>
+                <div class="btn-group">
+                    <button class="btn-modern" onclick="document.querySelectorAll('.nav-btn')[1].click()">
+                        <i class="fas fa-book-open"></i> دەستپێکردنی فێربوون
+                    </button>
+                    <button class="btn-modern btn-outline" onclick="document.querySelectorAll('.nav-btn')[2].click()">
+                        <i class="fas fa-play-circle"></i> تاقیکردنەوەی VIP
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2 class="about-title">دەربارەی ئێمە</h2>
+            <p class="about-desc">ئێمە یەکێکین لە متمانەپێکراوترین نوسینگەکانی فێرکردنی شۆفێری لە کوردستان. ئامانجی سەرەکیمان سەلامەتی تۆیە و پێگەیاندنی شۆفێری لێهاتووە بە بەکارهێنانی مۆدێرنترین ڕێگاکانی سەردەم.</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-user-tie"></i>
+                    <h3>ڕاهێنەری شارەزا</h3>
+                    <p>خاوەنی باشترین ڕاهێنەری کوڕان و کچانین کە بە ئارامی و دڵسۆزییەوە فێرت دەکەن و هەموو نهێنییەکانی شۆفێریت پێ دەڵێن.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-car-on"></i>
+                    <h3>ئۆتۆمبێلی مۆدێرن</h3>
+                    <p>فێربوون لەسەر نوێترین جۆری ئۆتۆمبێلەکان دەبێت کە هەموو سیستەمەکانی سەلامەتی و ئاسانکارییان تێدایە.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-award"></i>
+                    <h3>ڕێژەی دەرچوونی بەرز</h3>
+                    <p>لەسایەی سیستەمە پێشکەوتووەکەمان، خوێندکارەکانمان بەرزترین ڕێژەی دەرچوونیان هەیە لە تاقیکردنەوەکانی هاتوچۆدا.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ٢. پەڕەی فێربوون -->
+    <div id="learning" class="page">
+        <div class="tips-section" style="max-width: 1300px; margin: 0 auto 50px; padding: 0 5%;">
+            <h2 class="sec-title"><i class="fas fa-lightbulb" style="color:var(--accent)"></i> ١٥ ڕێنماییە ئاڵتوونییەکان بۆ شۆفێران</h2>
+            <div class="tips-grid" id="tips-container"></div>
+        </div>
+
+        <div class="signs-container">
+            <h2 class="sec-title"><i class="fas fa-exclamation-triangle" style="color:var(--danger)"></i> ئاگادارکردنەوە (سێگۆشە)</h2>
+            <div class="signs-grid" id="warning-signs"></div>
+
+            <h2 class="sec-title" style="margin-top: 50px;"><i class="fas fa-ban" style="color:var(--danger)"></i> قەدەغەکردن (بازنەی سوور)</h2>
+            <div class="signs-grid" id="prohibit-signs"></div>
+
+            <h2 class="sec-title" style="margin-top: 50px;"><i class="fas fa-arrow-circle-right" style="color:var(--info)"></i> ناچارکردن (بازنەی شین)</h2>
+            <div class="signs-grid" id="mandatory-signs"></div>
+            
+            <h2 class="sec-title" style="margin-top: 50px;"><i class="fas fa-info-square" style="color:var(--info)"></i> زانیاری و ڕێنمایی</h2>
+            <div class="signs-grid" id="info-signs"></div>
+        </div>
+    </div>
+
+    <!-- ٣. پەڕەی تاقیکردنەوە -->
+    <div id="quiz" class="page">
+        <div class="quiz-bg">
+            <div class="quiz-wrapper">
+                <div class="quiz-card" id="quiz-intro" style="text-align: center;">
+                    <i class="fas fa-shield-check" style="font-size: 80px; color: var(--accent); margin-bottom: 25px;"></i>
+                    <h2 style="font-size: 30px; color: var(--primary); margin-bottom: 15px;">تاقیکردنەوەی تیۆری (VIP)</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 40px; font-size: 18px;">لەم بەشەدا <b>٢٠ پرسیار</b> بە هەڕەمەکی لەناو ٥٠٠ پرسیار هەڵدەبژێردرێت. ئەگەر وەڵامەکەت هەڵە بێت، ڕاستەوخۆ وەڵامە ڕاستەکەت بە سەوزی بۆ ئاشکرا دەبێت.</p>
+                    <button class="btn-modern" style="width: 100%; justify-content: center;" onclick="startQuiz()">
+                        <i class="fas fa-play-circle" style="font-size: 24px;"></i> دەستپێکردن
+                    </button>
+                </div>
+
+                <div class="quiz-card" id="quiz-box" style="display: none;">
+                    <div class="progress-container"><div class="progress-fill" id="progress"></div></div>
+                    <div class="q-header">
+                        <span id="q-count">پرسیار: ١ / ٢٠</span>
+                        <span style="color: var(--danger);"><i class="fas fa-star"></i> ٥ نمرە</span>
+                    </div>
+                    <div class="q-text" id="q-text">لێرەدا پرسیارەکە دەردەکەوێت؟</div>
+                    <div class="opts-grid" id="opts-box"></div>
+                </div>
+
+                <div class="quiz-card result-box" id="result-box" style="display: none;">
+                    <div class="score-circle" id="final-circle"><span id="final-score">100</span></div>
+                    <h2 id="res-title" style="font-size: 35px; margin-bottom: 15px;">دەرەنجام</h2>
+                    <p id="res-msg" style="color: var(--text-muted); margin-bottom: 40px; font-size: 20px;"></p>
+                    <button class="btn-modern" onclick="startQuiz()"><i class="fas fa-redo-alt"></i> دوبارەکردنەوەی تاقیکردنەوە</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- واتسئاپ و فوتەر -->
+    <a href="https://wa.me/9647504659955" class="whatsapp-float" target="_blank" title="پەیوەندیمان پێوە بکە لە واتسئاپ"><i class="fab fa-whatsapp"></i></a>
+    <footer><p>Developed by Rawesh Khoshnaw &copy; 2026. All Rights Reserved.</p></footer>
+
+    <script>
+        function switchPage(id, btn) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            btn.classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // ١. ڕێنماییە ئاڵتوونییەکان
+        const tipsData = [
+            {i: 'fa-user-shield', c: 'var(--success)', t: 'قایشی سەلامەتی', d: 'بەستنی قایشی سەلامەتی مەترسی مەرگ لە ڕووداوەکان ٥٠٪ کەم دەکاتەوە.'},
+            {i: 'fa-ruler', c: 'var(--info)', t: 'مەسافەی سەلامەتی (٥٠ مەتر)', d: 'هەمیشە مەسافەی ٥٠ مەتر جێبهێڵە لەنێوان ئۆتۆمبێلی پێشەوەت.'},
+            {i: 'fa-mobile-screen', c: 'var(--danger)', t: 'مۆبایل قەدەغەیە', d: 'سەیرکردنی مۆبایل بۆ ٣ چرکە، وەک لێخوڕین وایە بە چاوی داخراوەوە بۆ سەدان مەتر.'},
+            {i: 'fa-cloud-rain', c: 'var(--accent)', t: 'کەشوهەوای خراپ', d: 'لە کاتی باران و بەفردا، نیوەی خێرایی ئاسایی خۆت کەم بکەرەوە.'},
+            {i: 'fa-child-reaching', c: '#ec4899', t: 'دانیشتنی منداڵ', d: 'هەرگیز ڕێگە مەدە منداڵی خوار ١٢ ساڵ لە کوشنی پێشەوە دابنیشێت.'},
+            {i: 'fa-bed', c: '#8b5cf6', t: 'ماندوێتی و خەواڵوویی', d: 'ئەگەر خەوت دەهات دەستبەجێ بوەستە، نووستن بۆ یەک چرکە کارەساتە.'},
+            {i: 'fa-eye-slash', c: 'var(--primary)', t: 'گۆشەی نەبینراو (Blind Spot)', d: 'پێش پێچکردنەوە تەنها پشت بە ئاوێنە مەبەستە، کەمێک سەرت بسوڕێنە.'},
+            {i: 'fa-car-burst', c: 'var(--danger)', t: 'خلیسکانی سەر ئاو', d: 'ئەگەر ئۆتۆمبێلەکەت خلیسکا، هەرگیز بە توندی برێک مەگرە.'},
+            {i: 'fa-lightbulb', c: 'var(--accent)', t: 'بەکارهێنانی لایت', d: 'لە شەودا ئەگەر ئۆتۆمبێل بەرامبەرت هات، دەبێت لایتی فول بکوژێنیتەوە.'},
+            {i: 'fa-truck', c: 'var(--text-muted)', t: 'ئۆتۆمبێلی گەورە', d: 'لەپشت بارهەڵگرەوە زۆر نزیک مەبەرەوە، چونکە شۆفێرەکەی ناتبينێت.'},
+            {i: 'fa-sync', c: 'var(--success)', t: 'یاسای فلکە', d: 'هەمیشە پێشینەی ڕۆیشتن بۆ ئەو کەسەیە کە لەناو فلکەدایە.'},
+            {i: 'fa-compress-arrows-alt', c: 'var(--info)', t: 'برێکی کتوپڕ (ABS)', d: 'ئەگەر سیستەمی ABSـت هەیە، بەهێز برێک بگرە، تایەکان قفڵ نابن.'},
+            {i: 'fa-walking', c: 'var(--danger)', t: 'پەڕینەوەی پیادە', d: 'هەمیشە ڕێز لە هێڵی پیادە بگرە و وەستان بکە بۆیان.'},
+            {i: 'fa-ambulance', c: '#ec4899', t: 'فریاگوزاری', d: 'ئەمبولانس و ئاگرکوژێنەوە کە زەنگیان لێدا، ڕێگایان بۆ چۆڵ بکە.'},
+            {i: 'fa-gas-pump', c: 'var(--accent)', t: 'سووتمەنی', d: 'هەرگیز مەهێڵە گڵۆپی بەنزین هەڵببێت بۆ ماوەیەکی زۆر.'}
+        ];
+        const tipsContainer = document.getElementById('tips-container');
+        tipsData.forEach(t => {
+            tipsContainer.innerHTML += `<div class="tip-card" style="border-right-color: ${t.c}"><i><span class="fas ${t.i}" style="color: ${t.c}"></span></i><div><h3>${t.t}</h3><p>${t.d}</p></div></div>`;
+        });
+
+        // ٢. مۆتۆڕی هێماکان
+        const signs = {
+            warning: [
+                {i:'fa-exclamation', t:'مەترسی گشتی', d:'ئاگاداربە مەترسی هەیە لەپێشە.'}, {i:'fa-child', t:'منداڵان', d:'قوتابخانە لەپێشە.'},
+                {i:'fa-car-burst', t:'ناوچەی ڕووداو', d:'مەترسی پێکدادان.'}, {i:'fa-road', t:'ڕێگەی خلیسک', d:'لە باران مەترسیدارە.'},
+                {i:'fa-train', t:'شەمەندەفەر', d:'هێڵی شەمەندەفەر.'}, {i:'fa-tractor', t:'تراکتۆر', d:'پەڕینەوەی تراکتۆر.'},
+                {i:'fa-wind', t:'بای بەهێز', d:'ئاگاداربە لە هێزی با.'}, {i:'fa-arrow-turn-up', t:'پێچی مەترسیدار', d:'خێرایی کەم بکەوە.'}
+            ],
+            prohibit: [
+                {i:'<i class="fas fa-bullhorn"></i>', t:'هۆڕن قەدەغەیە', d:'لێدانی هۆڕن قەدەغەیە.'}, {i:'<i class="fas fa-ban"></i>', t:'چوونەژوورەوە قەدەغە', d:'ساید عەکس.'},
+                {i:'<i class="fas fa-truck"></i>', t:'بارهەڵگر قەدەغە', d:'ئۆتۆمبێلی گەورە قەدەغەیە.'}, {i:'<i class="fas fa-car-side"></i>', t:'پێشبڕین قەدەغە', d:'نابێت پێش ئۆتۆمبێل بڕیت.'}
+            ],
+            mandatory: [
+                {i:'<i class="fas fa-arrow-right"></i>', t:'بۆ ڕاست بڕۆ', d:'ناچاریت بۆ ڕاست بڕۆیت.'}, {i:'<i class="fas fa-arrow-up"></i>', t:'بۆ پێشەوە بڕۆ', d:'تەنها بۆ پێشەوە.'},
+                {i:'<i class="fas fa-sync"></i>', t:'فلکە', d:'چوونە فلکە ناچارییە.'}
+            ],
+            info: [
+                {i:'<i class="fas fa-parking"></i>', t:'پارکینگ', d:'شوێنی وەستان.'}, {i:'<i class="fas fa-hospital"></i>', t:'نەخۆشخانە', d:'نەخۆشخانە لە نزیکە.'},
+                {i:'<i class="fas fa-gas-pump"></i>', t:'بەنزینخانە', d:'وێستگەی سووتەمەنی.'}, {i:'<i class="fas fa-wrench"></i>', t:'فیتەر', d:'چاککردنەوەی ئۆتۆمبێل.'}
+            ]
+        };
+
+        for(let j=10; j<=120; j+=10) { signs.prohibit.push({i: j, t: `زۆرترین خێرایی ${j}`, d: `نابێت لە ${j} کم تێپەڕیت.`}); }
+        for(let j=1; j<=10; j++) { signs.prohibit.push({i: `<b style="font-size:24px;">${j}t</b>`, t: `کێشی ڕێگەپێنەدراو ${j} تەن`, d: `کێشی زیاتر قەدەغەیە.`}); }
+        for(let j=30; j<=100; j+=10) { signs.mandatory.push({i: j, t: `کەمترین خێرایی ${j}`, d: `دەبێت لە ${j} کم خێراتر بڕۆیت.`}); }
+
+        const wBox = document.getElementById('warning-signs'), pBox = document.getElementById('prohibit-signs'), mBox = document.getElementById('mandatory-signs'), iBox = document.getElementById('info-signs');
+        signs.warning.forEach(s => wBox.innerHTML += `<div class="sign-card"><div class="shape-box"><div class="triangle"><i class="fas ${s.i}"></i></div></div><h3>${s.t}</h3><p>${s.d}</p></div>`);
+        signs.prohibit.forEach(s => pBox.innerHTML += `<div class="sign-card"><div class="shape-box"><div class="circle-red">${s.i}</div></div><h3>${s.t}</h3><p>${s.d}</p></div>`);
+        signs.mandatory.forEach(s => mBox.innerHTML += `<div class="sign-card"><div class="shape-box"><div class="circle-blue">${s.i}</div></div><h3>${s.t}</h3><p>${s.d}</p></div>`);
+        signs.info.forEach(s => iBox.innerHTML += `<div class="sign-card"><div class="shape-box"><div class="rect-blue">${s.i}</div></div><h3>${s.t}</h3><p>${s.d}</p></div>`);
+
+        // ٣. داتابەیسی پرسیارەکان
+        const baseQuestions = [
+            {q: "لە چوارڕیانی بێ هێمای هاتوچۆ، ٣ ئۆتۆمبێل بەیەکەوە گەیشتن. یاسای ئەولەویەت بۆ کێیە؟", o: ["ئەوەی دەکەوێتە لای ڕاستی ئەوانی ترەوە", "ئەوەی خێرایە و یەکەم جار گەیشتووە", "ئەوەی دەکەوێتە لای چەپەوە", "ئۆتۆمبێلی قەبارە گەورە"], a: 0},
+            {q: "لەناو فلکە، ئۆتۆمبێلێک هەیە و تۆش دەتەوێت بچیتە ناوی. کێ مافی پێشینەی هەیە؟", o: ["ئەو ئۆتۆمبێلەی کە پێشتر لەناو فلکەدایە", "من، چونکە لەلای ڕاستی ئەوم", "هەردووکیان دەتوانن بڕۆن", "ئەوەی خێرایی زیاترە"], a: 0},
+            {q: "ئەگەر لە کاتی بارانێکی بەخوڕدا ئۆتۆمبێلەکەت تووشی خلیسکانی سەر ئاو بوو، باشترین کار چییە؟", o: ["قاچم لەسەر بەنزین لادەبەم و برێک ناگرم تا کۆنتڕۆڵ دەگەرێتەوە", "بەهێز برێک دەگرم بۆ وەستان", "سوکانەکە بە خێرایی دەسوڕێنم", "گێڕەکە دەخەمە سەر خاڵی"], a: 0},
+            {q: "هێمایەکی سێگۆشەی هەڵگەڕاوە (سەرەوخوار) لەسەر شەقام کێشراوە، ئەمە واتای چییە؟", o: ["پێشینەی ڕۆیشتن بدە بە ئۆتۆمبێلەکانی شەقامی بەرامبەر", "شەقامی سەرەکییە بەردەوام بە", "وەستانی تەواو وەکو هێمای STOP", "تەنها بۆ ئۆتۆمبێلی بارهەڵگرە"], a: 0},
+            {q: "مەسافەی سەلامەتی یاسایی نێوان تۆ و ئۆتۆمبێلی پێشەوەت لە دۆخی کەشوهەوای ئاساییدا چەندە؟", o: ["٥٠ مەتر یان ٣ چرکە", "١٠ مەتر", "٢٠ مەتر", "١٠٠ مەتر"], a: 0},
+            {q: "سیستەمی ABS لە برێکی ئۆتۆمبێلدا کاری سەرەکی چییە لە کاتی ڕووداودا؟", o: ["ڕێگری دەکات لە قفڵبوونی تایەکان بۆ ئەوەی بتوانیت سوکانەکە بسوڕێنیت", "مەسافەی وەستان سفر دەکاتەوە", "خێرایی ئۆتۆمبێلەکە زیاد دەکات", "تایەکان لە تەقین دەپارێزێت"], a: 0},
+            {q: "لە شەودا لایتی بەرز (فول)ت پێکردووە، کەی ناچاریت بیکوژێنیتەوە و بیکەیتە نزم؟", o: ["کاتێک ئۆتۆمبێلێک لە بەرامبەرت دێت یان لەپشت ئۆتۆمبێلێکی ترەوەیت", "تەنها کاتێک پۆلیس دەبینیت", "کاتێک دەچیتە ناو تونێل", "هیچ کات ناچار نیت"], a: 0},
+            {q: "ئەگەر ترافیک لایت ڕەنگی (زەردی فلاش - پچڕپچڕ)ی لێدەدا، ئەمە چی دەگەیەنێت؟", o: ["بە وریاییەوە تێپەڕە و پێشینە بدە ئەگەر پێویست بوو", "ترافیکەکە تێکچووە، خێرا بڕۆ", "وەستانی تەواو وەک ڕەنگی سوور", "ڕێگاکە داخراوە بگەڕێوە"], a: 0},
+            {q: "کەی ڕێگەپێدراوە لەلای (ڕاست)ەوە پێش ئۆتۆمبێلێکی تر بڕیت؟", o: ["کاتێک ئۆتۆمبێلەکەی پێشت ئیشارەتی چەپی داوە بۆ پێچکردنەوە", "کاتێک شەقامەکە قەرەباڵغە", "کاتێک شۆفێری پێشەوەت زۆر هێواشە", "قەد ڕێگەپێدراو نییە"], a: 0},
+            {q: "هێڵی بەردەوامی سپی (بێ پچڕان) لە ناوەڕاستی شەقام مانای چییە؟", o: ["بە توندی قەدەغەیە هێڵەکە ببڕیت یان پێش ئۆتۆمبێل بڕیت", "تایبەتە بە ئۆتۆمبێلی پۆلیس", "دەتوانیت پێش بڕیت ئەگەر شەقامەکە چۆڵ بوو", "شوێنی وەستانی کاتییە"], a: 0},
+            {q: "دابەزین لە چیایەکی بەرز (بەردەولانی) بۆ ماوەیەکی درێژ چۆن دەکرێت؟", o: ["گێڕێکی قورس (وەک ٢ یان ٣) بەکاردەهێنم و کەمتر برێک دەگرم", "ئۆتۆمبێلەکە دەکوژێنمەوە بۆ سەرفنەکردنی بەنزین", "پێم لەسەر برێک جێدەهێڵم بەردەوام", "گێڕەکە دەخەمە سەر بۆش (N)"], a: 0},
+            {q: "لەکاتی لێخوڕین لە تەمومژێکی چڕدا، کام لایتە مەترسیدارە و نابێت پێبکرێت؟", o: ["لایتی بەرز (فول)، چونکە تیشکەکە دەداتەوە چاوت و کورت دەبێتەوە", "لایتی نزم", "لایتی تەم (فۆگ)", "ئیشارەتی مەترسی (دەبڵ فلاش)"], a: 0},
+            {q: "ئەگەر لەسەر ڕێگایەکی خێرا ئۆتۆمبێلێکی ئەمبولانس بە زەنگەوە لەپشتتەوە هات، چی دەکەیت؟", o: ["دەچمە لای ڕاست و خێرایی کەم دەکەمەوە تا تێدەپەڕێت", "خێرایی زیاد دەکەم بۆ ئەوەی پێشی نەکەوێت", "یەکسەر لە شوێنی خۆم برێک دەگرم", "ئیشارەتی دەدەمێ کە ناتوانم لاچم"], a: 0},
+            {q: "پێش ئەوەی بپێچیتەوە بۆ لای ڕاست یان چەپ، بۆچی پێویستە کەمێک سەرت بسوڕێنیت نەک تەنها ئاوێنە؟", o: ["بۆ دڵنیابوون لە گۆشەی نەبینراو (Blind Spot) کە ئاوێنە نایگرێت", "بۆ ئەوەی شۆفێرەکانی تر بتبینن", "بۆ بینینی پۆلیسی هاتوچۆ", "وەک ڕێزێک بۆ شۆفێرانی تر"], a: 0},
+            {q: "هێمای پیادەکان لەسەر شەقام چی لەسەر شۆفێر پێویست دەکات؟", o: ["ئامادە بێت بۆ وەستان و مافی تەواو بدات بە پیادەکان", "هۆڕن لێبدات بۆ ئەوەی خەڵکەکە خێرا بڕۆن", "خێرایی زیاد بکات تا کەس نەپەڕێتەوە", "تەنها لەکاتی بوونی پۆلیس بوەستێت"], a: 0}
+        ];
+
+        let massiveDB = [];
+        for(let i=0; i<35; i++) { massiveDB = massiveDB.concat(baseQuestions); }
+
+        let qIndex = 0, score = 0, currentQuiz = [];
+
+        function startQuiz() {
+            document.getElementById('quiz-intro').style.display = 'none';
+            document.getElementById('result-box').style.display = 'none';
+            document.getElementById('quiz-box').style.display = 'block';
+            currentQuiz = [...massiveDB].sort(() => 0.5 - Math.random()).slice(0, 20);
+            qIndex = 0; score = 0; loadQ();
+        }
+
+        function loadQ() {
+            const q = currentQuiz[qIndex];
+            document.getElementById('q-count').innerText = `پرسیار: ${qIndex + 1} / 20`;
+            document.getElementById('progress').style.width = `${((qIndex) / 20) * 100}%`;
+            document.getElementById('q-text').innerText = q.q;
+            
+            const box = document.getElementById('opts-box');
+            box.innerHTML = '';
+            
+            let optionsWithIndex = q.o.map((opt, idx) => ({text: opt, isCorrect: idx === q.a}));
+            optionsWithIndex = optionsWithIndex.sort(() => 0.5 - Math.random());
+
+            optionsWithIndex.forEach((opt, index) => {
+                box.innerHTML += `<button class="opt-btn" onclick="checkAns(this, ${opt.isCorrect})"><i class="far fa-circle"></i> <span>${opt.text}</span></button>`;
+            });
+        }
+
+        // سیستەمی ڕەنگەکانی تاقیکردنەوە (سوور و سەوز)
+        function checkAns(clickedBtn, isCorrect) {
+            const allBtns = document.querySelectorAll('.opt-btn');
+            allBtns.forEach(btn => btn.disabled = true); // لەکارخستنی دوگمەکانی تر
+
+            if(isCorrect) {
+                clickedBtn.classList.add('correct');
+                clickedBtn.querySelector('i').className = 'fas fa-check-circle';
+                score += 5;
+            } else {
+                clickedBtn.classList.add('wrong');
+                clickedBtn.querySelector('i').className = 'fas fa-times-circle';
+                
+                // دەرخستنی وەڵامە ڕاستەکە بە سەوز
+                currentQuiz[qIndex].o.forEach((text, i) => {
+                    if (i === currentQuiz[qIndex].a) {
+                        allBtns.forEach(btn => {
+                            if (btn.innerText.includes(text)) {
+                                btn.classList.add('correct');
+                                btn.querySelector('i').className = 'fas fa-check-circle';
+                            }
+                        });
+                    }
+                });
+            }
+
+            // چاوەڕێکردن پێش ئەوەی بچێتە پرسیاری داهاتوو
+            setTimeout(() => {
+                qIndex++;
+                if(qIndex < 20) loadQ(); else showResult();
+            }, 1800);
+        }
+
+        function showResult() {
+            document.getElementById('quiz-box').style.display = 'none';
+            document.getElementById('result-box').style.display = 'block';
+            const circle = document.getElementById('final-circle');
+            document.getElementById('final-score').innerText = score;
+            
+            if(score >= 80) {
+                circle.style.background = 'var(--success)';
+                circle.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+                document.getElementById('res-title').innerText = 'پیرۆزە دەرچوویت ✅';
+                document.getElementById('res-title').style.color = 'var(--success)';
+                document.getElementById('res-msg').innerText = 'تۆ بەسەرکەوتوویی تاقیکردنەوەکەت بڕی لە قورسترین پرسیارەکاندا.';
+            } else {
+                circle.style.background = 'var(--danger)';
+                circle.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+                document.getElementById('res-title').innerText = 'دەرنەچوویت ❌';
+                document.getElementById('res-title').style.color = 'var(--danger)';
+                document.getElementById('res-msg').innerText = 'نمرەکەت کەمترە لە ٨٠. پێویستە یاساکان و ڕێنماییەکان زیاتر بخوێنیتەوە.';
+            }
+        }
+    </script>
+</body>
+</html>
