@@ -176,7 +176,7 @@
         <div class="reg-section">
             <div class="reg-card">
                 <div class="reg-title"><i class="fas fa-id-card"></i> فۆرمی تۆمارکردنی ناوی قوتابی</div>
-                <p class="reg-desc">تکایە کێڵگەکان بە دروستی پڕبکەرەوە تا داواکارییەکەت ڕاستەوخۆ بە نووسراوێکی فەرمی بگاتە دەستی بەشی تۆمارکردن لە واتسئاپ.</p>
+                <p class="reg-desc">تکایە خانەکان بە دروستی پڕبکەرەوە تا داواکارییەکەت ڕاستەوخۆ بە نووسراوێکی فەرمی بگاتە دەستی بەشی تۆمارکردن لە واتسئاپ.</p>
                 
                 <form id="stu-registration-form" onsubmit="submitToWhatsApp(event)">
                     <div class="form-grid">
@@ -195,17 +195,7 @@
                         <div class="form-group">
                             <label for="stu-license">جۆری مۆڵەتی خوازراو</label>
                             <select id="stu-license">
-                                <option value="تایبەت (کوشنی بچووک)">تایبەت (ئۆتۆمبێلی گێڕی ئۆتۆماتیک یان عادی)</option>
-                                <option value="گشتی (بارهەڵگر و تەکسی)">گشتی (شۆفێری پیشەگەرانە)</option>
-                                <option value="ماتۆڕسکیل">مۆڵەتی ماتۆڕسکیل</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="stu-trainer">ڕەگەزی ڕاهێنەر</label>
-                            <select id="stu-trainer">
-                                <option value="ڕاهێنەری پیاو (کوڕ)">ڕاهێنەری پیاو (کوڕ)</option>
-                                <option value="ڕاهێنەری ئافرەت (کچ)">ڕاهێنەری ئافرەت (کچ)</option>
-                                <option value="فرقی نییە">فرقی نییە</option>
+                                <option value="تایبەت (ئۆتۆمبێلی بچووک)">مۆڵەتی تایبەت (ئۆتۆمبێلی بچووک)</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -213,7 +203,6 @@
                             <select id="stu-shift">
                                 <option value="بەیانیان (٨:٠٠ تا ١٢:٠٠)">بەیانیان (٨:٠٠ تا ١٢:٠٠)</option>
                                 <option value="پاشنیوەڕۆیان (١٢:٠٠ تا ٤:٠٠)">پاشنیوەڕۆیان (١٢:٠٠ تا ٤:٠٠)</option>
-                                <option value="ئێواران (٤:٠٠ تا ٨:٠٠)">ئێواران (٤:٠٠ تا ٨:٠٠)</option>
                             </select>
                         </div>
                     </div>
@@ -290,7 +279,7 @@
         <p>developed by dli kosan &copy; 2026. All Rights Reserved.</p>
     </footer>
 
-    <script>
+    <script {onload}>
         function switchPage(id, btn) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -306,7 +295,6 @@
             const phone = document.getElementById('stu-phone').value;
             const city = document.getElementById('stu-city').value;
             const license = document.getElementById('stu-license').value;
-            const trainer = document.getElementById('stu-trainer').value;
             const shift = document.getElementById('stu-shift').value;
 
             const text = `*🌟 پێشکەشکردنی ناوی قوتابی نوێ 🌟*\n\n` +
@@ -314,7 +302,6 @@
                          `📞 *ژمارەی مۆبایل:* ${phone}\n` +
                          `📍 *ناونیشان/شوێن:* ${city}\n` +
                          `🚗 *مۆڵەتی خوازراو:* ${license}\n` +
-                         `👤 *ڕاهێنەری گونجاو:* ${trainer}\n` +
                          `⏰ *کاتی گونجاوی وانە:* ${shift}\n\n` +
                          `_داواکارییەکە لەڕێی سیستمەکەوە بە سەرکەوتوویی نێردراوە_`;
 
@@ -398,7 +385,7 @@
             {i:'<i class="fas fa-restroom"></i>', t:'توالێت', d:'شوێنی گشتی توالێت لە نزیکە.'},
             {i:'<i class="fas fa-bus"></i>', t:'وێستگەی پاس', d:'شوێنی وەستانی پاسی گشتی.'},
             {i:'<i class="fas fa-taxi"></i>', t:'وێستگەی تەکسی', d:'شوێنی فەرمی بۆ وەستانی تەکسییەکان.'},
-            {i:'<i class="fas fa-camera"></i>', t:'کامێرای چاودێری', d:'چاودێریکردنی خێرایی لەسەر شەقامەکە.'}
+            {i:'<i class="fas fa-camera"></i>', t:'کامێرای چاودێری', d:'کامێرای تۆمارکردنی سەرپێچییەکانی خێرایی.'}
         ];
 
         // دروستکردنی داینامیکی بۆ گەیاندنی بە زیاتر لە ١٥٠ هێما بەبێ قورسکردنی کۆدەکە
@@ -457,7 +444,7 @@
                 o: [
                     "پێشینەی ڕۆیشتن بدە بە ئۆتۆمبێلە ڕاستەوخۆکانی بەرامبەر", 
                     "شەقامی سەرەکییە و بە خێرایی بەردەوامی بە ڕۆیشتن بدە", 
-                    "وەستانی تەواو بکە تەنانەت ئەگەر جادەکە چۆڵیش بێت", 
+                    "وەستانی تەواو بکە تەنانەت ئەگەر جادەکەچۆڵیش بێت", 
                     "ڕێگای سەرەکی داخراوە و دەبێت بگەڕێیتەوە بۆ دواوە"
                 ], 
                 a: 0
@@ -537,7 +524,7 @@
                 o: [
                     "لایتی بەرز (فول لایت)، چونکە تیشکەکە دەداتەوە لە تەمەکە", 
                     "لایتی نزم (لۆ لایت)، چونکە ناتوانێت شەقامەکە بە تەواوی بپێکێت", 
-                    "لایتی تەم (فۆگ لایت)، چونکە سەرنجی خەڵکی دەوروبەر تێکدەدات", 
+                    "لایتی تەم (fۆگ لایت)، چونکە سەرنجی خەڵکی دەوروبەر تێکدەدات", 
                     "لایتی ئاماژەی مەترسی، چونکە پاتری ئۆتۆمبێلەکە زۆر دادەبەزێنێت"
                 ], 
                 a: 0
