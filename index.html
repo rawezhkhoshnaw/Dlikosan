@@ -18,7 +18,6 @@
         *:focus, button:focus, .opt-btn:focus { outline: none !important; box-shadow: none !important; }
         body { background-color: var(--bg-color); color: var(--text-dark); overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* باڕی سەرەوە */
         header { position: fixed; top: 15px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 1100px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); padding: 10px 20px; border-radius: 50px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; box-shadow: var(--shadow-sm); border: 1px solid rgba(255,255,255,0.8); }
         .logo { font-size: 18px; font-weight: bold; color: var(--primary); display: flex; align-items: center; gap: 10px; }
         .logo i { color: var(--accent); font-size: 24px; }
@@ -48,7 +47,6 @@
         .btn-modern { background: linear-gradient(135deg, var(--accent), var(--accent-hover)); color: white; padding: 14px 30px; font-size: 16px; font-weight: bold; border-radius: 40px; cursor: pointer; transition: 0.3s; box-shadow: 0 8px 15px rgba(139, 92, 246, 0.4); display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
         .btn-modern:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 25px rgba(139, 92, 246, 0.6); }
 
-        /* جۆرەکانی مۆڵەتی شۆفێری */
         .licenses-section { max-width: 1200px; margin: 50px auto 30px; padding: 0 5%; }
         .licenses-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-top: 25px; }
         .license-card { background: var(--surface); border-radius: 20px; padding: 22px 20px; border: 1px solid #e9d5ff; box-shadow: var(--shadow-sm); transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
@@ -65,11 +63,8 @@
         .article-card { background: #fff5f5; border: 2px dashed #fca5a5; border-radius: 20px; padding: 25px; margin-top: 25px; grid-column: 1 / -1; box-shadow: var(--shadow-sm); }
         .article-card h3 { color: var(--danger); font-size: 18px; font-weight: bold; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
         .article-card ul { list-style: none; padding: 0; }
-        .article-card li { font-size: 14px; color: #7f1d1d; margin-bottom: 8px; position: relative; padding-inline-start: 22px; }
-        .article-card li::before { content: '✔'; position: absolute; right: 0; color: var(--danger); font-weight: bold; }
-        [dir="ltr"] .article-card li::before { right: auto; left: 0; }
+        .article-card li { font-size: 14px; color: #7f1d1d; margin-bottom: 8px; position: relative; }
 
-        /* فۆرمی تۆمارکردنی ناوی قوتابی */
         .reg-section { max-width: 850px; margin: 30px auto 50px; padding: 0 5%; }
         .reg-card { background: var(--surface); border-radius: 30px; padding: 40px; box-shadow: var(--shadow-lg); border: 1px solid #e9d5ff; }
         .reg-title { font-size: 24px; color: var(--primary); margin-bottom: 10px; font-weight: bold; text-align: center; display: flex; align-items: center; justify-content: center; gap: 12px; }
@@ -91,7 +86,6 @@
         .feature-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
         .feature-card i { font-size: 36px; color: var(--primary); margin-bottom: 20px; background: #faf5ff; padding: 18px; border-radius: 50%; }
 
-        /* ڕێنمایی و هێماکان */
         .tips-container { max-width: 1200px; margin: 0 auto 50px; padding: 0 5%; }
         .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 25px; }
         .tip-card { display: flex; gap: 18px; align-items: flex-start; padding: 22px; background: var(--surface); border-radius: var(--radius); border-inline-start: 5px solid var(--info); box-shadow: var(--shadow-sm); transition: 0.3s; }
@@ -105,14 +99,12 @@
         .signs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 18px; margin-bottom: 40px; }
         .sign-card { background: var(--surface); border-radius: var(--radius); padding: 25px 15px; text-align: center; box-shadow: var(--shadow-sm); border: 1px solid #f1f5f9; transition: 0.3s; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
         .sign-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--accent); }
+        .shape-box { height: 85px; display: flex; justify-content: center; align-items: center; margin-bottom: 12px; }
         
-        .shape-box { height: 90px; display: flex; justify-content: center; align-items: center; margin-bottom: 12px; position: relative; }
-        
-        /* چاککردنی تەواوەتی کێشەی ئایکۆنی ناو سێگۆشە سوورەکان */
         .triangle-container { width: 85px; height: 75px; position: relative; display: flex; align-items: center; justify-content: center; }
         .warning-triangle { position: absolute; width: 100%; height: 100%; background-color: var(--danger); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
-        .warning-triangle-inner { position: absolute; width: 76%; height: 76%; background-color: var(--surface); bottom: 3px; left: 12%; clip-path: polygon(50% 0%, 0% 100%, 100% 100%); z-index: 1; }
-        .triangle-icon { position: absolute; z-index: 10 !important; top: 56%; left: 50%; transform: translate(-50%, -50%); font-size: 20px; color: var(--primary); text-align: center; }
+        .warning-triangle-inner { position: absolute; width: 78%; height: 78%; background-color: var(--surface); bottom: 3px; left: 11%; clip-path: polygon(50% 0%, 0% 100%, 100% 100%); z-index: 1; }
+        .triangle-icon { position: absolute; z-index: 2; bottom: 10px; font-size: 22px; color: var(--primary); text-align: center; left: 50%; transform: translateX(-50%); }
 
         .circle-red { width: 80px; height: 80px; border-radius: 50%; border: 9px solid var(--danger); background: white; display: flex; justify-content: center; align-items: center; font-size: 18px; color: var(--primary); font-weight: bold; overflow: hidden; text-align: center; }
         .circle-red i { font-size: 22px; }
@@ -120,7 +112,6 @@
         .circle-blue i { font-size: 22px; }
         .rect-blue { width: 80px; height: 80px; border-radius: 15px; background: var(--info); display: flex; justify-content: center; align-items: center; font-size: 28px; color: white; }
 
-        /* بەشی تاقیکردنەوە */
         .quiz-wrapper { max-width: 850px; margin: 30px auto; padding: 0 5%; }
         .quiz-card { background: var(--surface); border-radius: 30px; padding: 35px; box-shadow: var(--shadow-lg); border: 1px solid #e9d5ff; position: relative; }
         .progress-container { width: 100%; height: 10px; background: #e2e8f0; border-radius: 10px; margin-bottom: 25px; overflow: hidden; }
@@ -288,7 +279,7 @@
             <div class="quiz-card" id="quiz-intro" style="text-align: center;">
                 <i class="fas fa-shield-halved" style="font-size: 70px; color: var(--accent); margin-bottom: 20px;"></i>
                 <h2 style="font-size: 26px; color: var(--primary); margin-bottom: 12px;" data-i18n="quiz_start_title">تاقیکردنەوەی فەرمی تیۆری</h2>
-                <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 16px;" data-i18n="quiz_start_desc">بەخێربێیت! بۆ هەر تاقیکردنەوەیەک <b>٢٥ پرسیاری جیاواز لە بانکی ١٢٠+ پرسیاری</b> پێشکەش دەکرێت. هەر پرسیارێک ٦٠ چرکەت لەبەردەستدایە.</p>
+                <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 16px;" data-i18n="quiz_start_desc">بەخێربێیت! بۆ هەر تاقیکردنەوەیەک <b>٢٥ پرسیاری جیاوازت</b> پێشکەش دەکرێت. هەر پرسیارێک ٦٠ چرکەت لەبەردەستدایە.</p>
                 <button class="btn-modern" style="width: 100%; justify-content: center;" onclick="startQuiz()">
                     <i class="fas fa-play-circle"></i> <span data-i18n="quiz_btn_start">دەستپێکردن</span>
                 </button>
@@ -338,7 +329,7 @@
                 feat_3_title: "سەرکەوتنی گەرەنتی", feat_3_desc: "پاسکردنی تاقیکردنەوەی تیۆری و پراکتیکی بەبێ دووبارەبوونەوە.",
                 sec_tips_title: "ڕێنماییە ئاڵتوونییەکان بۆ شۆفێران", sign_cat_warning: "ئاگادارکردنەوە (سێگۆشە)", sign_cat_prohibit: "قەدەغەکردن (بازنەی سوور)",
                 sign_cat_mandatory: "ناچارکردن (بازنەی شین)", sign_cat_info: "زانیاری و ڕێنمایی",
-                quiz_start_title: "تاقیکردنەوەی فەرمی تیۆری", quiz_start_desc: "بەخێربێیت! بۆ هەر تاقیکردنەوەیەک ٢٥ پرسیاری جیاواز لە بانکی ١٢٠+ پرسیاری پێشکەش دەکرێت. هەر پرسیارێک ٦٠ چرکەت لەبەردەستدایە بۆ وەڵامدانەوە.",
+                quiz_start_title: "تاقیکردنەوەی فەرمی تیۆری", quiz_start_desc: "بەخێربێیت! لێرەدا خۆت تاقی بکەرەوە. بۆ هەر تاقیکردنەوەیەک ٢٥ پرسیاری جیاوازت پێشکەش دەکرێت. هەر پرسیارێک ٦٠ چرکەت لەبەردەستدایە بۆ وەڵامدانەوە.",
                 quiz_btn_start: "دەستپێکردن", quiz_btn_retry: "تاقیکردنەوەیەکی نوێ", q_label: "پرسیار", sec_label: "چرکە",
                 res_pass_title: "پیرۆزە دەرچوویت ✅", res_pass_msg: "تۆ بەسەرکەوتوویی تاقیکردنەوەکەت بە ئەنجامێکی نایاب بڕی.",
                 res_fail_title: "دەرنەچوویت ❌", res_fail_msg: "نمرەکەت کەمترە لە ٨٠. پێویستە زیاتر هەوڵبدەیتەوە."
@@ -359,7 +350,7 @@
                 feat_3_title: "نجاح مضمون", feat_3_desc: "اجتياز الاختبارات النظرية والعملية من المرة الأولى.",
                 sec_tips_title: "التعليمات الذهبية للسائقين", sign_cat_warning: "علامات التحذير (مثلث)", sign_cat_prohibit: "علامات المنع (دائرة حمراء)",
                 sign_cat_mandatory: "علامات الإلزام (دائرة زرقاء)", sign_cat_info: "المعلومات والإرشادات",
-                quiz_start_title: "الاختبار النظري الرسمي", quiz_start_desc: "أهلاً بك! سيتم تقديم ٢٥ سؤالاً مختلفاً لك من بنك الأسئلة الشامل (١٢٠+ سؤال). لديك ٦٠ ثانية لكل سؤال.",
+                quiz_start_title: "الاختبار النظري الرسمي", quiz_start_desc: "أهلاً بك! سيتم تقديم ٢٥ سؤالاً مختلفاً لك في كل اختبار. لديك ٦٠ ثانية لكل سؤال.",
                 quiz_btn_start: "بدء الاختبار", quiz_btn_retry: "اختبار جديد", q_label: "سؤال", sec_label: "ثانية",
                 res_pass_title: "مبروك، لقد نجحت ✅", res_pass_msg: "لقد اجتزت الاختبار بنجاح وبنتيجة ممتازة.",
                 res_fail_title: "لم تنجح ❌", res_fail_msg: "درجتك أقل من ٨٠. يرجى المحاولة مرة أخرى."
@@ -380,7 +371,7 @@
                 feat_3_title: "Guaranteed Success", feat_3_desc: "Pass theory & practical exams smoothly.",
                 sec_tips_title: "Golden Driving Rules", sign_cat_warning: "Warning Signs (Triangles)", sign_cat_prohibit: "Prohibitive Signs (Red Circles)",
                 sign_cat_mandatory: "Mandatory Signs (Blue Circles)", sign_cat_info: "Information & Guides",
-                quiz_start_title: "Official Theory Exam", quiz_start_desc: "Welcome! Each exam consists of 25 unique questions selected from a bank of 120+ questions. You have 60 seconds per question.",
+                quiz_start_title: "Official Theory Exam", quiz_start_desc: "Welcome! Each exam consists of 25 questions. You have 60 seconds per question.",
                 quiz_btn_start: "Start Exam", quiz_btn_retry: "Retake Exam", q_label: "Question", sec_label: "sec",
                 res_pass_title: "Congratulations, You Passed! ✅", res_pass_msg: "You passed the theory test with an excellent score.",
                 res_fail_title: "Exam Failed ❌", res_fail_msg: "Your score is below 80%. Please try again."
@@ -545,7 +536,7 @@
             {i:'<i class="fas fa-camera"></i>', t:{ckb:'کامێرای چاودێری', ar:'كاميرا مراقبة', en:'Speed Camera'}, d:{ckb:'کامێرای تۆمارکردنی خێرایی.', ar:'كاميرات تسجيل السرعة.', en:'Radar camera speed enforcement.'}}
         ];
 
-        // دروستکردنی داینامیکی بۆ گەیاندنی بە ١٥٠+ هێما
+        // دروستکردنی داینامیکی لۆپەکان بۆ گەیشتن بە ١٥٠+ هێما
         for(let j=10; j<=120; j+=10) { prohibitSigns.push({i: j, t:{ckb:`زۆرترین خێرایی ${j}`, ar:`السرعة القصوى ${j}`, en:`Speed Limit ${j}`}, d:{ckb:`نابێت لە خێرایی ${j} کم تێپەڕیت.`, ar:`يمنع تجاوز سرعة ${j} كم/ساعة.`, en:`Do not exceed ${j} km/h.`}}); }
         for(let j=1; j<=15; j++) { prohibitSigns.push({i: `<span style="font-size:15px;">${j}t</span>`, t:{ckb:`کێشی ڕێگەپێنەدراو ${j} تەن`, ar:`الوزن الممنوع ${j} طن`, en:`Weight Limit ${j}T`}, d:{ckb:`تێپەڕبوونی ئۆتۆمبێلی زیاتر لەم کێشە قەدەغەیە.`, ar:`يمنع مرور السيارات المتجاوزة لهذا الوزن.`, en:`Vehicles exceeding weight prohibited.`}}); }
         for(let j=2; j<=6; j+=0.5) { prohibitSigns.push({i: `<span style="font-size:15px;">${j}m</span>`, t:{ckb:`پانی یان بەرزی ${j} م`, ar:`العرض أو الارتفاع ${j} م`, en:`Max Dimension ${j}m`}, d:{ckb:`تێپەڕبوونی ئۆتۆمبێل بە ڕەهەندی زیاتر قەدەغەیە.`, ar:`مرور المركبات بأبعاد أضخم ممنوع.`, en:`Exceeding dimensions prohibited.`}}); }
@@ -576,116 +567,252 @@
             infoSigns.forEach(s => iBox.innerHTML += `<div class="sign-card"><div class="shape-box"><div class="rect-blue">${s.i}</div></div><h3>${s.t[currentLang]}</h3><p>${s.d[currentLang]}</p></div>`);
         }
 
-        // --- ٤. بزوێنەری دروستکردنی بانکی ١٢٠+ پرسیاری نا-دووبارەبووەوە ---
-        let masterQuestionsDB = [];
-        let usedQuestionIdsInLastQuiz = new Set(); // پاراستنی ئەو پرسیارانەی لە تاقیکردنەوەی پێشوو هاتبوون
+        // --- ٣. داتابەیسی پرسیارەکانی تاقیکردنەوە (ڕێک ٢٥ پرسیاری تەواو بە ٣ زمان) ---
+        const massiveQuestionsDB = [
+            {
+                q: {ckb: "١. لە چوارڕیانی بێ هێمای هاتوچۆ، یاسای ئەولەویەت بۆ کێیە؟", ar: "١. في التقاطع بدون إشارات، لمن تكون أولوية المرور؟", en: "1. At an uncontrolled intersection, who has the right-of-way?"},
+                o: [
+                    {ckb: "ئەو شۆفێرەی دەکەوێتە لای ڕاستی ئۆتۆمبێلەکەی ترەوە", ar: "السائق القادم من جهة اليمين", en: "The driver coming from the right"},
+                    {ckb: "ئەو شۆفێرەی خێراییەکەی زیاترە لە ناو چوارڕیانەکەدا", ar: "السائق الأكثر سرعة داخل التقاطع", en: "The vehicle driving with higher speed"},
+                    {ckb: "ئەو شۆفێرەی دەکەوێتە لای چەپی ئۆتۆمبێلەکەی ترەوە", ar: "السائق القادم من جهة اليسار", en: "The driver coming from the left"},
+                    {ckb: "ئەو ئۆتۆمبێلە باربرانەی کە کێشیان زۆر گەورەیە", ar: "الشاحنات المركبة الكبيرة ذات الوزن العالي", en: "Heavy cargo trucks only"}
+                ], a: 0
+            },
+            {
+                q: {ckb: "٢. لەناو فەلەکەدا، کێ مافی پێشینەی فەرمی هەیە بۆ ڕۆیشتن؟", ar: "٢. داخل الدوار، لمن تكون أولوية المرور الرسمية؟", en: "2. Inside a roundabout, who has the official right of way?"},
+                o: [
+                    {ckb: "ئەو ئۆتۆمبێلەی کە پێشتر لەناو فەلەکەدا دەسوڕێتەوە", ar: "السيارة التي تدور بالفعل داخل الدوار", en: "The vehicle already driving inside the roundabout"},
+                    {ckb: "ئەو ئۆتۆمبێلەی کە تازە دەیەوێت بچێتە ناو فەلەکەکەوە", ar: "السيارة التي تريد الدخول حديثاً للدوار", en: "The vehicle approaching to enter the roundabout"},
+                    {ckb: "ئەو ئۆتۆمبێلەی کە لای چەپی شەقامی دەرەکییەوە دێت", ar: "السيارة القادمة من اليسار في الطريق الخارجي", en: "The vehicle coming from the outer left lane"},
+                    {ckb: "ئەو ئۆتۆمبێلەی خێراییەکەی لە هەموو ئۆتۆمبێلەکان زیاترە", ar: "السيارة الأسرع بين جميع السيارات", en: "The vehicle moving faster than all others"}
+                ], a: 0
+            },
+            {
+                q: {ckb: "٣. لەکاتی بارانی بەخوڕ و خلیسکانی سەر ئاو، باشترین کار چییە؟", ar: "٣. أثناء المطر الغزير والانزلاق المائي، ما هو التصرف الأفضل؟", en: "3. During heavy rain and hydroplaning, what is the best action?"},
+                o: [
+                    {ckb: "قاچم لەسەر غاز لادەبەم و برێک بەهیچ شێوەیەک ناگرم", ar: "رفع القدم عن الدواسة وعدم الضغط على الفرامل", en: "Release the accelerator pedal and avoid pressing brakes"},
+                    {ckb: "برێکی توند دەگرم بۆ ئەوەی خێرا ئۆتۆمبێلەکە ڕابگرم", ar: "الضغط بقوة على الفرامل لإيقاف السيارة", en: "Slam the brakes hard to stop immediately"},
+                    {ckb: "سوکانەکە بە توندی دەسوڕێنم بۆ ئەوەی لادان بکەم", ar: "تدوير المقود بقوة للانحراف بعيداً", en: "Turn the steering wheel sharply away"},
+                    {ckb: "گێڕی ئۆتۆمبێلەکە دەگۆڕم بۆ دۆخی خاڵی یان خێرا", ar: "تغيير ناقل الحركة إلى الوضع الفارغ N", en: "Shift gear into neutral or high speed"}
+                ], a: 0
+            },
+            {
+                q: {ckb: "٤. هێمای سێگۆشەی هەڵگەڕاوە (سەرەوخوار) بە چ مانایەک دێت؟", ar: "٤. ماذا تعني إشارة المثلث المقلوب؟", en: "4. What does an inverted triangle road sign mean?"},
+                o: [
+                    {ckb: "پێشینەی ڕۆیشتن بدە بە ئۆتۆمبێلە ڕاستەوخۆکانی بەرامبەر", ar: "إعطاء الأولوية للسيارات المباشرة", en: "Yield right of way to opposing traffic"},
+                    {ckb: "شەقامی سەرەکییە و بە خێرایی بەردەوامی بە ڕۆیشتن بدە", ar: "طريق رئيسي ويجب الاستمرار بسرعة", en: "Main priority road, continue at speed"},
+                    {ckb: "وەستانی تەواو بکە تەنانەت ئەگەر جادەکەچۆڵیش بێت", ar: "التوقف التام حتى لو كان الطريق فارغاً", en: "Full stop mandatory even if road is empty"},
+                    {ckb: "ڕێگای سەرەکی داخراوە و دەبێت بگەڕێیتەوە بۆ دواوە", ar: "الطريق مغلق ويجب الدوران للخلف", en: "Road closed ahead, make a turn"}
+                ], a: 0
+            },
+            {
+                q: {ckb: "٥. مەسافەی سەلامەتی یاسایی نێوان تۆ و ئۆتۆمبێلی پێشەوەت چەندە؟", ar: "٥. ما هي مسافة الأمان القانونية بينك وبين السيارة أمامك؟", en: "5. What is the legal safe distance from the vehicle in front?"},
+                o: [
+                    {ckb: "٥٠ مەتر یان هێشتنەوەی ماوەی کاتی لانی کەم ٣ چرکە", ar: "٥٠ متراً أو الحفاظ على زمن ٣ ثوانٍ على الأقل", en: "50 meters or a 3-second gap minimum"},
+                    {ckb: "١٠ مەتر یان هێشتنەوەی ماوەی کاتی لانی کەم ١ چرکە", ar: "١٠ أمتار أو زمن ثانية واحدة", en: "10 meters or a 1-second time gap"},
+                    {ckb: "٢٠ مەتر یان هێشتنەوەی ماوەی کاتی لانی کەم ٢ چرکە", ar: "٢٠ متراً أو زمن ثانیتین", en: "20 meters or a 2-second time gap"},
+                    {ckb: "١٠٠ مەتر یان هێشتنەوەی ماوەی کاتی لانی کەم ٥ چرکە", ar: "١٠٠ متر أو زمن ٥ ثوانٍ", en: "100 meters or a 5-second time gap"}
+                ], a: 0
+            },
+            {
+                q: {ckb: "٦. سیستەمی ABS لە برێکی ئۆتۆمبێلدا بۆچی بەکاردێت لە کاتی لێخوڕیندا؟", ar: "٦. ما هي فائدة نظام ABS في الفرامل أثناء القيادة؟", en: "6. What is the function of the ABS braking system?"},
+                o: [
+                    {ckb: "ڕێگری دەکات لە قفڵبوونی تایەکان تا بتوانیت سوکان بسوڕێنیت", ar: "يدير منع انغلاق الإطارات لتتمكن من التوجيه", en: "Prevents wheels from locking so you can steer"},
+                    {ckb: "مەسافەی وەستان بەتەواوی ناهێڵێت و ڕادەوەستێت کتوپڕ", ar: "يلغي مسافة التوقف تماماً فوراً", en: "Eliminates stopping distance instantly"},
+                    {ckb: "خێرایی ئۆتۆمبێلەکە زیاد دەکات لە کاتی برێکگرتنی تونددا", ar: "يزيد سرعة المركبة عند الكبح الشديد", en: "Increases vehicle speed during braking"},
+                    {ckb: "تایە لە تەقین بەتەواوی دەپارێزێت لە زەوی ناهەمواردا", ar: "يحمي الإطار من الانفجار في الطرق الوعرة", en: "Protects tires from blowing out on rough roads"}
+                ], a: 0
+            },
+            {
+                q: {ckb: "٧. لە شەودا کەی ناچاریت لایتی بەرز (فول لایت) بە تەواوی بکوژێنیتەوە؟", ar: "٧. في الليل، متى يجب عليك إطفاء الضوء العالي كلياً؟", en: "7. At night, when must you switch off your high beams?"},
+                o: [
+                    {ckb: "کاتێک ئۆتۆمبێلێک لە بەرامبەرت دێت یان لەپشتەوەیەتی", ar: "عند اقتراب سيارة مقابلة أو المشي خلف سيارة", en: "When approaching oncoming cars or following closely"},
+                    {ckb: "تەنها بۆ پۆلیسی هاتوچۆ ئەگەر لەسەر جادەکە وەستابوو", ar: "فقط عند وجود شرطة المرور على الطريق", en: "Only for traffic police on the roadway"},
+                    {ckb: "لە کاتی تێپەڕبوون لە ناو توونێلێکی تاریکی درێژدا", ar: "عند المرور داخل نفق مظلم وطويل", en: "When driving inside a long dark tunnel"},
+                    {ckb: "هیچ کاتێک ناچاریت لایتی بەرز بەتەواوی بکوژێنیتەوە", ar: "لا يلزم إطفاء الضوء العالي أبداً", en: "Never required to turn off high beams"}
+                ], a: 0
+            },
+            {
+                q: {ckb: "٨. ترافیک لایت ڕەنگی (زەردی فلاش - پچڕپچڕ) دەدات، چی دەکەیت؟", ar: "٨. عندما تومض الإشارة الضوئية باللون الأصفر المتقطع، ماذا تفعل؟", en: "8. What should you do at a flashing yellow traffic light?"},
+                o: [
+                    {ckb: "بە وریاییەوە تێپەڕە و پێشینە بدە بەوانی تر", ar: "اعبر بحذر واعطِ الأولوية للآخرين", en: "Proceed with caution and yield right of way"},
+                    {ckb: "ترافیکەکە تێکچووە بۆیە بە زۆرترین خێرایی تێپەڕە", ar: "الإشارة معطلة لذا اعبر بأقصى سرعة", en: "Signal is broken, proceed at maximum speed"},
+                    {ckb: "وەستانی تەواو بکە هاوشێوەی ڕەنگی سووری ترافیکەکە", ar: "توقف تماماً كما هو الحال مع الضوء الأحمر", en: "Come to a complete stop as if red light"},
+                    {ckb: "بگەڕێوە دواوە چونکە جادەکە بە تەواوی داخراوە", ar: "عد للخلف لأن الطريق مغلق بالكامل", en: "Turn back as the street is fully closed"}
+                ], a: 0
+            },
+            {
+                q: {ckb: "٩. کەی ڕێگەپێدراوە لەلای ڕاستەوە پێش ئۆتۆمبێلێکی تر بڕیت؟", ar: "٩. متى يُسمح بالتجاوز من جهة اليمين؟", en: "9. When is overtaking allowed from the right side?"},
+                o: [
+                    {ckb: "کاتێک ئۆتۆمبێلەکەی پێشت ئیشارەتی چەپی داوە بۆ پێچکردنەوە", ar: "عندما تعطي السيارة أمامك إشارة للانعطاف يساراً", en: "When the vehicle ahead signals a left turn"},
+                    {ckb: "کاتێک شەقامەکە زۆر قەرەباڵغە و پەلەتە بگەی شوێنی مەبەست", ar: "عندما يكون الطريق مزدحماً وأنت مستعجل", en: "When traffic is heavy and you are in a rush"},
+                    {ckb: "کاتێک ئۆتۆمبێلی پێشت زۆر هێواش دەڕوات لە شەقامەکەدا", ar: "عندما تسير السيارة أمامك ببطء شديد", en: "When the vehicle ahead travels very slowly"},
+                    {ckb: "هیچ کاتێک ڕێگەپێدراو نییە لە لای ڕاستەوە پێشبڕین بکەیت", ar: "لا يُسمح إطلاقاً بالتجاوز من اليمين", en: "Overtaking from the right is never allowed"}
+                ], a: 0
+            },
+            {
+                q: {ckb: "١٠. هێڵی بەردەوامی سپی (بێ پچڕان) لە ناوەڕاستی شەقامدا مانای چییە؟", ar: "١٠. ماذا يعني الخط الأبيض المتصل في منتصف الطريق؟", en: "10. What does a solid white line in the middle of the road mean?"},
+                o: [
+                    {ckb: "بە توندی قەدەغەیە هێڵەکە ببڕیت یان پێشبڕینی لەسەر بکەیت", ar: "يحظر تماماً عبور الخط أو التجاوز فوقه", en: "Strictly forbidden to cross or overtake over it"},
+                    {ckb: "تایبەتە بە ئۆتۆمبێلەکانی پۆلیس یان فریاگوزاری سەر شەقام", ar: "مخصص لسيارات الشرطة أو الطوارئ", en: "Reserved exclusively for police or emergency"},
+                    {ckb: "دەتوانیت پێشبڕینی لەسەر بکەیت ئەگەر هێواش لێبخوڕیت لەسەری", ar: "يمكن التجاوز فوقه إذا قُدت ببطء", en: "You may overtake if driving slowly"},
+                    {ckb: "ئەم هێڵە تایبەتە بە شوێنی وەستان و پارکینگی ئۆتۆمبێلەکان", ar: "هذا الخط مخصص لركن السيارات", en: "Line designates parking areas"}
+                ], a: 0
+            },
+            {
+                q: {ckb: "١١. دابەزین لە چیایەکی بەرز چۆن دەکرێت بە شێوازێکی سەلامەت؟", ar: "١١. كيف يتم نزول المنحدرات الجبلية العالية بأمان؟", en: "11. How should you safely drive down a steep hill?"},
+                o: [
+                    {ckb: "گێڕێکی قورس بەکاردێنم و بە هیچ شێوەیەک زۆر برێک ناگرم", ar: "استخدام غيار ثقيل وتجنب الضغط المستمر على الفرامل", en: "Use a lower gear and avoid riding the brakes"},
+                    {ckb: "مەکینەی ئۆتۆمبێلەکە بەتەواوی دەکوژێنمەوە تا بەنزین پاشەکەوت بێت", ar: "إطفاء المحرك لتوفير الوقود", en: "Turn off the engine completely to save fuel"},
+                    {ckb: "برێکی بەردەوام دەگرم بەبێ تێپەڕبوون لە خێرایی کەم لە شاخدا", ar: "الضغط المستمر على الفرامل دون توقف", en: "Hold down brakes continuously"},
+                    {ckb: "گێڕی خاڵی (N) بەکاردێنم تا بەهۆی کێشکردنەوە بە ئاسانی دابەزم", ar: "استخدام الوضع الفارغ N للنزول بحرية", en: "Coast down in Neutral gear"}
+                ], a: 0
+            },
+            {
+                q: {ckb: "١٢. لەکاتی لێخوڕین لە تەمومژێکی چڕدا، کام لایتە نابێت پێبکرێت؟", ar: "١٢. عند القيادة في الضباب الكثيف، أي مصباح لا يجوز تشغيله؟", en: "12. When driving in heavy fog, which light should NOT be used?"},
+                o: [
+                    {ckb: "لایتی بەرز (فول لایت)، چونکە تیشکەکە دەداتەوە لە تەمەکە", ar: "الضوء العالي، لأنه ينعكس على الضباب", en: "High beam headlights, as light reflects back"},
+                    {ckb: "لایتی نزم (لۆ لایت)، چونکە ناتوانێت شەقامەکە بە تەواوی بپێکێت", ar: "الضوء المنخفض، لأنه لا يغطي الطريق", en: "Low beam headlights"},
+                    {ckb: "لایتی تەم (فۆگ لایت)، چونکە سەرنجی خەڵکی دەوروبەر تێکدەدات", ar: "مصابيح الضباب الخاصة", en: "Fog lights"},
+                    {ckb: "لایتی ئاماژەی مەترسی، چونکە پاتری ئۆتۆمبێلەکە زۆر دادەبەزێنێت", ar: "إشارات التحذير الرباعية", en: "Hazard warning lights"}
+                ], a: 0
+            },
+            {
+                q: {ckb: "١٣. ئەگەر ئەمبولانس بە زەنگەوە لەپشتتەوە هات، چی دەکەیت؟", ar: "١٣. إذا اقتربت منك سيارة إسعاف بالصافرات، ماذا تفعل؟", en: "13. If an emergency ambulance approaches with sirens, what do you do?"},
+                o: [
+                    {ckb: "دەچمە لای ڕاست و خێرایی کەم دەکەمەوە تا تێدەپەڕێت بە خێرایی", ar: "الانحياز لليمين وتخفيف السرعة لمرورها", en: "Move to the right lane and slow down to let it pass"},
+                    {ckb: "خێراییەکەم زۆر زیاد دەکەم بۆ ئەوەی بمێنمەوە لەپێشی بەردەوام", ar: "زيادة السرعة للبقاء أمامها", en: "Speed up significantly to stay ahead"},
+                    {ckb: "دەستبەجێ لە شوێنی خۆم برێک دەگرم و ئۆتۆمبێلەکە ڕادەگرم لێرەدا", ar: "التوقف المباشر في وسط الطريق", en: "Stop immediately in the middle of the lane"},
+                    {ckb: "ئیشارەتی دەدەمێ کە توانام نییە بۆ لادان تا پشوویەک بدات", ar: "إعطاء إشارة لعدم القدرة على التنحي", en: "Signal that you cannot pull over"}
+                ], a: 0
+            },
+            {
+                q: {ckb: "١٤. پێش ئەوەی بپێچیتەوە، بۆچی پێویستە کەمێک سەرت بسوڕێنیت؟", ar: "١٤. قبل الانعطاف، لماذا يجب عليك تدوير رأسكليلاً؟", en: "14. Before turning, why must you turn your head slightly?"},
+                o: [
+                    {ckb: "بۆ دڵنیابوون لە نەبوونی ئۆتۆمبێل لە گۆشەی نەبینراودا (کوێر)", ar: "للتحقق من عدم وجود سيارات في الزاوية العمياء", en: "To check for vehicles in your blind spot"},
+                    {ckb: "بۆ ئەوەی شۆفێرانی دەوروبەر بتبینن کە وریایت لە شۆفێریدا", ar: "ليراك السائقون الآخرون أنك منتبه", en: "So other drivers can see you are alert"},
+                    {ckb: "بۆ دڵنیابوون لەوەی پۆلیسی هاتوچۆ لە دەوروبەری جادەکە وەستاوە", ar: "للتحقق من وجود شرطة المرور nearby", en: "To see if traffic police are standing nearby"},
+                    {ckb: "بۆ سەیرکردنی چۆنیەتی کارکردنی تایەکانی دواوە لە کاتی پێچەکەدا", ar: "لمراقبة كيفية حركة الإطارات الخلفية", en: "To inspect how rear tires move"}
+                ], a: 0
+            },
+            {
+                q: {ckb: "١٥. هێمای پیادەکان لەسەر شەقام چی لەسەر شۆفێر پێویست دەکات؟", ar: "١٥. ماذا تتطلب إشارة عبور المشاة من السائق؟", en: "15. What does a pedestrian crossing sign require from a driver?"},
+                o: [
+                    {ckb: "ئامادە بێت بۆ وەستان و مافی تەواو بدات بە پیادەکان هەمیشە", ar: "الاستعداد للتوقف وإعطاء الأولوية التامة للمشاة", en: "Be prepared to stop and always yield to pedestrians"},
+                    {ckb: "هۆڕن لێبدات بەردەوام تا بە خێرایی جادەکە چۆڵ بکەن بۆی", ar: "استخدام المنبه ليعبروا بسرعة", en: "Sound the horn continuously so they clear the path"},
+                    {ckb: "خێرایی ئۆتۆمبێلەکە زۆر زیاد بکات بۆ ئەوەی پێشیان بکەوێت خێرا", ar: "زيادة السرعة للتجاوز قبل عبورهم", en: "Speed up quickly to pass before they cross"},
+                    {ckb: "تەنها لە کاتێکدا دەوەستێت کە پۆلیسی هاتوچۆ لە جادەکە بوونی هەبێت", ar: "التوقف فقط عند وجود شرطي مرور", en: "Stop only when a traffic officer is present"}
+                ], a: 0
+            },
+            {
+                q: {ckb: "١٦. هێمایەکی بازنەیی سوور کە ژمارە (٥٠)ی تێدایە مانای چییە؟", ar: "١٦. ماذا تعني إشارة دائرة حمراء تحتوي على الرقم (٥٠)؟", en: "16. What does a red circular sign with number 50 mean?"},
+                o: [
+                    {ckb: "زۆرترین خێرایی ڕێگەپێدراو لەم شەقامەدا تەنها ٥٠ کم/ک", ar: "السرعة القصوى المسموح بها هي ٥٠ كم/ساعة", en: "Maximum speed limit allowed is 50 km/h"},
+                    {ckb: "کەمترین خێرایی ناچاری لەم شەقامەدا تەنها ٥٠ کم/ک", ar: "السرعة الدنيا الإجبارية هي ٥٠ كم/ساعة", en: "Minimum mandatory speed is 50 km/h"},
+                    {ckb: "پێویستە مەسافەی نێوان ئۆتۆمبێلەکان هەمیشە ٥٠ مەتر بێت لە جادەدا", ar: "المسافة بين السيارات يجب أن تكون ٥٠ متراً", en: "Distance between cars must be 50 meters"},
+                    {ckb: "کێشی ڕێگەپێدراوی ئۆتۆمبێلەکان نابێت لە ٥٠ تۆن زیاتر بێت", ar: "الحمولة المسموحة لا تتجاوز ٥٠ طناً", en: "Allowed vehicle weight limit is 50 tons"}
+                ], a: 0
+            },
+            {
+                q: {ckb: "١٧. ترافیک سوورە بەڵام پۆلیسی هاتوچۆ ئاماژەت پێدەدات بڕۆیت، چی دەکەیت؟", ar: "١٧. الإشارة حمراء ولكن شرطي المرور يشير لك بالعبور، ماذا تفعل؟", en: "17. The signal light is red, but a traffic officer signals you to proceed. What do you do?"},
+                o: [
+                    {ckb: "دەڕۆم چونکە فەرمانی پۆلیس پێش یاسای ترافیک و هێماکان دەکەوێت", ar: "أعبر لأن أامر الشرطي تلغي إشارات المرور", en: "Obey the officer; manual control overrides traffic lights"},
+                    {ckb: "دەوەستم تا سەوز دەبێت و بە هیچ شێوەیەک لێناخوڕم لێرەدا", ar: "أتوقف حتى تضيء الإشارة باللون الأخضر", en: "Remain stopped until the green light comes on"},
+                    {ckb: "هۆڕن لێدەدەم بۆ ئەوەی تێیبگەیەنم کە ترافیکەکە هێشتا سوورە بۆمان", ar: "أطلق المنبه للتنبيه أن الإشارة حمراء", en: "Honk to remind officer the light is red"},
+                    {ckb: "ئۆتۆمبێلەکە دەکوژێنمەوە و چاوەڕێی کۆتایی دەوامی پۆلیس دەکەم", ar: "إطفاء السيارة والانتظار", en: "Turn off vehicle engine"}
+                ], a: 0
+            },
+            {
+                q: {ckb: "١٨. هێمای شینی بازنەیی کە وێنەی پاسکیلێکی تێدایە واتای چییە؟", ar: "١٨. ماذا تعني إشارة دائرة زرقاء بها صورة دراجة؟", en: "18. What does a blue circular sign displaying a bicycle icon represent?"},
+                o: [
+                    {ckb: "ڕێگەیەکی ناچارییە و تەنها تایبەتە بە لێخوڕینی پایسکیلسواران", ar: "مسار إجباري مخصص فقط للدراجات الهوائية", en: "Mandatory track dedicated exclusively to bicycles"},
+                    {ckb: "هاتوچۆی پایسکیل لەم شەقامەدا بە هەموو شێوەیەک قەدەغەکراوە لێرەدا", ar: "مرور الدراجات ممنوع في هذا الشارع", en: "Bicycles banned on this road segment"},
+                    {ckb: "مەترسی پەڕینەوەی پایسکیلسواران هەیە لە قەراغی شەقامەکەدا بەردەوام", ar: "خطر عبور أصحاب الدراجات", en: "Caution for bicycles crossing area"},
+                    {ckb: "ئەم شوێنە تایبەتە بە پارکینگ و ڕاگرتنی فەرمی پایسکیل لە جادەکەدا", ar: "موقف خاص بركن الدراجات", en: "Official bicycle parking zone"}
+                ], a: 0
+            },
+            {
+                q: {ckb: "١٩. لەکاتی لێخوڕین لە ناو توونێلدا، چی بە توندی قەدەغەکراوە؟", ar: "١٩. أثناء القيادة داخل النفق، ما هو الأمر الحظر تماماً؟", en: "19. While driving inside a road tunnel, what action is strictly prohibited?"},
+                o: [
+                    {ckb: "یوتێرن (پێچکردنەوە بۆ دواوە) و وەستان بەبێ هۆکاری ناچاری", ar: "الدوران للخلف (U-turn) والتوقف دون أسباب طارئة", en: "U-turns and stopping without an absolute emergency"},
+                    {ckb: "بەکارهێنانی لایتی نزم (کورت) لە کاتی ڕۆژدا لەناو توونێلەکە", ar: "استخدام الضوء المنخفض أثناء النهار", en: "Using dipped headlights daytime inside tunnel"},
+                    {ckb: "گوێگرتن لە گۆرانی یان سیستەمی دەنگی ئۆتۆمبێل بە دەنگی کز", ar: "الاستماع للمذياع بصوت منخفض", en: "Listening to radio at low volume"},
+                    {ckb: "کردنەوەی جامەکانی لای ڕاست و چەپی ئۆتۆمبێل لە کاتی ڕۆیشتندا", ar: "فتح نوافذ السيارة أثناء السير", en: "Opening car windows while driving"}
+                ], a: 0
+            },
+            {
+                q: {ckb: "٢٠. مەبەست لە هێڵی زەردی پچڕپچڕ لە قەراغی شەقامەکاندا چییە؟", ar: "٢٠. ما الهدف من الخط الأصفر المتقطع على جانب الطريق؟", en: "20. What does a broken yellow line on the side of the road signify?"},
+                o: [
+                    {ckb: "وەستانی کاتی ڕێگەپێدراوە بەڵام پارکینگ بە هەموو شێوەیەک قەدەغەیە", ar: "التوقف المؤقت مسموح ولكن الركن طويل الأمد ممنوع", en: "Temporary stopping allowed, extended parking prohibited"},
+                    {ckb: "وەستان قەدەغەیە بە هەموو شێوەیەک بۆ هەر جۆرە کارێکی کاتی", ar: "التوقف ممنوع تماماً لأي سبب", en: "Stopping strictly prohibited for any reason"},
+                    {ckb: "تەنها بۆ ئۆتۆمبێلی بارهەڵگر دروستکراوە بۆ بار دابەزاندن لێرەدا", ar: "مخصص للشاحنات لتفريغ الحمولة فقط", en: "Reserved exclusively for loading goods trucks"},
+                    {ckb: "شەقامەکە بە تەواوی داخراوە و تەنها بۆ کاری چاکسازی بەکاردێت", ar: "الطريق مغلق لأعمال الصيانة", en: "Road closed for maintenance operations"}
+                ], a: 0
+            },
+            {
+                q: {ckb: "٢١. ئەگەر لە کاتی لێخوڕیندا تایەی ئۆتۆمبێلەکەت تەمەقیا، چی دەکەیت؟", ar: "٢١. إذا انفجر إطار سيارتك أثناء القيادة، ماذا تفعل؟", en: "21. If your car tire blows out while driving, what should you do?"},
+                o: [
+                    {ckb: "سوکانەکە بە توندی دەگرم و هێواش قاچ لەسەر غاز لادەبەم", ar: "الإمساك بالمقود بقوة ورفع القدم تدريجياً عن البنزين", en: "Grip steering wheel firmly and gradually release gas"},
+                    {ckb: "دەستبەجێ بە توندی برێک دەگرم تا ئۆتۆمبێلەکە ڕابگرم", ar: "الضغط القوي المباشر على الفرامل", en: "Slam the brakes immediately"},
+                    {ckb: "هاندبرێک هەڵدەکێشم بۆ وەستانی خێرا", ar: "سحب فرامل اليد فوراً", en: "Pull the handbrake instantly"},
+                    {ckb: "سوکانەکە بە خێرایی بۆ لای چەپ و ڕاست دەسوڕێنم", ar: "تحريك المقود يميناً ويساراً بسرعة", en: "Steer sharply back and forth"}
+                ], a: 0
+            },
+            {
+                q: {ckb: "٢٢. لەکاتی نێوان بەیانی و ئێوارە (شەفەق)، چی لایتێک دەبێت پێبکرێت؟", ar: "٢٢. في وقت الغسق (بين النهار والليل)، أي ضوء يجب تشغيله؟", en: "22. At twilight (dusk/dawn), which lights must be switched on?"},
+                o: [
+                    {ckb: "لایتی نزم (لۆ لایت) بۆ بینینی ڕوونتر و دیدی بەرامبەر", ar: "المصابيح المنخفضة للرؤية الواضحة", en: "Dipped beam headlights for visibility"},
+                    {ckb: "لایتی بەرز (فول لایت) بە بەردەوامی", ar: "الضوء العالي باستمرار", en: "High beam lights continuously"},
+                    {ckb: "تەنها لایتی بچووکی شوێن پێنیشاندان (پلاکی لایت)", ar: "أضواء اللوحة فقط", en: "Side parking lights only"},
+                    {ckb: "هیچ لایتێک پێویست ناکات تا تاریک داڕدێت", ar: "لا داعي لتشغيل أي ضوء", en: "No lights required until total darkness"}
+                ], a: 0
+            },
+            {
+                q: {ckb: "٢٣. لە کاتی بوونی زریان و بای زۆر بەهێز، مەترسی سەرەکی چییە؟", ar: "٢٣. عند وجود رياح شديدة وعواصف، ما هو الخطر الرئيسي؟", en: "23. During severe windstorms, what is the main hazard?"},
+                o: [
+                    {ckb: "لادانی ئۆتۆمبێل لە ڕێڕەوی خۆی، بەتایبەت لەپشت بارهەڵگرکان", ar: "انحراف المركبة عن مسارها خصوصاً بجانب الشاحنات", en: "Vehicle drifting, especially alongside large trucks"},
+                    {ckb: "زیادبوونی سوتەمەنی ئۆتۆمبێل بە ڕێژەی دوو بەراورد", ar: "زيادة استهلاك الوقود بشكل مضاعف", en: "Doubling of fuel consumption rate"},
+                    {ckb: "لەکارکەوتنی سیستەمی برێکی ئۆتۆمبێلەکە", ar: "تعطل نظام الفرامل في السيارة", en: "Complete brake system failure"},
+                    {ckb: "تێکچوونی سیستەمی ڕادیۆ و کەشوهەوای ناو ئۆتۆمبێل", ar: "عطل التكييف والراديو", en: "Car AC and radio system failure"}
+                ], a: 0
+            },
+            {
+                q: {ckb: "٢٤. هێمای هەڵگەڕاوەی گڵۆپی مەترسی (فلادشەر / چوار لایت) کەی بەکاردێت؟", ar: "٢٤. متى تُستخدم أضواء التحذير الرباعية (الفلاشر)؟", en: "24. When should hazard warning lights (four-way flashers) be used?"},
+                o: [
+                    {ckb: "لە کاتی وەستانی ناچاری، ڕووداو، یان وەستانی لەناکاوی شەقام", ar: "عند التوقف الاضطراري، الحوادث، أو التوقف المفاجئ", en: "During emergency stops, breakdowns, or sudden hazards"},
+                    {ckb: "لە کاتی پارکینگکردنی ئاسایی لەبەردەم مارکێتدا", ar: "عند الركن العادي أمام المحلات", en: "When double parking for routine shopping"},
+                    {ckb: "لە کاتی ڕۆیشتن بە خێراییەکی زۆر لە شەقامی خێرا", ar: "عند القيادة بسرعة عالية جداً", en: "While driving at very high speeds"},
+                    {ckb: "لە کاتی سووڕانەوە بۆ لای ڕاست یان چەپ", ar: "عند الانعطاف لليمين أو اليسار", en: "Instead of turn signals"}
+                ], a: 0
+            },
+            {
+                q: {ckb: "٢٥. کاتی بەکارهێنانی ئیشارەتی پێچکردنەوە لانی کەم چەند مەتر پێش پێچەکە دەبێت؟", ar: "٢٥. كم المسافة الدنيا لاستخدام الغماز (الإشارة) قبل الانعطاف؟", en: "25. Minimum distance to activate turn signals before a turn?"},
+                o: [
+                    {ckb: "لانی کەم ٣٠ تا ٥٠ مەتر پێش گەیشتن بە پێچەکە", ar: "قبل ٣٠ إلى ٥٠ متراً على الأقل من الانعطاف", en: "At least 30 to 50 meters before turning"},
+                    {ckb: "ڕێک لەسەر پێچەکەدا کە گەیشتیتە جادەکە", ar: "عند المنعطف تماماً عند الوصول", en: "Exactly at the moment you make the turn"},
+                    {ckb: "٥ مەتر پێش پێچکردنەوە لە شەقامدا", ar: "قبل ٥ أمتار فقط من الانعطاف", en: "Only 5 meters prior to turning"},
+                    {ckb: "پێویست بە ئیشارەت ناکات ئەگەر جادەکە چۆڵ بێت", ar: "لا داعي للإشارة إذا كان الشارع فارغاً", en: "Not required if the road appears empty"}
+                ], a: 0
+            }
+        ];
 
-        function build120PlusQuestionsDB() {
-            masterQuestionsDB = [
-                // کۆمەڵەی پرسیارە ڕاستەوخۆکان (Core Questions)
-                { id: 1, q: {ckb: "لە چوارڕیانی بێ هێمای هاتوچۆ، یاسای ئەولەویەت بۆ کێیە؟", ar: "في التقاطع بدون إشارات، لمن تكون أولوية المرور؟", en: "At an uncontrolled intersection, who has the right-of-way?"}, o: [{ckb: "ئەو شۆفێرەی دەکەوێتە لای ڕاستی ئۆتۆمبێلەکەی ترەوە", ar: "السائق القادم من جهة اليمين", en: "The driver coming from the right"}, {ckb: "ئەو شۆفێرەی خێراییەکەی زیاترە", ar: "السائق الأكثر سرعة", en: "The faster vehicle"}, {ckb: "ئەو شۆفێرەی لای چەپەوە دێت", ar: "السائق القادم من اليسار", en: "The driver coming from left"}, {ckb: "ئۆتۆمبێلە بارهەڵگرەکان", ar: "الشاحنات فقط", en: "Trucks only"}], a: 0 },
-                { id: 2, q: {ckb: "لەناو فەلەکەدا، کێ مافی پێشینەی فەرمی هەیە بۆ ڕۆیشتن؟", ar: "داخل الدوار، لمن تكون أولوية المرور؟", en: "Inside a roundabout, who has the right of way?"}, o: [{ckb: "ئەو ئۆتۆمبێلەی کە پێشتر لەناو فەلەکەدا دەسوڕێتەوە", ar: "السيارة التي تدور بالفعل داخل الدوار", en: "The vehicle inside the roundabout"}, {ckb: "ئەو ئۆتۆمبێلەی تازە دەیەوێت بچێتە ناو فەلەکە", ar: "السيارة التي تريد الدخول للدوار", en: "The vehicle entering the roundabout"}, {ckb: "ئۆتۆمبێلی لای چەپ", ar: "السيارة من اليسار", en: "Vehicle from left"}, {ckb: "ئەو ئۆتۆمبێلەی خێراترە", ar: "السيارة الأسرع", en: "The fastest car"}], a: 0 },
-                { id: 3, q: {ckb: "لەکاتی بارانی بەخوڕ و خلیسکانی سەر ئاو، باشترین کار چییە؟", ar: "أثناء المطر الغزير والانزلاق، ما هو التصرف الأفضل؟", en: "During heavy rain and hydroplaning, what is best to do?"}, o: [{ckb: "قاچم لەسەر غاز لادەبەم و برێک بە توندی ناگرم", ar: "رفع القدم عن الدواسة وعدم الضغط على الفرامل بقوة", en: "Release gas pedal and avoid heavy braking"}, {ckb: "برێکی توند دەگرم", ar: "الضغط بقوة على الفرامل", en: "Slam the brakes"}, {ckb: "سوکانەکە بە توندی دەسوڕێنم", ar: "تدوير المقود بقوة", en: "Turn steering sharply"}, {ckb: "گێڕی خاڵی N بەکاردێنم", ar: "وضع ناقل الحركة على N", en: "Shift into neutral N"}], a: 0 },
-                { id: 4, q: {ckb: "هێمای سێگۆشەی هەڵگەڕاوە (سەرەوخوار) مانای چییە؟", ar: "ماذا تعني إشارة المثلث المقلوب؟", en: "What does an inverted triangle road sign mean?"}, o: [{ckb: "پێشینەی ڕۆیشتن بدە بە ئۆتۆمبێلە ڕاستەوخۆکان", ar: "إعطاء الأولوية للسيارات المباشرة", en: "Yield right of way"}, {ckb: "شەقامی سەرەکییە و بە خێرایی بڕۆ", ar: "طريق رئيسي واستمر بسرعة", en: "Main priority road"}, {ckb: "وەستانی تەواو بێ مەرج", ar: "التوقف التام الإجباري", en: "Mandatory full stop"}, {ckb: "ڕێگاکە داخراوە", ar: "الطريق مغلق", en: "Road closed"}], a: 0 },
-                { id: 5, q: {ckb: "مەسافەی سەلامەتی یاسایی نێوان تۆ و ئۆتۆمبێلی پێشەوەت چەندە؟", ar: "ما هي مسافة الأمان القانونية بينك وبين المركبة أمامك؟", en: "What is the legal safe distance from the vehicle ahead?"}, o: [{ckb: "٥٠ مەتر یان ماوەی کاتی لانی کەم ٣ چرکە", ar: "٥٠ متراً أو زمن ٣ ثوانٍ على الأقل", en: "50 meters or a 3-second gap minimum"}, {ckb: "١٠ مەتر", ar: "١٠ أمتار", en: "10 meters"}, {ckb: "٢٠ مەتر", ar: "٢٠ متراً", en: "20 meters"}, {ckb: "١٠٠ مەتر", ar: "١٠٠ متر", en: "100 meters"}], a: 0 },
-                { id: 6, q: {ckb: "سیستەمی ABS لە برێکی ئۆتۆمبێلدا چی دەکات؟", ar: "ما هي فائدة نظام ABS في الفرامل؟", en: "What does the ABS braking system do?"}, o: [{ckb: "ڕێگری دەکات لە قفڵبوونی تایەکان تا بتوانیت سوکان بسوڕێنیت", ar: "يمنع انغلاق الإطارات لتتمكن من التوجيه", en: "Prevents wheels locking so you can steer"}, {ckb: "مەسافەی وەستان بەتەواوی ناهێڵێت", ar: "يلغي مسافة التوقف تماماً", en: "Eliminates stopping distance"}, {ckb: "خێرایی ئۆتۆمبێلەکە زیاد دەکات", ar: "يزيد سرعة المركبة", en: "Increases vehicle speed"}, {ckb: "تایەکان لە بەنزین پارێزێت", ar: "يحمي الإطارات من البنزين", en: "Protects tires from gas"}], a: 0 },
-                { id: 7, q: {ckb: "لە شەودا کەی لایتی بەرز (فول لایت) بکوژێنیتەوە؟", ar: "في الليل، متى يجب إطفاء الضوء العالي؟", en: "At night, when must you switch off high beams?"}, o: [{ckb: "کاتێک ئۆتۆمبێلێک لە بەرامبەرت دێت یان لەپشتەوەیەتی", ar: "عند اقتراب سيارة مقابلة أو المشي خلف سيارة", en: "When oncoming car approaches or following close"}, {ckb: "تەنها بۆ پۆلیسی هاتوچۆ", ar: "فقط لشرطة المرور", en: "Only for traffic police"}, {ckb: "لە ناو توونێلدا", ar: "داخل النفق", en: "Inside a tunnel"}, {ckb: "هیچ کاتێک ناچاریت بکوژێنیتەوە", ar: "لا يلزم إطفاؤه أبداً", en: "Never required"}], a: 0 },
-                { id: 8, q: {ckb: "ترافیک لایت ڕەنگی (زەردی فلاش) دەدات، چی دەکەیت؟", ar: "إذا كانت الإشارة تومض باللون الأصفر، ماذا تفعل؟", en: "What to do at a flashing yellow traffic light?"}, o: [{ckb: "بە وریاییەوە تێپەڕە و پێشینە بدە بەوانی تر", ar: "اعبر بحذر واعطِ الأولوية للآخرين", en: "Proceed with caution and yield right of way"}, {ckb: "ترافیکەکە تێکچووە بە خێرایی بڕۆ", ar: "الإشارة معطلة اعبر بسرعة", en: "Signal broken, speed up"}, {ckb: "وەستانی تەواو بکه وەک سوور", ar: "توقف تماماً كالأحمر", en: "Complete stop like red light"}, {ckb: "بگەڕێوە دواوە", ar: "عد للخلف", en: "Turn back"}], a: 0 },
-                { id: 9, q: {ckb: "کەی ڕێگەپێدراوە لەلای ڕاستەوە پێشبڕین بکەیت؟", ar: "متى يُسمح بالتجاوز من اليمين؟", en: "When is overtaking allowed from the right?"}, o: [{ckb: "کاتێک ئۆتۆمبێلەکەی پێشت ئیشارەتی چەپی داوە بۆ پێچکردنەوە", ar: "عندما تعطي السيارة أمامك إشارة للانعطاف يساراً", en: "When the vehicle ahead signals a left turn"}, {ckb: "کاتێک پەلەتە", ar: "عندما تكون مستعجلاً", en: "When you are in a hurry"}, {ckb: "کاتێک جادەکە چۆڵە", ar: "عندما يكون الطريق فارغاً", en: "When road is empty"}, {ckb: "هیچ کاتێک ڕێگەپێدراو نییە", ar: "لا يُسمح إطلاقاً", en: "Never allowed"}], a: 0 },
-                { id: 10, q: {ckb: "هێڵی بەردەوامی سپی لە ناوەڕاستی شەقامدا مانای چییە؟", ar: "ماذا يعني الخط الأبيض المتصل في منتصف الطريق؟", en: "What does a solid white line in the center mean?"}, o: [{ckb: "بە توندی قەدەغەیە هێڵەکە ببڕیت یان پێشبڕینی لەسەر بکەیت", ar: "يحظر تماماً عبور الخط أو التجاوز فوقه", en: "Strictly forbidden to cross or overtake"}, {ckb: "تایبەتە بە ئۆتۆمبێلی پۆلیس", ar: "مخصص لسيارات الشرطة", en: "Reserved for police"}, {ckb: "دەتوانیت بپەڕێیتەوە ئەگەر هێواش بیت", ar: "يمكن التجاوز ببطء", en: "You may cross if driving slowly"}, {ckb: "شوێنی وەستانە", ar: "مكان للركن", en: "Parking spot"}], a: 0 }
-            ];
-
-            // دروستکردنی داینامیکی بۆ گەیاندنی بە ١٢٠+ پرسیار لەسەر سەرجەم هێماکانی هاتوچۆ
-            let idCounter = 11;
-            
-            // داڕشتنی پرسیار لەسەر هێماکانی ئاگادارکردنەوە
-            warningSigns.forEach((s) => {
-                masterQuestionsDB.push({
-                    id: idCounter++,
-                    q: {
-                        ckb: `واتای هێمای سێگۆشەی ئاگادارکردنەوەی "${s.t.ckb}" چییە؟`,
-                        ar: `ما هو معنى إشارة التحذير "${s.t.ar}"؟`,
-                        en: `What does the warning sign "${s.t.en}" mean?`
-                    },
-                    o: [
-                        {ckb: s.d.ckb, ar: s.d.ar, en: s.d.en},
-                        {ckb: "قەدەغەیە بە هەموو شێوەیەک لێرەوە بڕۆیت", ar: "ممنوع المرور نهائياً", en: "Entry strictly prohibited"},
-                        {ckb: "کەمترین خێرایی ناچاری ڕێگەپێدراو لە شەقام", ar: "السرعة الدنيا الإجبارية", en: "Minimum mandatory speed"},
-                        {ckb: "شوێنی تایبەت بە پارکینگی ئۆتۆمبێلەکان", ar: "موقف مخصص للسيارات", en: "Designated parking area"}
-                    ],
-                    a: 0
-                });
-            });
-
-            // داڕشتنی پرسیار لەسەر هێماکانی قەدەغەکردن
-            prohibitSigns.forEach((s) => {
-                masterQuestionsDB.push({
-                    id: idCounter++,
-                    q: {
-                        ckb: `کاتێک هێمای بازنەی سووری "${s.t.ckb}" دەبینیت، چی لەسەر شۆفێر پێویستە؟`,
-                        ar: `عند رؤية إشارة المنع الحمراء "${s.t.ar}"، ماذا يتوجب عليك؟`,
-                        en: `When seeing the red prohibitive sign "${s.t.en}", what is required?`
-                    },
-                    o: [
-                        {ckb: s.d.ckb, ar: s.d.ar, en: s.d.en},
-                        {ckb: "خێرایی بە ڕێژەی دووهێندە زیاد بکە", ar: "زيادة السرعة للضعف", en: "Double your speed"},
-                        {ckb: "تەنها ئاگاداربە بەڵام ئازادیت لە جێبەجێکردنی", ar: "تحذير فقط وغير ملزم", en: "Warning only, not mandatory"},
-                        {ckb: "پێشینەی ڕۆیشتن بۆ تۆیە بە بەردەوامی", ar: "الأولوية لك دائماً", en: "You have right of way"}
-                    ],
-                    a: 0
-                });
-            });
-
-            // داڕشتنی پرسیار لەسەر هێماکانی ناچارکردن
-            mandatorySigns.forEach((s) => {
-                masterQuestionsDB.push({
-                    id: idCounter++,
-                    q: {
-                        ckb: `هێمای شینی بازنەیی "${s.t.ckb}" ئاماژە بۆ چی دەکات؟`,
-                        ar: `إلى ماذا تشير الإشارة الزرقاء الدائرية "${s.t.ar}"؟`,
-                        en: `What does the blue mandatory circular sign "${s.t.en}" indicate?`
-                    },
-                    o: [
-                        {ckb: s.d.ckb, ar: s.d.ar, en: s.d.en},
-                        {ckb: "قەدەغەکردنی ڕۆیشتن بە هەموو شێوازێک", ar: "منع المرور كلياً", en: "Total prohibition of entry"},
-                        {ckb: "شوێنی فیتەر و چاککردنەوەی ئۆتۆمبێل", ar: "ورشة صيانة السيارات", en: "Vehicle repair workshop"},
-                        {ckb: "مەترسی ڕوودانی داڕمانی زەوی", ar: "خطر انهيار أرضي", en: "Landslide danger zone"}
-                    ],
-                    a: 0
-                });
-            });
+        let availableQuestions = [];
+        function fillQuestionPool() {
+            availableQuestions = [...massiveQuestionsDB];
+            availableQuestions = availableQuestions.sort(() => 0.5 - Math.random());
         }
+        fillQuestionPool();
 
-        build120PlusQuestionsDB(); // ئامادەکردنی بانکی ١٢٠+ پرسیارەکە
-
-        let availablePool = [];
         let qIndex = 0, score = 0, currentQuiz = [];
         let timerInterval = null, questionEndTime = 0;
-
-        function getNext25Questions() {
-            // ئەگەر پرسیارە ماوەکان لە ٢٥ کەمتر بویەوە، دووبارە پڕی بکەرەوە
-            if (availablePool.length < 25) {
-                // هێنانی تەواوی داتابەیسەکە بە مەرجێک پرسیارەکانی تاقیکردنەوەی پێشوو فڕێ بدات
-                availablePool = masterQuestionsDB.filter(q => !usedQuestionIdsInLastQuiz.has(q.id));
-                availablePool.sort(() => 0.5 - Math.random());
-            }
-
-            // هەڵبژاردنی ٢٥ پرسیاری تەواو نوێ
-            const selected = availablePool.splice(0, 25);
-            
-            // تۆمارکردنی IDی ئەم پرسیارانە تا لە تاقیکردنەوەی دواتردا دووبارە نەبنەوە
-            usedQuestionIdsInLastQuiz.clear();
-            selected.forEach(q => usedQuestionIdsInLastQuiz.add(q.id));
-
-            return selected;
-        }
 
         function startQuiz() {
             document.getElementById('quiz-intro').style.display = 'none';
             document.getElementById('result-box').style.display = 'none';
             document.getElementById('quiz-box').style.display = 'block';
             
-            currentQuiz = getNext25Questions();
+            if (availableQuestions.length < 25) fillQuestionPool();
+            currentQuiz = availableQuestions.splice(0, 25);
             qIndex = 0; score = 0; 
             loadQ();
         }
@@ -716,7 +843,7 @@
             const badge = document.getElementById('timer-badge');
             badge.classList.remove('urgent');
 
-            questionEndTime = Date.now() + 60000; // ٦٠ چرکەی ڕاستەقینە
+            questionEndTime = Date.now() + 60000;
             updateTimerDisplay();
 
             timerInterval = setInterval(() => {
@@ -762,7 +889,7 @@
             if(isCorrect) {
                 clickedBtn.classList.add('correct');
                 clickedBtn.querySelector('i').className = 'fas fa-check-circle';
-                score += 4; // ٢٥ * ٤ = ١٠٠ نمرە
+                score += 4;
             } else {
                 clickedBtn.classList.add('wrong');
                 clickedBtn.querySelector('i').className = 'fas fa-times-circle';
