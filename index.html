@@ -1,1 +1,873 @@
 
+
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نوسینگەی دڵی کۆسان | VIP شۆفێری</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #12072b; --primary-light: #220e4d; --accent: #8b5cf6; --accent-hover: #7c3aed;
+            --bg-color: #f5f3ff; --surface: #ffffff; --text-dark: #0f172a; --text-muted: #64748b;
+            --danger: #ef4444; --success: #10b981; --info: #0ea5e9; --warning: #f59e0b;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05); --shadow-lg: 0 20px 40px -5px rgba(34, 14, 77, 0.15);
+            --radius: 20px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Arial, sans-serif; line-height: 1.8; }
+        *:focus, button:focus, .opt-btn:focus { outline: none !important; box-shadow: none !important; }
+        body { background-color: var(--bg-color); color: var(--text-dark); overflow-x: hidden; scroll-behavior: smooth; }
+
+        /* باڕی سەرەوە */
+        header { position: fixed; top: 15px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 1100px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); padding: 10px 20px; border-radius: 50px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; box-shadow: var(--shadow-sm); border: 1px solid rgba(255,255,255,0.8); }
+        .logo { font-size: 18px; font-weight: bold; color: var(--primary); display: flex; align-items: center; gap: 10px; }
+        .logo i { color: var(--accent); font-size: 24px; }
+        .header-controls { display: flex; align-items: center; gap: 10px; }
+        .nav-links { display: flex; gap: 5px; }
+        .nav-btn { background: transparent; border: none; padding: 8px 16px; border-radius: 30px; font-weight: bold; color: var(--text-muted); cursor: pointer; transition: 0.3s; font-size: 14px; }
+        .nav-btn.active, .nav-btn:hover { background: var(--primary); color: var(--surface); box-shadow: 0 4px 15px rgba(34, 14, 77, 0.3); transform: scale(1.03); }
+
+        .lang-select-wrapper { position: relative; }
+        .lang-btn { background: #faf5ff; border: 2px solid #ddd6fe; color: var(--primary); font-weight: bold; padding: 6px 14px; border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 13px; transition: 0.3s; }
+        .lang-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+        .lang-dropdown { position: absolute; top: 115%; left: 0; background: white; border-radius: 15px; box-shadow: var(--shadow-lg); border: 1px solid #e9d5ff; display: none; flex-direction: column; overflow: hidden; min-width: 120px; z-index: 1001; }
+        .lang-dropdown.show { display: flex; }
+        .lang-opt { padding: 10px 15px; background: none; border: none; text-align: initial; cursor: pointer; font-weight: bold; color: var(--text-dark); transition: 0.2s; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+        .lang-opt:hover { background: #f5f3ff; color: var(--accent); }
+
+        .page { display: none; padding-top: 95px; padding-bottom: 80px; animation: slideUp 0.5s ease; }
+        .page.active { display: block; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        .hero { position: relative; margin: 0 5%; border-radius: 35px; overflow: hidden; background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; padding: 80px 20px; text-align: center; box-shadow: var(--shadow-lg); }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=1200') center/cover; opacity: 0.15; mix-blend-mode: overlay; }
+        .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+        .hero h1 { font-size: 40px; color: var(--accent); margin-bottom: 15px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); font-weight: 900; }
+        .hero h2 { font-size: 20px; color: white; margin-bottom: 30px; font-weight: normal; line-height: 1.6; }
+        .btn-group { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 25px; }
+        .btn-modern { background: linear-gradient(135deg, var(--accent), var(--accent-hover)); color: white; padding: 14px 30px; font-size: 16px; font-weight: bold; border-radius: 40px; cursor: pointer; transition: 0.3s; box-shadow: 0 8px 15px rgba(139, 92, 246, 0.4); display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+        .btn-modern:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 25px rgba(139, 92, 246, 0.6); }
+
+        /* جۆرەکانی مۆڵەتی شۆفێری */
+        .licenses-section { max-width: 1200px; margin: 50px auto 30px; padding: 0 5%; }
+        .licenses-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-top: 25px; }
+        .license-card { background: var(--surface); border-radius: 20px; padding: 22px 20px; border: 1px solid #e9d5ff; box-shadow: var(--shadow-sm); transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+        .license-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--accent); }
+        .license-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px; }
+        .license-code { background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; font-weight: 900; font-size: 20px; padding: 6px 18px; border-radius: 12px; box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3); }
+        .license-title { font-size: 16px; font-weight: bold; color: var(--primary); }
+        .license-desc { font-size: 13px; color: var(--text-dark); line-height: 1.7; text-align: justify; margin-bottom: 12px; }
+        .license-footer { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+        .badge-info { font-size: 11px; font-weight: bold; padding: 3px 10px; border-radius: 8px; }
+        .badge-age { background: #f0fdf4; color: var(--success); border: 1px solid #bbf7d0; }
+        .badge-req { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+
+        .article-card { background: #fff5f5; border: 2px dashed #fca5a5; border-radius: 20px; padding: 25px; margin-top: 25px; grid-column: 1 / -1; box-shadow: var(--shadow-sm); }
+        .article-card h3 { color: var(--danger); font-size: 18px; font-weight: bold; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .article-card ul { list-style: none; padding: 0; }
+        .article-card li { font-size: 14px; color: #7f1d1d; margin-bottom: 8px; position: relative; padding-inline-start: 22px; }
+        .article-card li::before { content: '✔'; position: absolute; right: 0; color: var(--danger); font-weight: bold; }
+        [dir="ltr"] .article-card li::before { right: auto; left: 0; }
+
+        /* فۆرمی تۆمارکردن */
+        .reg-section { max-width: 850px; margin: 30px auto 50px; padding: 0 5%; }
+        .reg-card { background: var(--surface); border-radius: 30px; padding: 40px; box-shadow: var(--shadow-lg); border: 1px solid #e9d5ff; }
+        .reg-title { font-size: 24px; color: var(--primary); margin-bottom: 10px; font-weight: bold; text-align: center; display: flex; align-items: center; justify-content: center; gap: 12px; }
+        .reg-desc { color: var(--text-muted); text-align: center; margin-bottom: 30px; font-size: 15px; }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; text-align: initial; }
+        .form-group label { font-size: 14px; font-weight: bold; color: var(--primary); }
+        .form-group input, .form-group select { padding: 12px 15px; border-radius: 12px; border: 2px solid #ddd6fe; font-size: 14px; background: #faf5ff; transition: 0.3s; color: var(--text-dark); }
+        .form-group input:focus, .form-group select:focus { border-color: var(--accent); background: white; outline: none; }
+        .submit-btn { width: 100%; margin-top: 30px; background: linear-gradient(135deg, var(--accent), var(--accent-hover)); color: white; padding: 15px; font-size: 16px; font-weight: bold; border-radius: 15px; cursor: pointer; transition: 0.3s; display: flex; justify-content: center; align-items: center; gap: 10px; border: none; }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(139, 92, 246, 0.4); }
+
+        .about-section { max-width: 1100px; margin: 60px auto 20px; padding: 0 5%; text-align: center; }
+        .sec-header { font-size: 28px; color: var(--primary); margin-bottom: 12px; font-weight: bold; }
+        .sec-desc { font-size: 16px; color: var(--text-muted); max-width: 700px; margin: 0 auto 40px; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
+        .feature-card { background: var(--surface); padding: 35px 20px; border-radius: var(--radius); box-shadow: var(--shadow-sm); transition: 0.4s; border: 1px solid #e9d5ff; position: relative; overflow: hidden; }
+        .feature-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--accent); }
+        .feature-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+        .feature-card i { font-size: 36px; color: var(--primary); margin-bottom: 20px; background: #faf5ff; padding: 18px; border-radius: 50%; }
+
+        /* ڕێنمایی و هێماکان */
+        .tips-container { max-width: 1200px; margin: 0 auto 50px; padding: 0 5%; }
+        .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 25px; }
+        .tip-card { display: flex; gap: 18px; align-items: flex-start; padding: 22px; background: var(--surface); border-radius: var(--radius); border-inline-start: 5px solid var(--info); box-shadow: var(--shadow-sm); transition: 0.3s; }
+        .tip-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+        .tip-card i { font-size: 26px; color: var(--info); background: #f0f9ff; width: 55px; height: 55px; display: flex; justify-content: center; align-items: center; border-radius: 15px; flex-shrink: 0; }
+        .tip-card h3 { font-size: 16px; color: var(--primary); margin-bottom: 6px; font-weight: bold; }
+        .tip-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+        .signs-container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+        .signs-title { display: flex; align-items: center; gap: 12px; font-size: 22px; color: var(--primary); margin: 40px 0 20px; padding-bottom: 12px; border-bottom: 2px solid #e2e8f0; }
+        .signs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 18px; margin-bottom: 40px; }
+        .sign-card { background: var(--surface); border-radius: var(--radius); padding: 25px 15px; text-align: center; box-shadow: var(--shadow-sm); border: 1px solid #f1f5f9; transition: 0.3s; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
+        .sign-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--accent); }
+        
+        .shape-box { height: 90px; display: flex; justify-content: center; align-items: center; margin-bottom: 12px; position: relative; }
+        
+        /* چاککردنی تەواوەتی کێشەی نیشاندانی ئایکۆنی ناو سێگۆشەکان */
+        .triangle-container { width: 85px; height: 75px; position: relative; display: flex; align-items: center; justify-content: center; }
+        .warning-triangle { position: absolute; width: 100%; height: 100%; background-color: var(--danger); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
+        .warning-triangle-inner { position: absolute; width: 74%; height: 74%; background-color: var(--surface); bottom: 3px; left: 13%; clip-path: polygon(50% 0%, 0% 100%, 100% 100%); z-index: 1; }
+        .triangle-icon { position: absolute; z-index: 10 !important; top: 58%; left: 50%; transform: translate(-50%, -50%); font-size: 20px; color: var(--primary); text-align: center; }
+
+        .circle-red { width: 80px; height: 80px; border-radius: 50%; border: 9px solid var(--danger); background: white; display: flex; justify-content: center; align-items: center; font-size: 18px; color: var(--primary); font-weight: bold; overflow: hidden; text-align: center; }
+        .circle-red i { font-size: 22px; }
+        .circle-blue { width: 80px; height: 80px; border-radius: 50%; background: var(--info); display: flex; justify-content: center; align-items: center; font-size: 22px; color: white; font-weight: bold; }
+        .circle-blue i { font-size: 22px; }
+        .rect-blue { width: 80px; height: 80px; border-radius: 15px; background: var(--info); display: flex; justify-content: center; align-items: center; font-size: 28px; color: white; }
+
+        /* بەشی تاقیکردنەوە */
+        .quiz-wrapper { max-width: 850px; margin: 30px auto; padding: 0 5%; }
+        .quiz-card { background: var(--surface); border-radius: 30px; padding: 35px; box-shadow: var(--shadow-lg); border: 1px solid #e9d5ff; position: relative; }
+        .progress-container { width: 100%; height: 10px; background: #e2e8f0; border-radius: 10px; margin-bottom: 25px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--success)); width: 0%; transition: 0.5s ease; border-radius: 10px; }
+        
+        .q-header { display: flex; justify-content: space-between; align-items: center; font-weight: bold; margin-bottom: 20px; font-size: 16px; color: var(--text-muted); border-bottom: 2px solid #f1f5f9; padding-bottom: 12px; }
+        .timer-badge { display: flex; align-items: center; gap: 8px; background: #fffbebfb; color: var(--warning); border: 2px solid #fde68a; padding: 6px 14px; border-radius: 20px; font-weight: bold; font-size: 15px; transition: 0.3s; }
+        .timer-badge.urgent { background: #fef2f2; color: var(--danger); border-color: #fca5a5; animation: pulse 1s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+
+        .q-text { font-size: 20px; color: var(--primary); margin-bottom: 25px; font-weight: bold; line-height: 1.6; text-align: initial; }
+        .opts-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+        .opt-btn { background: var(--bg-color); border: 2px solid transparent; padding: 16px 20px; border-radius: 15px; font-size: 15px; text-align: initial; cursor: pointer; transition: 0.2s; font-weight: bold; color: var(--text-dark); display: flex; align-items: center; gap: 15px; width: 100%; }
+        .opt-btn i { font-size: 20px; color: #cbd5e1; transition: 0.2s; flex-shrink: 0; }
+        .opt-btn:hover:not(:disabled) { background: white; border-color: var(--primary); box-shadow: 0 5px 15px rgba(34, 14, 77, 0.1); }
+        .opt-btn.correct { background: var(--success) !important; color: white !important; border-color: var(--success) !important; }
+        .opt-btn.correct i { color: white !important; }
+        .opt-btn.wrong { background: var(--danger) !important; color: white !important; border-color: var(--danger) !important; animation: shake 0.4s; }
+        .opt-btn.wrong i { color: white !important; }
+        .opt-btn:disabled { cursor: not-allowed; }
+
+        @keyframes shake { 0% { transform: translateX(0); } 25% { transform: translateX(-5px); } 50% { transform: translateX(5px); } 75% { transform: translateX(-5px); } 100% { transform: translateX(0); } }
+
+        .result-box { text-align: center; }
+        .score-circle { width: 170px; height: 170px; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; margin: 0 auto 25px; color: white; box-shadow: var(--shadow-lg); border: 8px solid rgba(255,255,255,0.3); }
+        .score-circle span { font-size: 55px; font-weight: bold; line-height: 1; }
+
+        .whatsapp-float { position: fixed; bottom: 25px; right: 25px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 32px; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4); z-index: 1000; text-decoration: none; border: 2px solid white; }
+        [dir="ltr"] .whatsapp-float { right: auto; left: 25px; }
+        footer { background: var(--primary); color: white; text-align: center; padding: 35px 20px; margin-top: 50px; }
+
+        @media (max-width: 768px) {
+            header { width: 92%; padding: 8px 12px; }
+            .nav-btn { padding: 6px 10px; font-size: 12px; }
+            .logo span { display: none; }
+            .hero h1 { font-size: 30px; }
+            .hero h2 { font-size: 16px; }
+            .btn-group { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo"><i class="fas fa-car-side"></i> <span>زریانی کۆسان</span></div>
+        <div class="header-controls">
+            <div class="nav-links">
+                <button class="nav-btn active" onclick="switchPage('home', this)" data-i18n="nav_home">سەرەتا</button>
+                <button class="nav-btn" onclick="switchPage('learning', this)" data-i18n="nav_learning">فێربوون</button>
+                <button class="nav-btn" onclick="switchPage('quiz', this)" data-i18n="nav_quiz">تاقیکردنەوە</button>
+            </div>
+            <div class="lang-select-wrapper">
+                <button class="lang-btn" onclick="toggleLangDropdown(event)">
+                    <i class="fas fa-globe"></i> <span id="current-lang-text">کوردی</span> <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
+                </button>
+                <div class="lang-dropdown" id="langDropdown">
+                    <button class="lang-opt" onclick="changeLanguage('ckb')">کوردی</button>
+                    <button class="lang-opt" onclick="changeLanguage('ar')">العربية</button>
+                    <button class="lang-opt" onclick="changeLanguage('en')">English</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="home" class="page active">
+        <div class="hero">
+            <div class="hero-content">
+                <h1 data-i18n="hero_title">نوسینگەی دڵی کۆسان</h1>
+                <h2 data-i18n="hero_subtitle">ڕابەر لە فێرکردنی زانستیانەی شۆفێری بە نوێترین سیستەم</h2>
+                <div class="btn-group">
+                    <button class="btn-modern" onclick="switchPage('learning', document.querySelectorAll('.nav-btn')[1])">
+                        <i class="fas fa-book-open"></i> <span data-i18n="btn_start_learn">دەستپێکردنی فێربوون</span>
+                    </button>
+                    <button class="btn-modern btn-outline" style="background: rgba(255,255,255,0.1); border: 2px solid white; box-shadow: none;" onclick="switchPage('quiz', document.querySelectorAll('.nav-btn')[2])">
+                        <i class="fas fa-play-circle"></i> <span data-i18n="btn_theory_test">تاقیکردنەوەی تیۆری</span>
+                    </button>
+                </div>
+                <div style="margin-top: 20px; display: flex; justify-content: center;">
+                    <a href="traffic-guide1.pdf" target="_blank" class="btn-modern" style="background: linear-gradient(135deg, #ef4444, #b91c1c); color: white; text-decoration: none;">
+                        <i class="fas fa-file-pdf"></i> <span data-i18n="btn_pdf_guide">ڕێبەری هاتوچۆ (PDF)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="licenses-section">
+            <h2 class="sec-header" style="text-align: center;" data-i18n="lic_title">جۆرەکانی مۆڵەتی شۆفێری</h2>
+            <p class="sec-desc" style="text-align: center;" data-i18n="lic_subtitle">زانیاری تەواو و فەرمی دەربارەی مەرج و جۆرەکانی مۆڵەتی شۆفێری بەپێی یاسا</p>
+            <div class="licenses-grid" id="licenses-grid-container"></div>
+        </div>
+
+        <div class="reg-section">
+            <div class="reg-card">
+                <div class="reg-title"><i class="fas fa-id-card"></i> <span data-i18n="form_title">فۆرمی تۆمارکردنی ناوی قوتابی</span></div>
+                <p class="reg-desc" data-i18n="form_desc">تکایە خانەکان بە دروستی پڕبکەرەوە تا داواکارییەکەت ڕاستەوخۆ بگاتە دەستی بەشی تۆمارکردن لە واتسئاپ.</p>
+                <form id="stu-registration-form" onsubmit="submitToWhatsApp(event)">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="stu-name" data-i18n="lbl_fullname">ناوی سیانی</label>
+                            <input type="text" id="stu-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="stu-phone" data-i18n="lbl_phone">ژمارەی مۆبایل</label>
+                            <input type="tel" id="stu-phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="stu-city" data-i18n="lbl_address">شوێنی نیشتەجێبوون</label>
+                            <input type="text" id="stu-city" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="stu-license" data-i18n="lbl_license_type">جۆری مۆڵەتی خوازراو</label>
+                            <select id="stu-license">
+                                <option value="تایبەت (ئۆتۆمبێلی بچووک)" data-i18n="opt_private">مۆڵەتی تایبەت (ئۆتۆمبێلی بچووک)</option>
+                                <option value="گشتی (بارهەڵگر / پاس)" data-i18n="opt_general">مۆڵەتی گشتی (بارهەڵگر / پاس)</option>
+                                <option value="ماتۆڕسکیل" data-i18n="opt_moto">مۆڵەتی ماتۆڕسکیل</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="stu-shift" data-i18n="lbl_time">کاتی گونجاوی وانەکان</label>
+                            <select id="stu-shift">
+                                <option value="بەیانیان (٨:٠٠ تا ١٢:٠٠)" data-i18n="opt_morning">بەیانیان (٨:٠٠ تا ١٢:٠٠)</option>
+                                <option value="پاشنیوەڕۆیان (١٢:٠٠ تا ٤:٠٠)" data-i18n="opt_afternoon">پاشنیوەڕۆیان (١٢:٠٠ تا ٤:٠٠)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn"><i class="fab fa-whatsapp"></i> <span data-i18n="btn_submit_whatsapp">ناردنی داواکاری و تۆماربوون</span></button>
+                </form>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2 class="sec-header" data-i18n="about_title">دەربارەی نوسینگەی دڵی کۆسان</h2>
+            <p class="sec-desc" data-i18n="about_desc">ئێمە خاوەن متمانەترین ناوەندی فێرکردنی شۆفێرین لەسەر ئاستی ناوچەکە.</p>
+            <div class="features-grid">
+                <div class="feature-card"><i class="fas fa-user-tie"></i><h3 data-i18n="feat_1_title">ڕاهێنەرانی بێوێنە</h3><p data-i18n="feat_1_desc">خاوەنی لێهاتووترین ڕاهێنەرانی هاوچەرخین بۆ هەردوو ڕەگەزی کوڕان و کچان.</p></div>
+                <div class="feature-card"><i class="fas fa-car-on"></i><h3 data-i18n="feat_2_title">ئۆتۆمبێلی مۆدێرن</h3><p data-i18n="feat_2_desc">فێربوونەکە لەسەر نوێترین ئۆتۆمبێلەکان دەبێت کە سەرجەم مەرجەکانی سەلامەتی فەرمییان هەیە.</p></div> 
+                <div class="feature-card"><i class="fas fa-award"></i><h3 data-i18n="feat_3_title">سەرکەوتنی گەرەنتی</h3><p data-i18n="feat_3_desc">پاسکردنی تاقیکردنەوەی تیۆری و پراکتیکی بەبێ دووبارەبوونەوە.</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="learning" class="page">
+        <div class="tips-container">
+            <h2 class="sec-header" style="text-align: center;"><i class="fas fa-lightbulb" style="color:var(--accent)"></i> <span data-i18n="sec_tips_title">ڕێنماییە ئاڵتوونییەکان بۆ شۆفێران</span></h2>
+            <div class="tips-grid" id="tips-container"></div>
+        </div>
+
+        <div class="signs-container">
+            <h2 class="signs-title"><i class="fas fa-exclamation-triangle" style="color:var(--danger)"></i> <span data-i18n="sign_cat_warning">ئاگادارکردنەوە (سێگۆشە)</span></h2>
+            <div class="signs-grid" id="warning-signs"></div>
+
+            <h2 class="signs-title"><i class="fas fa-ban" style="color:var(--danger)"></i> <span data-i18n="sign_cat_prohibit">قەدەغەکردن (بازنەی سوور)</span></h2>
+            <div class="signs-grid" id="prohibit-signs"></div>
+
+            <h2 class="signs-title"><i class="fas fa-arrow-circle-right" style="color:var(--info)"></i> <span data-i18n="sign_cat_mandatory">ناچارکردن (بازنەی شین)</span></h2>
+            <div class="signs-grid" id="mandatory-signs"></div>
+            
+            <h2 class="signs-title"><i class="fas fa-circle-info" style="color:var(--info)"></i> <span data-i18n="sign_cat_info">زانیاری و ڕێنمایی</span></h2>
+            <div class="signs-grid" id="info-signs"></div>
+        </div>
+    </div>
+
+    <div id="quiz" class="page">
+        <div class="quiz-wrapper">
+            <div class="quiz-card" id="quiz-intro" style="text-align: center;">
+                <i class="fas fa-shield-halved" style="font-size: 70px; color: var(--accent); margin-bottom: 20px;"></i>
+                <h2 style="font-size: 26px; color: var(--primary); margin-bottom: 12px;" data-i18n="quiz_start_title">تاقیکردنەوەی فەرمی تیۆری</h2>
+                <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 16px;" data-i18n="quiz_start_desc">بەخێربێیت! ئەم داتابەیسە <b>١٢٥ پرسیاری تەواو جیاوازی</b> تێدایە (بەشی ٥ تاقیکردنەوەی تەواو دەکات بەبێ دووبارەبوونەوەی پرسیارەکان). هەر پرسیارێک ٦٠ چرکەت لەبەردەستدایە.</p>
+                <button class="btn-modern" style="width: 100%; justify-content: center;" onclick="startQuiz()">
+                    <i class="fas fa-play-circle"></i> <span data-i18n="quiz_btn_start">دەستپێکردن</span>
+                </button>
+            </div>
+
+            <div class="quiz-card" id="quiz-box" style="display: none;">
+                <div class="progress-container"><div class="progress-fill" id="progress"></div></div>
+                <div class="q-header">
+                    <span id="q-count">پرسیار: ١ / ٢٥</span>
+                    <div class="timer-badge" id="timer-badge">
+                        <i class="fas fa-clock"></i> <span id="timer-sec">60</span> <span data-i18n="sec_label">چرکە</span>
+                    </div>
+                </div>
+                <div class="q-text" id="q-text"></div>
+                <div class="opts-grid" id="opts-box"></div>
+            </div>
+
+            <div class="quiz-card result-box" id="result-box" style="display: none;">
+                <div class="score-circle" id="final-circle"><span id="final-score">100</span></div>
+                <h2 id="res-title" style="font-size: 30px; margin-bottom: 12px;">دەرەنجام</h2>
+                <p id="res-msg" style="color: var(--text-muted); margin-bottom: 30px; font-size: 18px;"></p>
+                <button class="btn-modern" onclick="startQuiz()"><i class="fas fa-redo-alt"></i> <span data-i18n="quiz_btn_retry">تاقیکردنەوەیەکی نوێ</span></button>
+            </div>
+        </div>
+    </div>
+
+    <a href="https://wa.me/9647504659955" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <footer><h3>Dlli Kosan Driving</h3><p>Developed by Dlli Kosan &copy; 2026. All Rights Reserved.</p></footer>
+
+    <script>
+        let currentLang = 'ckb';
+
+        const translations = {
+            ckb: {
+                nav_home: "سەرەتا", nav_learning: "فێربوون", nav_quiz: "تاقیکردنەوە",
+                hero_title: "نوسینگەی دڵی کۆسان", hero_subtitle: "ڕابەر لە فێرکردنی زانستیانەی شۆفێری بە نوێترین سیستەم",
+                btn_start_learn: "دەستپێکردنی فێربوون", btn_theory_test: "تاقیکردنەوەی تیۆری", btn_pdf_guide: "ڕێبەری هاتوچۆ (PDF)",
+                lic_title: "جۆرەکانی مۆڵەتی شۆفێری", lic_subtitle: "زانیاری تەواو و فەرمی دەربارەی مەرج و جۆرەکانی مۆڵەتی شۆفێری بەپێی یاسا",
+                form_title: "فۆرمی تۆمارکردنی ناوی قوتابی", form_desc: "تکایە خانەکان بە دروستی پڕبکەرەوە تا داواکارییەکەت ڕاستەوخۆ بگاتە دەستی بەشی تۆمارکردن لە واتسئاپ.",
+                lbl_fullname: "ناوی سیانی", lbl_phone: "ژمارەی مۆبایل", lbl_address: "شوێنی نیشتەجێبوون", lbl_license_type: "جۆری مۆڵەتی خوازراو",
+                opt_private: "مۆڵەتی تایبەت (ئۆتۆمبێلی بچووک)", opt_general: "مۆڵەتی گشتی (بارهەڵگر / پاس)", opt_moto: "مۆڵەتی ماتۆڕسکیل",
+                lbl_time: "کاتی گونجاوی وانەکان", opt_morning: "بەیانیان (٨:٠٠ تا ١٢:٠٠)", opt_afternoon: "پاشنیوەڕۆیان (١٢:٠٠ تا ٤:٠٠)",
+                btn_submit_whatsapp: "ناردنی داواکاری و تۆماربوون", about_title: "دەربارەی نوسینگەی دڵی کۆسان",
+                about_desc: "ئێمە خاوەن متمانەترین ناوەندی فێرکردنی شۆفێرین لەسەر ئاستی ناوچەکە.",
+                feat_1_title: "ڕاهێنەرانی بێوێنە", feat_1_desc: "خاوەنی لێهاتووترین ڕاهێنەرانی هاوچەرخین بۆ هەردوو ڕەگەزی کوڕان و کچان.",
+                feat_2_title: "ئۆتۆمبێلی مۆدێرن", feat_2_desc: "فێربوونەکە لەسەر نوێترین ئۆتۆمبێلەکان دەبێت کە سەرجەم مەرجەکانی سەلامەتی فەرمییان هەیە.",
+                feat_3_title: "سەرکەوتنی گەرەنتی", feat_3_desc: "پاسکردنی تاقیکردنەوەی تیۆری و پراکتیکی بەبێ دووبارەبوونەوە.",
+                sec_tips_title: "ڕێنماییە ئاڵتوونییەکان بۆ شۆفێران", sign_cat_warning: "ئاگادارکردنەوە (سێگۆشە)", sign_cat_prohibit: "قەدەغەکردن (بازنەی سوور)",
+                sign_cat_mandatory: "ناچارکردن (بازنەی شین)", sign_cat_info: "زانیاری و ڕێنمایی",
+                quiz_start_title: "تاقیکردنەوەی فەرمی تیۆری", quiz_start_desc: "بەخێربێیت! بۆ هەر تاقیکردنەوەیەک ٢٥ پرسیاری جیاواز لە بانکی ١٢٥ پرسیاری پێشکەش دەکرێت. هەر پرسیارێک ٦٠ چرکەت لەبەردەستدایە بۆ وەڵامدانەوە.",
+                quiz_btn_start: "دەستپێکردن", quiz_btn_retry: "تاقیکردنەوەیەکی نوێ", q_label: "پرسیار", sec_label: "چرکە",
+                res_pass_title: "پیرۆزە دەرچوویت ✅", res_pass_msg: "تۆ بەسەرکەوتوویی تاقیکردنەوەکەت بە ئەنجامێکی نایاب بڕی.",
+                res_fail_title: "دەرنەچوویت ❌", res_fail_msg: "نمرەکەت کەمترە لە ٨٠. پێویستە زیاتر هەوڵبدەیتەوە."
+            },
+            ar: {
+                nav_home: "الرئيسية", nav_learning: "التعليم", nav_quiz: "الاختبار",
+                hero_title: "مكتب دلي كوسان", hero_subtitle: "الرواد في تعليم القيادة الأكاديمية بأحدث الأنظمة",
+                btn_start_learn: "بدء التعلم", btn_theory_test: "الاختبار النظري", btn_pdf_guide: "دليل المرور (PDF)",
+                lic_title: "أنواع رخص القيادة", lic_subtitle: "معلومات كاملة ورسمية حول شروط وأنواع رخص القيادة بموجب القانون",
+                form_title: "استمارة تسجيل الطالب", form_desc: "يرجى ملء الحقول بدقة لتصل طلباتك مباشرة إلى قسم التسجيل عبر الواتساب.",
+                lbl_fullname: "الاسم الثلاثي", lbl_phone: "رقم الهاتف", lbl_address: "مكان السكن", lbl_license_type: "نوع الرخصة المطلوبة",
+                opt_private: "رخصة خاصة (سيارة صغيرة)", opt_general: "رخصة عامة (شاحنة / حافلة)", opt_moto: "رخصة دراجة نارية",
+                lbl_time: "الوقت المناسب للدروس", opt_morning: "صباحاً (٨:٠٠ إلى ١٢:٠٠)", opt_afternoon: "مساءً (١٢:٠٠ إلى ٤:٠٠)",
+                btn_submit_whatsapp: "إرسال الطلب والتسجيل", about_title: "عن مكتب دلي كوسان",
+                about_desc: "نحن المركز الأهم والأكثر موثوقية لتعليم القيادة على مستوى المنطقة.",
+                feat_1_title: "مدربون متميزون", feat_1_desc: "نمتلك كادراً من أمهر المدربين المعاصرين لكلا الجنسين.",
+                feat_2_title: "سيارات حديثة", feat_2_desc: "يتم التدريب على أحدث السيارات التي تلبي جميع شروط السلامة.",
+                feat_3_title: "نجاح مضمون", feat_3_desc: "اجتياز الاختبارات النظرية والعملية من المرة الأولى.",
+                sec_tips_title: "التعليمات الذهبية للسائقين", sign_cat_warning: "علامات التحذير (مثلث)", sign_cat_prohibit: "علامات المنع (دائرة حمراء)",
+                sign_cat_mandatory: "علامات الإلزام (دائرة زرقاء)", sign_cat_info: "المعلومات والإرشادات",
+                quiz_start_title: "الاختبار النظري الرسمي", quiz_start_desc: "أهلاً بك! يتم تقديم ٢٥ سؤالاً في كل اختبار من بنك أسئلة يحتوي ١٢٥ سؤالاً شاملاً بلا تكرار. لديك ٦٠ ثانية لكل سؤال.",
+                quiz_btn_start: "بدء الاختبار", quiz_btn_retry: "اختبار جديد", q_label: "سؤال", sec_label: "ثانية",
+                res_pass_title: "مبروك، لقد نجحت ✅", res_pass_msg: "لقد اجتزت الاختبار بنجاح وبنتيجة ممتازة.",
+                res_fail_title: "لم تنجح ❌", res_fail_msg: "درجتك أقل من ٨٠. يرجى المحاولة مرة أخرى."
+            },
+            en: {
+                nav_home: "Home", nav_learning: "Learning", nav_quiz: "Exam",
+                hero_title: "Dlli Kosan Office", hero_subtitle: "Leaders in professional driving education with modern systems",
+                btn_start_learn: "Start Learning", btn_theory_test: "Theory Exam", btn_pdf_guide: "Traffic Guide (PDF)",
+                lic_title: "Driving License Categories", lic_subtitle: "Official categories, conditions & specifications per traffic regulations",
+                form_title: "Student Registration Form", form_desc: "Please fill out the fields accurately. Your registration request will be sent directly to WhatsApp.",
+                lbl_fullname: "Full Name", lbl_phone: "Phone Number", lbl_address: "City / Residence", lbl_license_type: "Desired License Category",
+                opt_private: "Private License (Small Cars)", opt_general: "Commercial License (Trucks/Buses)", opt_moto: "Motorcycle License",
+                lbl_time: "Preferred Class Schedule", opt_morning: "Morning (8:00 AM - 12:00 PM)", opt_afternoon: "Afternoon (12:00 PM - 4:00 PM)",
+                btn_submit_whatsapp: "Submit Application via WhatsApp", about_title: "About Dlli Kosan Office",
+                about_desc: "We are the most trusted driving academy in the region.",
+                feat_1_title: "Expert Instructors", feat_1_desc: "Equipped with top certified professional instructors.",
+                feat_2_title: "Modern Vehicles", feat_2_desc: "Training takes place in modern, safety-certified vehicles.",
+                feat_3_title: "Guaranteed Success", feat_3_desc: "Pass theory & practical exams smoothly.",
+                sec_tips_title: "Golden Driving Rules", sign_cat_warning: "Warning Signs (Triangles)", sign_cat_prohibit: "Prohibitive Signs (Red Circles)",
+                sign_cat_mandatory: "Mandatory Signs (Blue Circles)", sign_cat_info: "Information & Guides",
+                quiz_start_title: "Official Theory Exam", quiz_start_desc: "Welcome! Each exam presents 25 unique questions from a 125-question bank (allowing 5 non-repeating tests). You have 60 seconds per question.",
+                quiz_btn_start: "Start Exam", quiz_btn_retry: "Retake Exam", q_label: "Question", sec_label: "sec",
+                res_pass_title: "Congratulations, You Passed! ✅", res_pass_msg: "You passed the theory test with an excellent score.",
+                res_fail_title: "Exam Failed ❌", res_fail_msg: "Your score is below 80%. Please try again."
+            }
+        };
+
+        const licensesData = [
+            { code: "A", title: {ckb:"مۆڵەتی ماتۆڕسکیل", ar:"رخصة دراجة نارية", en:"Motorcycle License"}, desc: {ckb:"ڕێگە دەدات بە هەڵگرەکەی شۆفێری ماتۆڕسکیلێک بکات، کە قەبارەی هێزی بزوێنەرەکەی له (125CC) کەمتڕ نەبێت، وە ماتۆڕسکیلی وزەی دووانە (هیبرۆید - hybrid)، یاخود کارەبایی. تەمەنی (١٦) ساڵی تەواو کردبێت.", ar:"تسمح بحاملها قيادة دراجة نارية لا يقل حجم محركها عن (125CC)، والدراجات الهجينة (Hybrid) أو الكهربائية. بشرط إكمال سن 16 عاماً.", en:"Allows driving motorcycles with engine capacity >= 125CC, hybrid, or electric. Age required: 16+ years."}, age: {ckb:"تەمەن: ١٦ ساڵ", ar:"العمر: ١٦ سنة", en:"Age: 16+"}, req: {ckb:"تەواوکردنی ١٦ ساڵ", ar:"إكمال سن ١٦ سنة", en:"16 years completed"} },
+            { code: "B", title: {ckb:"مۆڵەتی تایبەت (ئۆتۆمبێلی بچووک)", ar:"رخصة خاصة (سيارات صغيرة)", en:"Private Vehicle License"}, desc: {ckb:"ڕێگە دەدات بە هەڵگرەکەی شۆفێری ئۆتۆمبێلێک بکات کە کێشی ئۆتۆمبێلەکە کۆی بە بارەوە له (٣٥٠٠) کیلو گرام زیاتر نەبێت، وە عارەبانەیەک ڕابکێشێت کە کێشی له (٧٥٠) کیلوگرام زیاتر نەبێت.", ar:"تسمح بفيادة سيارة لا يتجاوز وزنها الكلي مع الحمولة (3500) كغم، وسحب مقطورة لا تتجاوز (750) كغم.", en:"Allows driving vehicles up to 3500kg max weight, pulling trailers up to 750kg."}, age: {ckb:"تەمەن: ١٨ ساڵ", ar:"العمر: ١٨ سنة", en:"Age: 18+"}, req: {ckb:"تەواوکردنی ١٨ ساڵ", ar:"إكمال سن ١٨ سنة", en:"18 years completed"} },
+            { code: "BE", title: {ckb:"ئۆتۆمبێلی تایبەت + عارەبانەی قورس", ar:"سيارة خاصة + مقطورة ثقيلة", en:"Private Car + Heavy Trailer"}, desc: {ckb:"ڕێگە دەدات بە هەڵگرەکەی شۆفێری ئۆتۆمبێلێک بکات و عارەبانەیەک ڕابکێشێت، کە کێشی عارەبانەکە له (٧٥٠) کیلو گرام زیاتر بێت، بەو مەرجەی کێشی بە بەتاڵی له (٣٥٠٠) کیلو گرام زیاتر نەبێت.", ar:"تسمح بقيادة سيارة وسحب مقطورة يتجاوز وزنها (750) كغم، بشرط ألا يتجاوز وزن المقطورة فارغة (3500) كغم.", en:"Allows driving a category B car pulling a trailer > 750kg (trailer empty weight <= 3500kg)."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە ۱ ساڵ مۆڵەتی Bت هەبێت", ar:"حائز على رخصة B لمدة سنة", en:"Held B License for 1 year"} },
+            { code: "C1", title: {ckb:"بارهەڵگری ناوەنجی", ar:"شاحنة متوسطة", en:"Medium Truck"}, desc: {ckb:"ڕێگە دەدات بە هەڵگرەکەی شۆفێری ئۆتۆمبێلیکی بارهەڵگر بکات کە کێشی بە بارەوە لە نێوان (٣٥٠٠) بۆ (٧٥٠٠) کیلوگرام بێت و عارەبانەیەک ڕابکێشێت کە کێشی له (٧٥٠) کیلوگرام زیاتر نەبێت.", ar:"تسمح بقيادة شاحنة يتراوح وزنها مع الحمولة بين (3500) إلى (7500) كغم وسحب مقطورة لا تتجاوز (750) كغم.", en:"Allows driving trucks between 3500kg and 7500kg, pulling trailers up to 750kg."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە ۱ ساڵ مۆڵەتی Bت هەبێت", ar:"حائز على رخصة B لمدة سنة", en:"Held B License for 1 year"} },
+            { code: "C1E", title: {ckb:"بارهەڵگری ناوەنجی + عارەبانە", ar:"شاحنة متوسطة + مقطورة", en:"Medium Truck + Trailer"}, desc: {ckb:"ڕێگە دەدات بە هەڵگرەکەی شۆفێری ئۆتۆمبێلیکی بارهەڵگر بکات کە کێشی بە بارەوە لە نێوان (٣٥٠٠) بۆ (٧٥٠٠) کیلوگرام بێت و عارەبانەیەک ڕابکێشێت کە کێشی له (٧٥٠) کیلوگرام زیاتر بێت.", ar:"تسمح بقيادة شاحنة متوسطة (3500 - 7500 كغم) وسحب مقطورة يتجاوز وزنها (750) كغم.", en:"Allows driving a C1 truck with a trailer > 750kg. Permits driving BE vehicles as well."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە مۆڵەتی C1ت هەبێت", ar:"حائز على رخصة C1", en:"Must hold C1 License"} },
+            { code: "C", title: {ckb:"بارهەڵگری قورس", ar:"شاحنة ثقيلة", en:"Heavy Rigid Truck"}, desc: {ckb:"ڕێگە دەدات بە هەڵگرەکەی کە شۆفێری ئۆتۆمبێلیکی بارهەڵگر بکات. کە کێشی بە بارەوە له (٣٥٠٠) کیلوگرام زیاتر بێت، و عارەبانەیەک ڕابکێشێت کە کێشی له (٧٥٠) کیلوگرام زیاتر نەبێت.", ar:"تسمح بقيادة شاحنة ثقيلة يتجاوز وزنها الكلي (3500) كغم وسحب مقطورة لا تتجاوز (750) كغم.", en:"Allows driving heavy trucks > 3500kg pulling a trailer <= 750kg."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە ۱ ساڵ مۆڵەتی Bت هەبێت", ar:"حائز على رخصة B لمدة سنة", en:"Held B License for 1 year"} },
+            { code: "CE", title: {ckb:"ترێلە و قاطرة ومقطورة", ar:"شاحنة ثقيلة مع تريلة (مقطورة)", en:"Articulated Truck / Semi-Trailer"}, desc: {ckb:"ڕێگە دەدات بە هەڵگرەکەی کە شۆفێری ئۆتۆمبێلیکی بارهەڵگر بکات لەگەڵ جۆری ترێلە و (قاطرة و مقطورة) بکات کە کێشی له (٧٥٠) کیلوگرام زیاتر بێت.", ar:"تسمح بقيادة شاحنة ثقيلة مع قاطرة ومقطورة (تريلة) يتجاوز وزنها (750) كغم.", en:"Allows driving heavy articulated trucks & semi-trailers > 750kg."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە مۆڵەتی C و BEت هەبێت", ar:"حائز على رخصتي C و BE", en:"Must hold C & BE Licenses"} },
+            { code: "D1", title: {ckb:"مینی پاس (٩ تا ١٦ سەرنشین)", ar:"حافلة صغيرة (٩ - ١٦ راكب)", en:"Minibus (9-16 passengers)"}, desc: {ckb:"ڕێگە دەدات بە هەڵگرەکەی شۆفێری پاس بکات، کە ژمارەی سەرنشینەکانی لە (١٦) کەس زیاتر نەبێت و درێژی پاسەکە لە (٨) مەتر زیاتر نەبێت.", ar:"تسمح بقيادة حافلة لا يتجاوز عدد ركابها مع السائق (16) شخصاً وطولها لا يتجاوز (8) أمتار.", en:"Allows driving minibuses up to 16 seats and max 8m length."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە ۱ ساڵ مۆڵەتی Bت هەبێت", ar:"حائز على رخصة B لمدة سنة", en:"Held B License for 1 year"} },
+            { code: "D1E", title: {ckb:"مینی پاس + عارەبانەی قورس", ar:"حافلة صغيرة + مقطورة ثقيلة", en:"Minibus + Heavy Trailer"}, desc: {ckb:"ڕێگە دەدات بە هەڵگرەکەی شۆفێری پاس بکات، کە سەرنشینەکانی له (١٦) کەس زیاتر نەبێت، و عارەبانەیەک ڕابکێشێت کە کێشی له (٧٥٠) کیلوگرام زیاتر بێت.", ar:"تسمح بقيادة حافلة صغيرة (حتى 16 راكب) وسحب مقطورة يتجاوز وزنها (750) كغم.", en:"Allows driving a D1 minibus with a trailer > 750kg."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە مۆڵەتی D1ت هەبێت", ar:"حائز على رخصة D1", en:"Must hold D1 License"} },
+            { code: "D", title: {ckb:"پاسی گەورەی سەرنشینان", ar:"حافلة ركاب كبيرة", en:"Large Passenger Bus"}, desc: {ckb:"ڕێگە دەدات بە هەڵگرەکەی کە شۆفێری ئۆتۆمبێلیکی پاس بکات و عارەبانەیەک ڕابکێشێت کە کێشی له (٧٥٠) کیلوگرام زیاتر نەبێت.", ar:"تسمح بقيادة حافلة ركاب كبيرة وسحب مقطورة لا تتجاوز (750) كغم.", en:"Allows driving large passenger buses pulling a trailer <= 750kg."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە ۱ ساڵ مۆڵەتی Bت هەبێت", ar:"حائز على رخصة B لمدة سنة", en:"Held B License for 1 year"} },
+            { code: "DE", title: {ckb:"پاسی گەورە + عارەبانەی قورس", ar:"حافلة كبيرة + مقطورة ثقيلة", en:"Large Bus + Heavy Trailer"}, desc: {ckb:"ڕێگە دەدات بە هەڵگرەکەی کە شۆفێری ئۆتۆمبێلیکی پاس بکات، و عارەبانەیەک ڕابکێشێت کە کێشی له (٧٥٠) کیلوگرام زیاتر بێت.", ar:"تسمح بقيادة حافلة كبيرة وسحب مقطورة يتجاوز وزنها (750) كغم.", en:"Allows driving large buses pulling a heavy trailer > 750kg."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە مۆڵەتی Dت هەبێت", ar:"حائز على رخصة D", en:"Must hold D License"} },
+            { code: "T", title: {ckb:"ئامێرەکانی کێڵگە و بیناسازی", ar:"الآليات الزراعية والإنشائية", en:"Agricultural & Construction Tractors"}, desc: {ckb:"ڕێگە دەدات بە هەڵگرەکەی شۆفێری ئامێری کشتوکاڵی و بیناسازی بکات، کە خێراییەکەی له (٦٠) کیلو‌مەتر زیاتر نەبێت.", ar:"تسمح بقيادة الآليات الزراعية والإنشائية التي لا تتجاوز سرعتها (60) كم/ساعة.", en:"Allows driving agricultural and construction tractors with speed <= 60 km/h."}, age: {ckb:"تەمەن: ١٨ ساڵ", ar:"العمر: ١٨ سنة", en:"Age: 18+"}, req: {ckb:"تەواوکردنی ١٨ ساڵ", ar:"إكمال سن ١٨ سنة", en:"18 years completed"} }
+        ];
+
+        function renderLicenses() {
+            const container = document.getElementById('licenses-grid-container');
+            container.innerHTML = '';
+            licensesData.forEach(item => {
+                container.innerHTML += `
+                    <div class="license-card">
+                        <div>
+                            <div class="license-header">
+                                <span class="license-title">${item.title[currentLang]}</span>
+                                <span class="license-code">${item.code}</span>
+                            </div>
+                            <p class="license-desc">${item.desc[currentLang]}</p>
+                        </div>
+                        <div class="license-footer">
+                            <span class="badge-info badge-age">${item.age[currentLang]}</span>
+                            <span class="badge-info badge-req">${item.req[currentLang]}</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            const articleText = {
+                ckb: { title: "ماددەی (٢٦) - یاسای هاتوچۆ", li1: "گۆڕینی جۆری مۆڵەت لە گێڕی ئۆتۆماتیکەوە بۆ گێڕی ئاسایی: پێویستە شۆفێرەکە تەنها تاقیکردنەوەی کرداری (پڕاکتیکی) لەسەر شەقام دەر بچێت.", li2: "شۆفێر مۆڵەتی شۆفێری هەبووبێت لەسەر گێڕی ئاسایی، ڕاستەوخۆ دەتوانێت ئۆتۆمبێلی گێڕ ئۆتۆماتیک لێبخوڕێت بەبێ هیچ تاقیکردنەوەیەک." },
+                ar: { title: "المادة (٢٦) - قانون المرور", li1: "تحويل الرخصة من ناقل الحركة الأوتوماتيكي إلى العادي: يلزم السائق فقط باجتياز الاختبار العملي في الشارع.", li2: "السائق الحاصل على رخصة قيادة عادي (يدوي)، يمكنه قيادة السيارات الأوتوماتيكية مباشرة دون أي اختبار." },
+                en: { title: "Article (26) - Traffic Law", li1: "Converting license from Automatic to Manual gear: Driver only needs to pass the practical road driving test.", li2: "A driver possessing a Manual gear license is legally authorized to drive Automatic gear vehicles directly without re-testing." }
+            };
+            const art = articleText[currentLang];
+            container.innerHTML += `<div class="article-card"><h3><i class="fas fa-gavel"></i> ${art.title}</h3><ul><li>${art.li1}</li><li>${art.li2}</li></ul></div>`;
+        }
+
+        function switchPage(id, btn) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            btn.classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function toggleLangDropdown(e) { e.stopPropagation(); document.getElementById('langDropdown').classList.toggle('show'); }
+        window.onclick = function() { document.getElementById('langDropdown').classList.remove('show'); };
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            const html = document.documentElement;
+            html.lang = lang; html.dir = (lang === 'en') ? 'ltr' : 'rtl';
+            document.getElementById('current-lang-text').innerText = { ckb: 'کوردی', ar: 'العربية', en: 'English' }[lang];
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) el.innerHTML = translations[lang][key];
+            });
+
+            renderLicenses(); renderTips(); renderSigns();
+            if (document.getElementById('quiz-box').style.display === 'block') loadQ();
+        }
+
+        function submitToWhatsApp(e) {
+            e.preventDefault();
+            const name = document.getElementById('stu-name').value, phone = document.getElementById('stu-phone').value, city = document.getElementById('stu-city').value, license = document.getElementById('stu-license').value, shift = document.getElementById('stu-shift').value;
+            const text = `*🌟 پێشکەشکردنی ناوی قوتابی نوێ 🌟*\n\n👤 *ناوی سیانی:* ${name}\n📞 *ژمارەی مۆبایل:* ${phone}\n📍 *ناونیشان/شوێن:* ${city}\n🚗 *مۆڵەتی خوازراو:* ${license}\n⏰ *کاتی گونجاوی وانە:* ${shift}`;
+            window.open(`https://wa.me/9647504659955?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        const tipsData = [
+            {i: 'fa-user-shield', c: 'var(--success)', t: {ckb:'قایشی سەلامەتی', ar:'حزام الأمان', en:'Seatbelt'}, d: {ckb:'بەستنی قایشی سەلامەتی مەترسی مردن بە ڕێژەی ٥٠٪ کەم دەکاتەوە.', ar:'ارتداء حزام الأمان يقلل من خطر الوفاة بنسبة ٥٠٪.', en:'Wearing seatbelts reduces fatal injury risk by 50%.'}},
+            {i: 'fa-ruler', c: 'var(--info)', t: {ckb:'مەسافەی سەلامەتی (٥٠ مەتر)', ar:'مسافة الأمان (٥٠ متر)', en:'Safety Distance (50m)'}, d: {ckb:'هەمیشە مەسافەی ٥٠ مەتر جێبهێڵە لەنێوان خۆت و ئۆتۆمبێلی پێشەوەت.', ar:'حافظ على مسافة ٥٠ متراً أمامك.', en:'Maintain at least 50 meters from the vehicle ahead.'}},
+            {i: 'fa-mobile-screen', c: 'var(--danger)', t: {ckb:'مۆبایل قەدەغەیە', ar:'يمنع استخدام الهاتف', en:'No Mobile Phones'}, d: {ckb:'سەیرکردنی مۆبایل بۆ ٣ چرکە هاوشێوەی لێخوڕینە بە چاوی داخراوەوە.', ar:'النظر للهاتف ٣ ثوانٍ يعادل القيادة بعينين مغلقتين.', en:'Looking at a phone for 3s is driving blind.'}},
+            {i: 'fa-cloud-rain', c: 'var(--accent)', t: {ckb:'کەشوهەوای خراپ', ar:'الطقس السيء', en:'Bad Weather'}, d: {ckb:'لە کاتی باران و بەفردا، نیوەی خێرایی ئاسایی خۆت کەم بکەرەوە.', ar:'في المطر والثلج، خفف سرعتك إلى النصف.', en:'In rain or snow, reduce speed by half.'}},
+            {i: 'fa-child-reaching', c: '#ec4899', t: {ckb:'دانیشتنی منداڵ', ar:'جلوس الأطفال', en:'Child Safety'}, d: {ckb:'هەرگیز ڕێگە مەدە منداڵی خوار ١٢ ساڵ لە کوشنی پێشەوە دابنیشێت.', ar:'لا تسمح للأطفال دون ١٢ سنة بالجلوس في الأمام.', en:'Do not allow children under 12 in front seat.'}},
+            {i: 'fa-bed', c: '#8b5cf6', t: {ckb:'ماندوێتی و خەواڵوویی', ar:'التعب والنعاس', en:'Fatigue & Drowsiness'}, d: {ckb:'ئەگەر خەوت دەهات دەستبەجێ بوەستە، نووستن بۆ یەک چرکە کارەساتە.', ar:'إذا شعرت بالنعاس توقف فوراً.', en:'If drowsy, pull over immediately.'}},
+            {i: 'fa-eye-slash', c: 'var(--primary)', t: {ckb:'گۆشەی نەبینراو', ar:'الزاوية العمياء', en:'Blind Spots'}, d: {ckb:'پێش پێچکردنەوە سەرت بسوڕێنە بۆ دڵنیابوون لە گۆشەی نەبینراو.', ar:'تحقق من الزاوية العمياء قبل الانعطاف.', en:'Check blind spots before turning.'}},
+            {i: 'fa-car-burst', c: 'var(--danger)', t: {ckb:'خلیسکانی سەر ئاو', ar:'الانزلاق المائي', en:'Hydroplaning'}, d: {ckb:'ئەگەر ئۆتۆمبێلەکەت خلیسکا، بە توندی برێک مەگرە.', ar:'إذا انزلقت السيارة لا تضغط الفرامل بشدة.', en:'Do not brake hard if hydroplaning.'}},
+            {i: 'fa-lightbulb', c: 'var(--accent)', t: {ckb:'بەکارهێنانی لایت', ar:'استخدام المصابيح', en:'Headlight Etiquette'}, d: {ckb:'لە شەودا ئەگەر ئۆتۆمبێل بەرامبەرت هات، لایتی بەرز بکوژێنەرەوە.', ar:'في الليل اطفئ الضوء العالي للمقابيل.', en:'Switch off high beams for oncoming traffic.'}},
+            {i: 'fa-truck', c: 'var(--text-muted)', t: {ckb:'ئۆتۆمبێلی گەورە', ar:'الشاحنات الكبيرة', en:'Heavy Vehicles'}, d: {ckb:'لەپشت بارهەڵگرەوە زۆر نزیک مەبەرەوە.', ar:'لا تقترب كثيراً من خلف الشاحنات.', en:'Avoid tailgating large trucks.'}},
+            {i: 'fa-sync', c: 'var(--success)', t: {ckb:'یاسای فەلەکە', ar:'قانون الدوار', en:'Roundabout Rules'}, d: {ckb:'پێشینەی ڕۆیشتن بۆ ئەوەیە کە لەناو فەلەکەدایە.', ar:'الأولوية لمن هو داخل الدوار.', en:'Priority belongs to cars inside roundabout.'}},
+            {i: 'fa-compress-arrows-alt', c: 'var(--info)', t: {ckb:'برێکی کتوپڕ (ABS)', ar:'كبح الطوارئ (ABS)', en:'Emergency Braking'}, d: {ckb:'ئەگەر سیستەمی ABSت هەیە، بەهێز برێک بگرە.', ar:'اضغط الفرامل بقوة مع نظام ABS.', en:'Apply firm pressure with ABS brakes.'}},
+            {i: 'fa-walking', c: 'var(--danger)', t: {ckb:'پەڕینەوەی پیادە', ar:'عبور المشاة', en:'Pedestrian Crossing'}, d: {ckb:'هەمیشە ڕێز لە هێڵی پیادە بگرە و وەستان بکە.', ar:'احترم خطوط عبور المشاة وتوقف.', en:'Always yield to pedestrians.'}},
+            {i: 'fa-ambulance', c: '#ec4899', t: {ckb:'فریاگوزاری', ar:'طوارئ الإسعاف', en:'Emergency Vehicles'}, d: {ckb:'ئەمبولانس کە زەنگی لێدا، ڕێگای بۆ چۆڵ بکە.', ar:'افسح الطريق فوراً لسيارات الإسعاف.', en:'Clear lane for emergency sirens.'}},
+            {i: 'fa-gas-pump', c: 'var(--accent)', t: {ckb:'سووتمەنی', ar:'مستوى الوقود', en:'Fuel Level'}, d: {ckb:'هەرگیز مەهێڵە گڵۆپی بەنزین هەڵببێت بۆ ماوەیەکی زۆر.', ar:'لا تدع ضوء الوقود يعمل لفترة طويلة.', en:'Don\'t run constantly on fuel warning light.'}}
+        ];
+
+        function renderTips() {
+            const container = document.getElementById('tips-container'); container.innerHTML = '';
+            tipsData.forEach(t => {
+                container.innerHTML += `<div class="tip-card" style="border-inline-start-color: ${t.c}"><i><span class="fas ${t.i}" style="color: ${t.c}"></span></i><div><h3>${t.t[currentLang]}</h3><p>${t.d[currentLang]}</p></div></div>`;
+            });
+        }
+
+        const warningSigns = [
+            {i:'fa-exclamation', t:{ckb:'مەترسی گشتی', ar:'خطر عام', en:'General Danger'}, d:{ckb:'ئاگاداربە مەترسی هەیە لە پێشە.', ar:'احذر من وجود خطر أمامك.', en:'Beware of general hazard ahead.'}},
+            {i:'fa-child', t:{ckb:'منداڵان', ar:'أطفال', en:'Children Crossing'}, d:{ckb:'قوتابخانە یان شوێنی یاری منداڵان لە پێشە.', ar:'منطقة المدارس أو ألعاب الأطفال.', en:'School area or playground ahead.'}},
+            {i:'fa-car-burst', t:{ckb:'ناوچەی ڕووداو', ar:'منطقة حوادث', en:'Accident Zone'}, d:{ckb:'مەترسی پێکدادان یان لادانی توند.', ar:'احتمالية حوادث أو اصطدام.', en:'Risk of collisions ahead.'}},
+            {i:'fa-road', t:{ckb:'ڕێگەی خلیسکاو', ar:'طريق زلق', en:'Slippery Road'}, d:{ckb:'لە کاتی باریندا جادەکە دەخلیسکێت.', ar:'الطريق يصبح زلقاً أثناء المطر.', en:'Road slippery when wet.'}},
+            {i:'fa-train', t:{ckb:'شەمەندەفەر', ar:'سكة حديد', en:'Railway Crossing'}, d:{ckb:'هێڵی شەمەندەفەری بە بەربەست لە پێشە.', ar:'تقاطع سكة حديد بمصدات.', en:'Gated railway crossing ahead.'}},
+            {i:'fa-tractor', t:{ckb:'تراکتۆر', ar:'جرارات زراعية', en:'Agricultural Vehicles'}, d:{ckb:'ئەگەری پەڕینەوەی تراکتۆر.', ar:'احتمال عبور الجرارات.', en:'Farm vehicles crossing probability.'}},
+            {i:'fa-wind', t:{ckb:'بای بەهێز', ar:'رياح قوية', en:'Crosswinds'}, d:{ckb:'ئاگاداربە لە هێزی بای لاوەکی.', ar:'احذر من الرياح الجانبية.', en:'Beware of strong side crosswinds.'}},
+            {i:'fa-arrow-turn-up', t:{ckb:'پێچی مەترسیدار', ar:'منعطف خطير', en:'Dangerous Curve'}, d:{ckb:'خێراییەکەت کەم بکەرەوە بۆ ڕاست.', ar:'خفف سرعتك، منعطف لليمين.', en:'Sharp curve to the right ahead.'}},
+            {i:'fa-person-digging', t:{ckb:'چاکسازی شەقام', ar:'أعمال الطريق', en:'Roadworks'}, d:{ckb:'ناوچەی چاکسازی لەپێشە.', ar:'منطقة صيانة وإصلاحات.', en:'Road construction zone ahead.'}},
+            {i:'fa-traffic-light', t:{ckb:'ترافیک لایت', ar:'إشارة ضوئية', en:'Traffic Signals'}, d:{ckb:'ترافیک لایتی ئاگادارکردنەوە لە پێشە.', ar:'توجد إشارة ضوئية تحذيرية.', en:'Traffic lights warning ahead.'}},
+            {i:'fa-bicycle', t:{ckb:'مەترسی پایسکیل', ar:'عبور الدراجات', en:'Cyclists Ahead'}, d:{ckb:'ئەگەری پەڕینەوەی پایسکیلسواران.', ar:'احتمال عبور أصحاب الدراجات.', en:'Watch out for bicycle riders.'}},
+            {i:'fa-horse', t:{ckb:'ئاژەڵە ماڵییەکان', ar:'حيوانات أليفة', en:'Animals Crossing'}, d:{ckb:'ئەگەری پەڕینەوەی ئاژەڵ.', ar:'احتمال عبور المواشي.', en:'Farm animals crossing ahead.'}},
+            {i:'fa-arrow-trend-down', t:{ckb:'سەراوخواری تیژ', ar:'منحدر حاد', en:'Steep Descent'}, d:{ckb:'دابەزینێکی توند کە پێویستی بە گێڕی قورسە.', ar:'منحدر يتطلب غيار ثقيل.', en:'Steep descent requiring low gear.'}},
+            {i:'fa-arrow-trend-up', t:{ckb:'سەرهەڵدێری تیژ', ar:'مرتفع حاد', en:'Steep Incline'}, d:{ckb:'سەرکەوتنێکی تیژ لە پێشە.', ar:'طريق صاعد بشكل حاد.', en:'Steep incline road ahead.'}},
+            {i:'fa-bridge-water', t:{ckb:'پردی جوڵاو', ar:'جسر متحرك', en:'Opening Bridge'}, d:{ckb:'پردەکە دەکرێتەوە بۆ تێپەڕبوونی کەشتی.', ar:'الجسر يفتح لمرور السفن.', en:'Movable bridge ahead.'}}
+        ];
+
+        const prohibitSigns = [
+            {i:'<i class="fas fa-bullhorn"></i>', t:{ckb:'هۆڕن قەدەغەیە', ar:'ممنوع المنبه', en:'No Horns'}, d:{ckb:'لێدانی هۆڕن بە هەموو شێوەیەک قەدەغەیە.', ar:'يمنع استخدام المنبه تماماً.', en:'Use of horn prohibited.'}},
+            {i:'<i class="fas fa-ban"></i>', t:{ckb:'چوونەژوورەوە قەدەغەیە', ar:'ممنوع الدخول', en:'No Entry'}, d:{ckb:'ساید عەکس یان جادەی داخرواو.', ar:'طريق مغلق أو اتجاه معاكس.', en:'Entry prohibited for vehicles.'}},
+            {i:'<i class="fas fa-truck"></i>', t:{ckb:'بارهەڵگر قەدەغەیە', ar:'ممنوع للشاحنات', en:'No Goods Vehicles'}, d:{ckb:'ئۆتۆمبێلی گەورە بۆی نییە لێرەوە بڕوات.', ar:'يمنع مرور الشاحنات.', en:'Heavy cargo trucks not allowed.'}},
+            {i:'<i class="fas fa-car-side"></i>', t:{ckb:'پێشبڕین قەدەغەیە', ar:'ممنوع التجاوز', en:'No Overtaking'}, d:{ckb:'نابێت لە ئۆتۆمبێلی پێشت زیاتر بکەیت.', ar:'يحظر تجاوز السيارة أمامك.', en:'Overtaking prohibited.'}},
+            {i:'<i class="fas fa-motorcycle"></i>', t:{ckb:'ماتۆڕسکیل قەدەغەیە', ar:'ممنوع للدراجات النارية', en:'No Motorcycles'}, d:{ckb:'ماتۆڕ بۆی نییە لێرەوە بڕوات.', ar:'يمنع مرور الدراجات النارية.', en:'Motorcycles prohibited.'}},
+            {i:'<i class="fas fa-bicycle"></i>', t:{ckb:'پایسکیل قەدەغەیە', ar:'ممنوع للدراجات', en:'No Bicycles'}, d:{ckb:'پایسکیلسواران بۆیان نییە لێرەوە بڕۆن.', ar:'يمنع مرور الدراجات الهوائية.', en:'Bicycles prohibited.'}},
+            {i:'<i class="fas fa-person-walking"></i>', t:{ckb:'پیادە قەدەغەیە', ar:'ممنوع المشاة', en:'No Pedestrians'}, d:{ckb:'پەڕینەوە و ڕۆیشتنی پیادە قەدەغەیە.', ar:'عبور المشاة ممنوع.', en:'Pedestrian entry prohibited.'}},
+            {i:'<i class="fas fa-arrow-rotate-left"></i>', t:{ckb:'پێچ قەدەغەیە', ar:'ممنوع الدوران', en:'No U-Turn'}, d:{ckb:'سووڕانەوە بۆ دواوە (U-Turn) قەدەغەیە.', ar:'يمنع التدوير للخلف.', en:'Making U-Turn prohibited.'}},
+            {i:'<i class="fas fa-parking"></i>', t:{ckb:'ڕاوەستان قەدەغەیە', ar:'ممنوع الوقوف', en:'No Parking'}, d:{ckb:'پارککردنی ئۆتۆمبێل لێرەدا قەدەغەیە.', ar:'يمنع ركن السيارة.', en:'Parking vehicles prohibited.'}},
+            {i:'<i class="fas fa-circle-xmark"></i>', t:{ckb:'وەستان قەدەغەیە', ar:'ممنوع التوقف', en:'No Stopping'}, d:{ckb:'وەستانی کاتی یان هەمیشەیی قەدەغەیە.', ar:'يمنع التوقف المؤقت أو الدائم.', en:'Stopping prohibited.'}}
+        ];
+
+        const mandatorySigns = [
+            {i:'<i class="fas fa-arrow-right"></i>', t:{ckb:'بۆ ڕاست بڕۆ', ar:'اتجه لليمين', en:'Turn Right'}, d:{ckb:'ناچاریت بە ئاراستەی تیرەکە بۆ ڕاست بڕۆیت.', ar:'إجباري الاتجاه لليمين.', en:'Mandatory direction right.'}},
+            {i:'<i class="fas fa-arrow-up"></i>', t:{ckb:'بۆ پێشەوە بڕۆ', ar:'سير للأمام', en:'Proceed Straight'}, d:{ckb:'تەنها بۆ پێشەوە، پێچکردنەوە قەدەغەیە.', ar:'استمر للأمام فقط.', en:'Proceed straight only.'}},
+            {i:'<i class="fas fa-sync"></i>', t:{ckb:'فەلەکە', ar:'دوار إجباري', en:'Mandatory Roundabout'}, d:{ckb:'چوونە فەلەکە ناچارییە.', ar:'دخول الدوار إجباري.', en:'Mandatory roundabout ahead.'}},
+            {i:'<i class="fas fa-person-walking"></i>', t:{ckb:'تەنها پیادە', ar:'مسار مشاة فقط', en:'Pedestrians Only'}, d:{ckb:'تەنها بۆ پیاسەی پیادە.', ar:'طريق إجباري للمشاة.', en:'Path for pedestrians only.'}},
+            {i:'<i class="fas fa-bicycle"></i>', t:{ckb:'تەنها پایسکیل', ar:'مسار دراجات فقط', en:'Bicycles Only'}, d:{ckb:'تەنها بۆ پایسکیلسواران.', ar:'شارع إجباري للدراجات.', en:'Designated path for cyclists.'}},
+            {i:'<i class="fas fa-link"></i>', t:{ckb:'زنجیری پێویست', ar:'سلاسل الإطارات', en:'Snow Chains Required'}, d:{ckb:'دەبێت زنجیر لە تایەکان بدەیت.', ar:'تركيب سلاسل الإطارات.', en:'Snow chains required on tires.'}}
+        ];
+
+        const infoSigns = [
+            {i:'<i class="fas fa-parking"></i>', t:{ckb:'پاڕکینگ', ar:'موقف سيارات', en:'Parking Lot'}, d:{ckb:'شوێنی ڕێگەپێدراو بۆ ڕاگرتنی ئۆتۆمبێل.', ar:'مكان مسموح لركن السيارات.', en:'Allowed area for parking.'}},
+            {i:'<i class="fas fa-hospital"></i>', t:{ckb:'نەخۆشخانە', ar:'مستشفى', en:'Hospital'}, d:{ckb:'نەخۆشخانە لە نزیکە.', ar:'مستشفى قريب.', en:'Hospital nearby.'}},
+            {i:'<i class="fas fa-gas-pump"></i>', t:{ckb:'بەنزینخانە', ar:'محطة وقود', en:'Gas Station'}, d:{ckb:'وێستگەی سووتەمەنی.', ar:'محطة لتعبئة الوقود.', en:'Fuel station ahead.'}},
+            {i:'<i class="fas fa-wrench"></i>', t:{ckb:'فیتەر', ar:'صيانة سيارات', en:'Mechanic'}, d:{ckb:'چاککردنەوەی ئۆتۆمبێل لە نزیکە.', ar:'ورشة تصليح قريبة.', en:'Auto repair workshop nearby.'}},
+            {i:'<i class="fas fa-phone"></i>', t:{ckb:'تەلەفۆن', ar:'هاتف طوارئ', en:'Emergency Phone'}, d:{ckb:'تەلەفۆنی فریاگوزاری لەسەر شەقام.', ar:'هاتف طوارئ متوفر.', en:'Emergency telephone available.'}},
+            {i:'<i class="fas fa-bed"></i>', t:{ckb:'هۆتێل', ar:'فندق', en:'Hotel'}, d:{ckb:'مۆتێل بۆ مانەوەی گەشتیاران.', ar:'مكان للإقامة والاستراحة.', en:'Hotel lodging for travelers.'}},
+            {i:'<i class="fas fa-utensils"></i>', t:{ckb:'چێشتخانە', ar:'مطعم', en:'Restaurant'}, d:{ckb:'خواردنگە لە قەراغی شەقام.', ar:'مطعم على جانب الطريق.', en:'Restaurant alongside the road.'}},
+            {i:'<i class="fas fa-road-barrier"></i>', t:{ckb:'ڕێگای بەستراو', ar:'طريق مسدود', en:'Dead End'}, d:{ckb:'جادەکە بە هیچ شوێنێکی تردا ناڕوات.', ar:'الطريق لا يؤدي لمكان آخر.', en:'Road does not continue through.'}},
+            {i:'<i class="fas fa-restroom"></i>', t:{ckb:'توالێت', ar:'دورات مياه', en:'Restroom'}, d:{ckb:'شوێنی گشتی توالێت لە نزیکە.', ar:'دورات مياه عامة قريبة.', en:'Public restroom nearby.'}},
+            {i:'<i class="fas fa-bus"></i>', t:{ckb:'وێستگەی پاس', ar:'محطة حافلات', en:'Bus Stop'}, d:{ckb:'شوێنی وەستانی پاسی گشتی.', ar:'موقف رسمي للحافلات.', en:'Official bus stop location.'}},
+            {i:'<i class="fas fa-taxi"></i>', t:{ckb:'وێستگەی تەکسی', ar:'موقف تاكسي', en:'Taxi Stand'}, d:{ckb:'شوێنی وەستانی تەکسی.', ar:'مكان لوقوف سيارات التاكسي.', en:'Official taxi pickup location.'}},
+            {i:'<i class="fas fa-camera"></i>', t:{ckb:'کامێرای چاودێری', ar:'كاميرا مراقبة', en:'Speed Camera'}, d:{ckb:'کامێرای تۆمارکردنی خێرایی.', ar:'كاميرات تسجيل السرعة.', en:'Radar camera speed enforcement.'}}
+        ];
+
+        for(let j=10; j<=120; j+=10) { prohibitSigns.push({i: j, t:{ckb:`زۆرترین خێرایی ${j}`, ar:`السرعة القصوى ${j}`, en:`Speed Limit ${j}`}, d:{ckb:`نابێت لە خێرایی ${j} کم تێپەڕیت.`, ar:`يمنع تجاوز سرعة ${j} كم/ساعة.`, en:`Do not exceed ${j} km/h.`}}); }
+        for(let j=1; j<=15; j++) { prohibitSigns.push({i: `<span style="font-size:15px;">${j}t</span>`, t:{ckb:`کێشی ڕێگەپێنەدراو ${j} تەن`, ar:`الوزن الممنوع ${j} طن`, en:`Weight Limit ${j}T`}, d:{ckb:`تێپەڕبوونی ئۆتۆمبێلی زیاتر لەم کێشە قەدەغەیە.`, ar:`يمنع مرور السيارات المتجاوزة لهذا الوزن.`, en:`Vehicles exceeding weight prohibited.`}}); }
+        for(let j=2; j<=6; j+=0.5) { prohibitSigns.push({i: `<span style="font-size:15px;">${j}m</span>`, t:{ckb:`پانی یان بەرزی ${j} م`, ar:`العرض أو الارتفاع ${j} م`, en:`Max Dimension ${j}m`}, d:{ckb:`تێپەڕبوونی ئۆتۆمبێل بە ڕەهەندی زیاتر قەدەغەیە.`, ar:`مرور المركبات بأبعاد أضخم ممنوع.`, en:`Exceeding dimensions prohibited.`}}); }
+        for(let j=30; j<=100; j+=10) { mandatorySigns.push({i: j, t:{ckb:`کەمترین خێرایی ${j}`, ar:`السرعة الدنيا ${j}`, en:`Min Speed ${j}`}, d:{ckb:`دەبێت هەمیشە خێراتر لە ${j} کم لێبخوڕیت.`, ar:`يجب القيادة بسرعة أعلى من ${j} كم/ساعة.`, en:`Drive at least ${j} km/h.`}}); }
+
+        const warningIconsExtra = ['fa-snowflake', 'fa-bridge', 'fa-mound', 'fa-triangle-exclamation', 'fa-skull-crossbones', 'fa-water', 'fa-road-barrier', 'fa-signs-post', 'fa-ellipsis', 'fa-truck-flatbed', 'fa-truck-field', 'fa-industry', 'fa-cloud-rain', 'fa-train-subway', 'fa-tent'];
+        const warningTitlesExtra = {
+            ckb: ['مەترسی بەفر و بەستن', 'پردی بەرتەسک لە پێشە', 'جادەی بەرز و نزم', 'بەربەستی زەوی', 'مەترسی تەقەمەنی', 'قەراغی زەریا یان گۆم', 'ڕێگای بێ دەروازە', 'چەند پێچێکی بەدوایەکدا', 'مەترسی ناڕوون لە پێشە', 'بارهەڵگری درێژ', 'پەڕینەوەی ئۆتۆمبێلی بیناسازی', 'ناوچەی پیشەسازی و کارگە', 'بارانی بەخوڕ کتوپڕ', 'شەمەندەفەری ناو شاری', 'شوێنی پشووی گەشتیار'],
+            ar: ['خطر الثلج والانزلاق', 'جسر ضيق أمامك', 'طريق غير مستوٍ', 'حاجز أرضي', 'خطر مواد متفجرة', 'حافة مائية', 'طريق بلا منفذ', 'منعطفات متتالية', 'خطر غير محدد', 'شاحنة طويلة', 'عبور آليات بناء', 'منطقة صنعتیة', 'أمطار غزيرة مفاجئة', 'قطار المدينة الداخلي', 'منطقة استراحة'],
+            en: ['Ice & Snow Hazard', 'Narrow Bridge Ahead', 'Uneven Road Surface', 'Speed Hump Ahead', 'Explosives Danger', 'Unprotected Quayside', 'No Outlet Road', 'Series of Curves', 'Hazard Ahead', 'Long Vehicle', 'Construction Traffic', 'Industrial Zone', 'Sudden Torrential Rain', 'Street Tram Crossing', 'Camping/Rest Area']
+        };
+
+        for(let x=0; x<warningIconsExtra.length; x++) {
+            warningSigns.push({
+                i: warningIconsExtra[x], 
+                t: { ckb: warningTitlesExtra.ckb[x], ar: warningTitlesExtra.ar[x], en: warningTitlesExtra.en[x] }, 
+                d: { ckb: 'ئاگاداربە لەم مەترسییە فەرمییەی لە پێشە.', ar: 'انتبه من هذا الخطر القادم.', en: 'Pay attention to this warning ahead.' }
+            });
+        }
+
+        function renderSigns() {
+            const wBox = document.getElementById('warning-signs'), pBox = document.getElementById('prohibit-signs'), mBox = document.getElementById('mandatory-signs'), iBox = document.getElementById('info-signs');
+            wBox.innerHTML = ''; pBox.innerHTML = ''; mBox.innerHTML = ''; iBox.innerHTML = '';
+
+            warningSigns.forEach(s => wBox.innerHTML += `<div class="sign-card"><div class="shape-box"><div class="triangle-container"><div class="warning-triangle"></div><div class="warning-triangle-inner"></div><i class="fas ${s.i} triangle-icon"></i></div></div><h3>${s.t[currentLang]}</h3><p>${s.d[currentLang]}</p></div>`);
+            prohibitSigns.forEach(s => pBox.innerHTML += `<div class="sign-card"><div class="shape-box"><div class="circle-red">${s.i}</div></div><h3>${s.t[currentLang]}</h3><p>${s.d[currentLang]}</p></div>`);
+            mandatorySigns.forEach(s => mBox.innerHTML += `<div class="sign-card"><div class="shape-box"><div class="circle-blue">${s.i}</div></div><h3>${s.t[currentLang]}</h3><p>${s.d[currentLang]}</p></div>`);
+            infoSigns.forEach(s => iBox.innerHTML += `<div class="sign-card"><div class="shape-box"><div class="rect-blue">${s.i}</div></div><h3>${s.t[currentLang]}</h3><p>${s.d[currentLang]}</p></div>`);
+        }
+
+        // --- ٤. داتابەیسی دروست ڕێک ١٢٥ پرسیاری ئەکادیمی جیاواز بۆ ٥ تاقیکردنەوەی سەراپای بێ دووبارەبوونەوە ---
+        const raw115Questions = [
+            {q: "لە چوارڕیانی بێ هێمای هاتوچۆ، یاسای ئەولەویەت بۆ کێیە؟", o: ["ئەوەی دەکەوێتە لای ڕاستی ئەوانی ترەوە", "ئەوەی خێرایە", "ئەوەی لای چەپە", "بارهەڵگرەکان"], a: 0},
+            {q: "لەناو فلکە، کێ مافی پێشینەی هەیە؟", o: ["ئەو ئۆتۆمبێلەی کە پێشتر لەناو فلکەدایە", "من، ئەگەر لای ڕاستی بم", "هەردووکیان دەتوانن بڕۆن", "ئەوەی خێرایە"], a: 0},
+            {q: "لەکاتی بارانی بەخوڕ و خلیسکانی سەر ئاو، باشترین کار چییە؟", o: ["قاچم لەسەر بەنزین لادەبەم و برێک ناگرم", "بەهێز برێک دەگرم", "سوکان توند دەسوڕێنم", "گێڕەکە دەگۆڕم بۆ قورس"], a: 0},
+            {q: "هێمای سێگۆشەی هەڵگەڕاوە (سەرەوخوار) مانای چییە؟", o: ["پێشینەی ڕۆیشتن بدە بە ئۆتۆمبێلەکانی بەرامبەر", "شەقامی سەرەکییە بەردەوام بە", "وەستانی تەواو (STOP)", "ڕێگای داخراوە"], a: 0},
+            {q: "مەسافەی سەلامەتی یاسایی نێوان تۆ و ئۆتۆمبێلی پێشەوەت چەندە؟", o: ["٥٠ مەتر یان ٣ چرکە", "١٠ مەتر", "٢٠ مەتر", "١٠٠ مەتر"], a: 0},
+            {q: "سیستەمی ABS لە برێکی ئۆتۆمبێلدا سودی چییە لە کاتی ڕووداو؟", o: ["ڕێگری دەکات لە قفڵبوونی تایەکان تا بتوانیت سوکان بسوڕێنیت", "مەسافەی وەستان دەبێتە سفر", "خێرایی زیاد دەکات", "تایە لە تەقین دەپارێزێت"], a: 0},
+            {q: "لە شەودا کەی ناچاریت لایتی بەرز (فول) بکوژێنیتەوە؟", o: ["کاتێک ئۆتۆمبێلێک لە بەرامبەرت دێت یان لەپشتەوەیەتی", "تەنها بۆ پۆلیس", "لە توونێل", "هیچ کات"], a: 0},
+            {q: "ترافیک لایت ڕەنگی (زەردی فلاش - پچڕپچڕ) دەدات، چی دەکەیت؟", o: ["بە وریاییەوە تێپەڕە و پێشینە بدە بەوانی تر", "ترافیک تێکچووە خێرا بڕۆ", "وەستانی تەواو وەک ڕەنگی سوور", "بگەڕێوە دواوە"], a: 0},
+            {q: "کەی ڕێگەپێدراوە لەلای (ڕاست)ەوە پێش ئۆتۆمبێلێکی تر بڕیت؟", o: ["کاتێک ئۆتۆمبێلەکەی پێشت ئیشارەتی چەپی داوە بۆ پێچکردنەوە", "کاتێک شەقام قەرەباڵغە", "کاتێک هێواشە", "قەد ڕێگەپێدراو نییە"], a: 0},
+            {q: "هێڵی بەردەوامی سپی (بێ پچڕان) لە ناوەڕاستی شەقام مانای چییە؟", o: ["بە توندی قەدەغەیە هێڵەکە ببڕیت یان پێشبڕیت", "تایبەتە بە پۆلیس", "دەتوانیت پێش بڕیت", "شوێنی پارکینگە"], a: 0},
+            {q: "دابەزین لە چیایەکی بەرز چۆن دەکرێت بە سەلامەتی؟", o: ["گێڕێکی قورس (وەک ٢ یان ٣) بەکاردەهێنم و کەمتر برێک دەگرم", "مەکینە دەکوژێنمەوە", "برێک دەگرم بەردەوام", "گێڕی خاڵی (N)"], a: 0},
+            {q: "لەکاتی لێخوڕین لە تەمومژێکی چڕدا، کام لایتە نابێت پێبکرێت؟", o: ["لایتی بەرز (فول)، چونکە تیشکەکە دەداتەوە چاوت", "لایتی نزم", "لایتی تەم (فۆگ)", "دەبڵ فلاش"], a: 0},
+            {q: "ئەگەر ئەمبولانس بە زەنگەوە لەپشتتەوە هات, چی دەکەیت؟", o: ["دەچمە لای ڕاست و خێرایی کەم دەکەمەوە تا تێدەپەڕێت", "خێرایی زیاد دەکەم بۆ ئەوەی پێشی نەکەوێت", "یەکسەر لە شوێنی خۆم برێک دەگرم", "ئیشارەتی دەدەمێ کە ناتوانم لاچم"], a: 0},
+            {q: "پێش ئەوەی بپێچیتەوە، بۆچی کەمێک سەرت دەسوڕێنیت نەک تەنها ئاوێنە؟", o: ["بۆ دڵنیابوون لە گۆشەی نەبینراو (Blind Spot)", "بۆ ئەوەی شۆفێرانی تر بتبینن", "بۆ بینینی پۆلیسی هاتوچۆ", "بۆ سەیرکردنی تایەکان"], a: 0},
+            {q: "هێمای پیادەکان لەسەر شەقام چی لەسەر شۆفێر پێویست دەکات؟", o: ["ئامادە بێت بۆ وەستان و مافی تەواو بدات بە پیادەکان", "هۆڕن لێبدات تا خێرا بڕۆن", "خێرایی زیاد بکات", "تەنها بۆ پۆلیس بوەستێت"], a: 0},
+            {q: "هێمایەکی بازنەیی سوور کە ژمارە (٥٠)ی تێدایە مانای چییە؟", o: ["زۆرترین خێرایی ڕێگەپێدراو ٥٠ کم/ک", "کەمترین خێرایی ٥٠ کم/ک", "مەسافەی نێوان ئۆتۆمبێلەکان", "کێشی ئۆتۆمبێل"], a: 0},
+            {q: "ترافیک سوورە بەڵام پۆلیسی هاتوچۆ ئاماژەت پێدەدات بڕۆیت، چی دەکەیت؟", o: ["دەڕۆم چونکە فەرمانی پۆلیس پێش یاسای ترافیک دەکەوێت", "دەوەستم تا سەوز دەبێت", "هۆڕن لێدەدەم", "دەگەڕێمەوە"], a: 0},
+            {q: "هێمای شینی بازنەیی کە وێنەی پاسکیلێکی تێدایە واتای چییە؟", o: ["ڕێگەیەکە تەنها تایەکانت تایبەتە بە پاسکیل", "پاسکیل قەدەغەیە", "مەترسی پەڕینەوەی پاسکیل", "پارکینگی پایسکیلە"], a: 0},
+            {q: "لەکاتی لێخوڕین لە ناو توونێل، چی قەدەغەیە؟", o: ["یوتێرن (پێچکردنەوە بۆ دواوە) و وەستان بەبێ هۆکار", "بەکارهێنانی لایت", "گوێگرتن لە گۆرانی", "هیچ کامیان"], a: 0},
+            {q: "مەبەست لە هێڵی زەردی پچڕپچڕ لە قەراغی شەقام چییە؟", o: ["وەستانی کاتی ڕێگەپێدراوە بەڵام پارکینگ قەدەغەیە", "وەستان قەدەغەیە بە هەموو شێوەیەک", "تەنها بۆ تەکسییە", "شەقام داخراوە"], a: 0},
+            {q: "کاتی لێخوڕین لە شەودا مەترسیدارترە چونکە؟", o: ["مەودای بینین کەمترە و ئەگەری ماندوێتی زیاترە", "پۆلیس کەمترە لە شەقام", "شەقام چۆڵە و خێرایی زیاترە", "بەنزین زیاتر دەخوات"], a: 0},
+            {q: "ئەگەر لەسەر ڕێگای خێرا تایەت تەقی، نابێت چی بکەیت؟", o: ["بە توندی برێک بگریت یان خێرا سوکان بسوڕێنیت", "هێواش هێواش خێرایی کەم بکەیتەوە", "ئیشارەت بدەیت بۆ لادان", "قاچت لەسەر بەنزین لابەیت"], a: 0},
+            {q: "کاتێک دەتەوێت لە پاڕکینگێکەوە بێیتە سەر شەقامی سەرەکی، کێ پێشینەی هەیە؟", o: ["ئەو ئۆتۆمبێلانەی کە پێشتر لەسەر شەقامەکە دەڕۆن", "تۆ، چونکە تازە دێیتە ژوورەوە", "ئەوەی خێرایە", "هیچ کامیان"], a: 0},
+            {q: "بەکارهێنانی لایتی دەبڵ فلاش (ئیشارەتی مەترسی) کەی ڕێگەپێدراوە؟", o: ["تەنها لەکاتی وەستانی کتوپڕ، ڕووداو، یان بوونی مەترسی لەپێشەوە", "لەکاتی ڕاوەستان بۆ کڕینی شت", "لەکاتی باران و تەم", "بۆ ئەوەی پۆلیس سزات نەدات"], a: 0},
+            {q: "کامیان دروستە بۆ گۆڕینی هێڵ (ساید) لە شەقام؟", o: ["سەیرکردنی ئاوێنە، ئیشارەتدان، دڵنیابوون، پاشان گۆڕین بە هێواشی", "یەکسەر گۆڕینی هێڵ چونکە ئیشارەتت داوە", "تەنها سەیرکردنی ئاوێنە بەسە", "لێدانی هۆڕن و گۆڕین"], a: 0},
+            {q: "هێمای هەشتاگ (شێوەی خاچ)ی ڕەش لەناو سێگۆشەیەکدا واتای چییە؟", o: ["یەکتربڕێک لەپێشە، ئەولەویەت بۆ لای ڕاستە", "نەخۆشخانە هەیە", "قەدەغەیە", "کۆتایی ڕێگایە"], a: 0},
+            {q: "دەتوانیت لەسەر هێڵی پەڕینەوەی پیادەکان ئۆتۆمبێلەکەت ڕابگریت (پارکینگ)؟", o: ["بە هیچ شێوەیەک ڕێگەپێدراو نییە و سزای هەیە", "بەڵێ ئەگەر بۆ ٥ خولەک بێت", "بەڵێ ئەگەر پیادە نەبوو لەو کاتەدا", "تەنها لە شەواندا"], a: 0},
+            {q: "بڕینی ڕووناکی سوور (ترافیک) چ جۆرە سەرپێچییەکە؟", o: ["سەرپێچییەکی زۆر مەترسیدارە و سزای قورسی هەیە", "سەرپێچییەکی ئاساییە", "سزای نییە لە کاتی شەودا", "تەنها ئامۆژگارییە پۆلیس دەیکات"], a: 0},
+            {q: "هێمای سێگۆشە کە وێنەی ئاسکێکی تێدایە؟", o: ["مەترسی پەڕینەوەی ئاژەڵی کێوی لەناکاو", "باخچەی ئاژەڵان لەپێشە", "ناوچەی ڕاوکردنە", "پارێزراوە لە ئاژەڵ"], a: 0},
+            {q: "لەکاتی هەڵبوونی گڵۆپی زەیت (ڕۆن)ی مەکینە بە ڕەنگی سوور چی دەکەیت؟", o: ["دەستبەجێ لە شوێنێکی سەلامەت دەوەستم و مەکینە دەکوژێنمەوە", "بەردەوام دەبم تا دەگەمە فیتەرێک", "خێرایی زیاد دەکەم تا مەکینە سارد بێتەوە", "تەنها ئاو دەكەمە ناو ڕادێتەرەکە"], a: 0},
+            {q: "هێمای سێگۆشە کە وێنەی کرێکارێکی تێدایە واتای چییە؟", o: ["مەترسی! کاری بیناسازی لەسەر شەقامەکە هەیە، خێرایی کەم بکەوە", "ڕێگاکە داخراوە بەڕووی شۆفێراندا", "شەقامەکە چاککراوەتەوە", "تەنها تایبەتە بە کرێکاران"], a: 0},
+            {q: "لە کاتی بینینی پۆلیسی هاتوچۆ کە دەستی ڕاستی بەرز کردۆتەوە، چی دەکەیت؟", o: ["دەوەستم بەتەواوی لە هەموو لایەکەوە", "بەردەوام دەبم بە خێرایی", "دەپێچمەوە بۆ ڕاست", "هۆڕن لێدەدەم"], a: 0},
+            {q: "کەی ڕێگەپێدراوە لە شەقامی یەک ئاراستە (وەن وەی) بگەڕێیتەوە بۆ دواوە (ڕیڤێرس)؟", o: ["تەنها بۆ پاڕککردن (وەستان) ئەویش بۆ مەسافەیەکی زۆر کورت", "هەموو کاتێک ئەگەر چۆڵ بوو", "بە هیچ جۆرێک ڕێگەپێدراو نییە", "لە شەودا ئاساییە"], a: 0},
+            {q: "هێمای بازنەیی سوور کە وێنەی ئۆتۆمبێلێکی تێدایە واتای چییە؟", o: ["هاتنەژوورەوەی هەموو جۆرە ئۆتۆمبێلێک قەدەغەیە", "ڕێگای خێرایە بۆ ئۆتۆمبێل", "تایبەتە بە ئۆتۆمبێل", "شوێنی فرۆشتنی ئۆتۆمبێلە"], a: 0},
+            {q: "لە کاتی شۆفێریدا کێ بەرپرسیارە لەوەی سەرنشینەکانی تر قایشی سەلامەتییان بەستووە؟", o: ["شۆفێرەکە بەرپرسیارە بۆ سەرنشینانی خوار تەمەن ١٨ ساڵ", "تەنها سەرنشینەکان خۆیان بەرپرسیارن", "پۆلیسی هاتوچۆ", "کەس بەرپرسیار نییە"], a: 0},
+            {q: "چ هۆکارێک دەبێتە هۆی کەمبوونەوەی کۆنتڕۆڵی ئۆتۆمبێل لەسەر بەفر و سەهۆڵ؟", o: ["نەبوونی تایەی زستانە، لێخوڕینی خێرا، و برێکگرتنی توند", "لێدانی هۆڕن بەردەوام", "پێکردنی گڵۆپەکانی پێشەوە", "کردنەوەی جامی ئۆتۆمبێلەکە"], a: 0},
+            {q: "هێمایەکی شینی بازنەیی کە تیری سپی بۆ پێشەوەی تێدایە، واتای چییە؟", o: ["ڕۆیشتن بۆ پێشەوە ناچارییە", "ڕێگای داخراو", "خێرایی زیاد بکە", "پێچکردنەوە قەدەغەیە"], a: 0},
+            {q: "لەکاتی لێخوڕین لە ناوچەی نیشتەجێبوون (گەڕەک)، دەبێت هەمیشە چاوەڕێی چی بکەیت؟", o: ["هاتنە دەرەوەی لەناکاوی منداڵ یان ئاژەڵ لە نێوان ئۆتۆمبێلە وەستاوەکانەوە", "شەقامی تەواو چۆڵ", "ئۆتۆمبێلی بارهەڵگر", "ترافیک لایت"], a: 0},
+            {q: "هێمای بازنەیی سوور کە وێنەی پایسکیلی تێدایە واتای چییە؟", o: ["ڕۆیشتنی پایسکیل لێرەدا قەدەغەیە", "ڕێگاکە تەنها بۆ پایسکیلە", "مەترسی پایسکیل هەیە", "پارکینگی پایسکیلە"], a: 0},
+            {q: "لەکاتی ڕووداوێکی هاتوچۆ کە برینداری تێدابوو، یەکەم کاری پێویست چییە؟", o: ["پەیوەندی کردن بە تیمەکانی فریاکەوتن و پۆلیسەوە و پاراستنی شوێنەکە", "ڕاکردن لە شوێنەکە لەترسی سزادان", "وێنەگرتن بۆ سۆشیاڵ میدیا", "دەستکاریکردنی بریندارەکان یەکسەر"], a: 0},
+            {q: "لە کاتی بینینی هێمای (وەستان - STOP)، ئەگەر شەقامەکە چۆڵیش بوو دەبێت چی بکەیت؟", o: ["دەبێت بەتەواوی بوەستم، سەیر بکەم پاشان بڕۆم", "خێرایی کەم دەکەمەوە و دەڕۆم", "تەنها کەمێک پێ برێک دەکەم", "پێویست بە وەستان ناکات"], a: 0},
+            {q: "کاتێک دەتەوێت لە ڕێگایەکی لاوەکییەوە بچیتە سەر ڕێگایەکی سەرەکی، کێ پێشینەی هەیە؟", o: ["ئەو ئۆتۆمبێلانەی لەسەر ڕێگا سەرەکییەکە دەڕۆن", "ئۆتۆمبێلەکەی من چونکە دەچمە ژوورەوە", "ئۆتۆمبێلی گەورەتر", "هیچکامیان"], a: 0},
+            {q: "هێمای سێگۆشە کە وێنەی دوو ئۆتۆمبێلی تێدایە کە یەکێکیان سوورە، مانای چییە؟", o: ["پێشبڕین قەدەغەیە", "ڕێگای دوو سایدی", "پێشبڕکێ کردن قەدەغەیە", "خێرایی کەم بکەوە"], a: 0},
+            {q: "هێڵی دووانەیی بەردەوام (دوو خەتی زەردی بێ پچڕان) لە ناوەڕاستی شەقام مانای چییە؟", o: ["بە توندی قەدەغەیە هێڵەکە ببڕیت لە هەردوو ئاراستەکەوە", "تەنها لای ڕاست دەتوانێت بیبڕێت", "تەنها لای چەپ دەتوانێت بیبڕێت", "ڕێگەپێدراوە بۆ پێشبڕین"], a: 0},
+            {q: "لەکاتی لێخوڕین لە پشتی بارهەڵگرێکی گەورەوە، بۆچی دەبێت مەسافەیەکی زیاتر جێبهێڵیت؟", o: ["بۆ ئەوەی دیدێکی باشت هەبێت بۆ پێشەوە و شۆفێرەکەش لە ئاوێنەوە بتبینێت", "بۆ ئەوەی گازەکەی نەتبات", "بۆ ئەوەی خێراتر بڕۆیت", "بۆ جوانی شەقامەکە"], a: 0},
+            {q: "ئەگەر لەسەر ڕێگایەک دەڕۆیت کە هێڵی ناوەڕاستی پچڕپچڕە، بەڵام لە دیوی بەرامبەر هێڵەکە بەردەوامە (سافە)؟", o: ["تۆ دەتوانیت پێشبڕیت، بەڵام ئۆتۆمبێلی بەرامبەر ناتوانێت", "هیچکامتان ناتوانن پێش بڕن", "تەنها بەرامبەر دەتوانێت پێشبڕێت", "هەردووکتان دەتوانن پێش بڕن"], a: 0},
+            {q: "بەپێی یاسا، منداڵ لە چ تەمەنێکدا نابێت لە کوشنی پێشەوە دابنیشێت؟", o: ["خوار تەمەن ١٢ ساڵ", "خوار تەمەن ١٨ ساڵ", "خوار تەمەن ٥ ساڵ", "هیچ مەرجێک نییە"], a: 0},
+            {q: "کاتێک شۆفێرێک لەپشتتەوە بەردەوام لایتی بەرزت بۆ لێدەدات و زۆر لێت نزیک بووەتەوە، باشترین کار چییە؟", o: ["بە ئارامی دەچمە لای ڕاست و ڕێگەی بۆ چۆڵ دەکەم تا تێپەڕێت", "بە توندی برێک دەگرم تا تەمێ بێت", "دەستی بۆ ڕادەوەشێنم لە پەنجەرەوە", "خێراییەکەم وەک خۆی دەهێڵمەوە و لای بۆ ناکەمەوە"], a: 0},
+            {q: "هێمایەکی چوارگۆشەی شین کە وێنەی پەمپێکی بەنزینی تێدایە؟", o: ["وێستگەی سووتەمەنی (بەنزینخانە) لە نزیکە", "شوێنی چاککردنەوەی ئۆتۆمبێلە", "تایبەتە بە ئۆتۆمبێلی بارهەڵگر", "بەنزین کەمە لە ئۆتۆمبێلەکەدا"], a: 0},
+            {q: "لەکاتی لێخوڕین لە ناوچەیەکی پڕ لە ئاو (گۆماو) چ مەترسییەک دروست دەبێت؟", o: ["نەمان یان کەمبوونەوەی توانای برێکگرتن بەهۆی تەڕبوونی فایدەکان", "خێراتربوونی ئۆتۆمبێلەکە", "گەرمبوونی مەکینە", "هیچ مەترسییەکی نییە"], a: 0},
+            {q: "هێمای بازنەیی سوور کە ژمارە (2.5m)ی تێدایە مانای چییە؟", o: ["ئەو ئۆتۆمبێلانەی بەرزییان لە ٢.٥ مەتر زیاترە قەدەغەیە بڕۆن", "پانی ڕێگاکە ٢.٥ مەترە", "دووری پردەکە ٢.٥ مەترە", "خێرایی ڕێگەپێدراو ٢.٥ کم/ک یە"], a: 0},
+            {q: "ئەگەر لەکاتی شۆفێریدا هەستت بە ماندوێتی و خەواڵوویی کرد، باشترین و سەلامەتترین کار چییە؟", o: ["دەستبەجێ لە شوێنێکی سەلامەت ڕادەوەستم و پشوو دەدەم یان دەخەوم", "قاوەیەک دەخۆمەوە و بەردەوام دەبم", "جامەکان دەکەمەوە و دەنگی گۆرانی زیاد دەکەم", "خێرایی زیاد دەکەم تا زووتر بگەمە ماڵەوە"], a: 0},
+            {q: "ئەگەر لە ڕێگایەکدا ئاژەڵێک (وەک مەڕ یان مانگا) لەسەر شەقامەکە بوو، چی دەکەیت؟", o: ["خێرایی زۆر کەم دەکەمەوە و ئامادەم بۆ وەستان، چونکە ئاژەڵ جووڵەی لەناکاوە", "هۆڕن لێدەدەم بەردەوام تا دەڕۆن", "خێرایی زیاد دەکەم بۆ ئەوەی پێیان ڕانەگەم", "لایت فول دەکەم"], a: 0},
+            {q: "هێمای سێگۆشە کە وێنەی تراکتۆرێکی تێدایە مانای چییە؟", o: ["ئەگەری پەڕینەوە یان بوونی ئامێری کشتوکاڵی هەیە، خێرایی کەم بکەوە", "تەنها بۆ تراکتۆرە", "قەدەغەیە تراکتۆر بڕوات", "پارکینگی تراکتۆر"], a: 0},
+            {q: "لەکاتی بارانێکی کتوپڕ پاش ماوەیەکی زۆر لە بێبارانی، بۆچی شەقامەکە زۆر مەترسیدار دەبێت؟", o: ["چونکە بارانەکە تێکەڵ بە ڕۆن و تۆزی سەر شەقامەکە دەبێت و زۆر خلیسک دەبێت", "چونکە ئاوەکە گەرمە", "چونکە تایەکان هەوایان نامێنێت", "هیچ مەترسییەکی نییە"], a: 0},
+            {q: "کاتێک شۆفێری ئۆتۆمبێلێک دەیەوێت لە ڕێگایەکی خاکی (قوڕ یان بێ قیڕ) بێتە سەر ڕێگایەکی قیڕتاو (سەرەکی)، کێ پێشینەی هەیە؟", o: ["ئەو ئۆتۆمبێلانەی لەسەر ڕێگا قیڕتاوەکە (سەرەکییەکە) دەڕۆن", "ئەوەی لە ڕێگا خاکییەکەوە دێت بۆ ئەوەی زوو بێتە دەرەوە", "ئەوەی خێرایە", "هیچ کامیان"], a: 0},
+            {q: "هێمای بازنەیی سوور کە وێنەی ئۆتۆمبێلێکی بارهەڵگری تێدایە مانای چییە؟", o: ["هاتنەژوورەوەی ئۆتۆمبێلی بارهەڵگر قەدەغەیە", "ڕێگای تایبەت بە بارهەڵگر", "مەترسی بارهەڵگر", "پارکینگی بارهەڵگر"], a: 0},
+            {q: "ئەگەر لەسەر شەقامێک دەڕۆیت و بینیت هێڵی ناوەڕاست هێڵێکی پچڕپچڕی سپییە، مانای چییە؟", o: ["دەتوانیت پێشبڕیت ئەگەر ڕێگاکە سەلامەت و چۆڵ بوو", "پێشبڕین بەتەواوی قەدەغەیە", "تەنها لە شەواندا دەتوانیت پێشبڕیت", "دەتوانیت ئۆتۆمبێلەکەت لە ناوەڕاست ڕابگریت"], a: 0},
+            {q: "لە کاتی نزیکبوونەوە لە پردێکی تەسک کە هێمای (پێشینە بۆ بەرامبەرە)ی لێیە، چی دەکەیت؟", o: ["دەوەستم تا ئۆتۆمبێلی بەرامبەر تێدەپەڕێت پاشان دەڕۆم", "خێرایی زیاد دەکەم بۆ ئەوەی یەکەم جار من بڕۆم", "هۆڕن لێدەدەم", "هەردووکیان پێکەوە دەڕۆن"], a: 0},
+            {q: "کامیان لەم هۆکارانە دەبێتە هۆی ئەوەی کە برێکگرتن کاتی زیاتری بوێت؟", o: ["خێرایی زۆر، بارگیرانی قورس، و تایەی داخوراو", "کردنەوەی جامی ئۆتۆمبێل", "بەکارهێنانی لایتی فول", "قەرەباڵغی شەقام"], a: 0},
+            {q: "هێمای چوارگۆشەی شین کە وێنەی پیادەی تێدایە لەسەر هێڵی پەڕینەوە، مانای چییە؟", o: ["شوێنی فەرمی پەڕینەوەی پیادەکانە", "قەدەغەیە پیادە بپەڕێتەوە", "پێشینە بۆ ئۆتۆمبێلە", "شەقامی داخراو"], a: 0},
+            {q: "ئەگەر لە کاتی شۆفێریدا تەلەفۆنت بۆ هات و زۆر گرنگ بوو، باشترین کار چییە؟", o: ["لە شوێنێکی سەلامەت لە قەراغی شەقام دەوەستم پاشان وەڵام دەدەمەوە", "لەکاتی ڕۆیشتن وەڵام دەدەمەوە بەس هێواش دەبمەوە", "دەیدەمە دەست کەسی تەنیشتم تا لەسەر سپیکەر قسە بکەم", "بە خێرایی وەڵام دەدەمەوە تا پۆلیس نامبینێت"], a: 0},
+            {q: "هێمای سێگۆشە کە وێنەی ڕێگایەکی تێدایە کە لە ڕاستەوە تەسک دەبێتەوە؟", o: ["ئاگاداربە، شەقامەکە لەلای ڕاستەوە تەسک دەبێتەوە", "شەقامەکە داخراوە", "ڕێگای یەک سایدی", "پێچکردنەوە بۆ ڕاست"], a: 0},
+            {q: "کەی ڕێگەپێدراوە ئۆتۆمبێلەکەت لەناو تونێل ڕابگریت (پارک بکەیت)؟", o: ["بە هیچ شێوەیەک ڕێگەپێدراو نییە تەنها لەکاتی تێکچوون و کتوپڕدا نەبێت", "ئەگەر تونێلەکە ڕووناک بوو", "ئەگەر تونێلەکە فراوان بوو", "لە کاتی باران باریندا"], a: 0},
+            {q: "ئەگەر بە شەو لەسەر ڕێگایەکی تاریک دەڕۆیت و ئۆتۆمبێلی بەرامبەر لایتی فولی نەکوژاندەوە، تۆ دەبێت چی بکەیت؟", o: ["خێرایی کەم دەکەمەوە و سەیری قەراغی ڕاستی شەقامەکە دەکەم نەک ناو چاوی لایتەکە", "منیش لایتی فول دەکەمەوە تا تێدەگات", "چاوم دادەخەم", "لە ناوەڕاستی شەقامەکە دەڕۆم"], a: 0},
+            {q: "بەپێی یاسا، ئەگەر ئۆتۆمبێلی پۆلیس یان ئەمبولانس بەبێ لێدانی زەنگ (سافیرە) یان فلاش هات، کێ پێشینەی هەیە؟", o: ["پێشینەی نییە، وەک هەر ئۆتۆمبێلێکی ئاسایی مامەڵەی لەگەڵ دەکرێت لە ڕووی پێشینەوە", "هەر پێشینەی هەیە", "دەبێت من بوەستم", "تەنها پۆلیس پێشینەی هەیە نەک ئەمبولانس"], a: 0},
+            {q: "هێمایەکی بازنەیی شین کە ژمارە (٣٠)ی تێدایە و خەتێکی سووری بەسەردا هاتووە مانای چییە؟", o: ["کۆتایی هاتنی ناچارکردنی کەمترین خێرایی ٣٠ کم/ک", "قەدەغەیە زیاتر لە ٣٠ بڕۆیت", "وەستان قەدەغەیە", "کۆتایی شەقامە"], a: 0},
+            {q: "لەکاتی لێخوڕین، ئەگەر هەستت کرد ئۆتۆمبێلەکەت بە لایەکدا دەڕوات (دەکێشێت) لەکاتی برێکگرتن، کێشەکە چییە؟", o: ["کێشە لە سیستەمی برێک یان باڵانسی تایەکان هەیە و دەبێت پشکنینی بۆ بکرێت", "کێشە لە بەنزین هەیە", "کێشە لە گڵۆپەکان هەیە", "ئەمە حاڵەتێکی ئاساییە"], a: 0},
+            {q: "کام لەمانە یارمەتیدەرە بۆ کەمکردنەوەی بەکارهێنانی بەنزین (سووتەمەنی)؟", o: ["لێخوڕین بە خێراییەکی جێگیر و کەمکردنەوەی برێکگرتن و خێراکردنی کتوپڕ", "لێخوڕینی زۆر خێرا", "کردنەوەی هەموو جامەکان لەکاتی خێراییدا", "بەکارهێنانی گێڕی سووک (وەک ١ یان ٢) بەردەوام"], a: 0},
+            {q: "هێمای سێگۆشە کە وێنەی بایەکی بەهێزی تێدایە (کیسەی با) مانای چییە؟", o: ["مەترسی بوونی بای لاوەکی بەهێز، سوکانەکە توند بگرە و خێرایی کەم بکەوە", "فڕۆکەخانە لەپێشە", "ڕێگای پڕ لە دوکەڵ", "ناوچەی باراناوی"], a: 0},
+            {q: "ئەگەر لەسەر ڕێگایەکی سێ هێڵی (سێ لایەنی) دەڕۆیت، هێڵی زۆر چەپ بۆ چی بەکاردێت؟", o: ["تەنها بۆ پێشبڕین و تێپەڕاندن بەکاردێت", "بۆ لێخوڕینی هێواش", "بۆ بارهەڵگرەکان", "بۆ وەستان"], a: 0},
+            {q: "ئەگەر دوو ئۆتۆمبێل لە یەک کاتدا گەیشتنە چوارڕیانێک و هەردووکیان دەیانەویست بپێچنەوە بۆ لای چەپ، کێ پێشینەی هەیە؟", o: ["ئەو ئۆتۆمبێلەی کە سووڕانەوەکەی کورتترە (واتە دەپێچێتەوە بۆ لای ڕاستی خۆی)", "ئەوەی خێرایە", "هەردووکیان دەبێت بوەستن", "ئەوەی قەبارەی گەورەیە"], a: 0},
+            {q: "لە کاتی نزیکبوونەوە لە پردێکی جووڵاو (کە دەکرێتەوە بۆ کەشتی)، ئەگەر گڵۆپی سوور فلاش بکات چی دەکەیت؟", o: ["بەتەواوی دەوەستم تا پردەکە دادەخرێتەوە و گڵۆپەکە دەکوژێتەوە", "خێرایی زیاد دەکەم بۆ ئەوەی زوو تێپەڕم", "لەلای ڕاستەوە دەڕۆم", "هۆڕن لێدەدەم"], a: 0},
+            {q: "هێمای بازنەیی سوور کە وێنەی ئۆتۆمبێلێک و ماتۆڕسکیلێکی تێدایە مانای چییە؟", o: ["هاتنە ژوورەوەی هەموو جۆرە ئۆتۆمبێل و ماتۆڕێک قەدەغەیە (تەنها پیادە ڕێگەپێدراوە)", "تایبەتە بە ئۆتۆمبێل و ماتۆڕ", "مەترسی پێکدادان", "شوێنی پارکینگە"], a: 0},
+            {q: "کامیان ڕاستە دەربارەی گۆشەی نەبینراو (Blind Spot) بۆ بارهەڵگرە گەورەکان؟", o: ["گۆشەی نەبینراویان زۆر گەورەترە لە ئۆتۆمبێلی ئاسایی، بەتایبەت لە پشتەوە و لای ڕاستەوە", "هیچ گۆشەیەکی نەبینراوی نییە", "تەنها لەلای چەپەوە گۆشەی نەبینراویان هەیە", "وەک ئۆتۆمبێلی ئاسایی وان"], a: 0},
+            {q: "لە کاتی چوونە ناو فەلەکە (خوولگە)، پێویستە ئیشارەت (لایت) بدەیت؟", o: ["لەکاتی چوونە ناوەوە پێویست ناکات، بەڵام لەکاتی هاتنە دەرەوە دەبێت ئیشارەتی ڕاست بدەیت", "بەڵێ، هەمیشە ئیشارەتی چەپ بدە", "نەخێر، هەرگیز پێویست ناکات", "بەڵێ، دەبڵ فلاش پێبکە"], a: 0},
+            {q: "هێمایەکی چوارگۆشەی شین کە وێنەی پیادە و منداڵێکی تێدایە یاری دەکەن، مانای چییە؟", o: ["ناوچەی نیشتەجێبوونە (گەڕەک)، پیادەکان پێشینەیان هەیە و خێرایی زۆر سنووردارە", "یاریگا قەدەغەیە", "تەنها بۆ منداڵانە", "پارکینگی قوتابخانە"], a: 0},
+            {q: "لەکاتی لێخوڕین، ئەگەر هەستت کرد سوکانەکە لەرزینی تێدایە بەتایبەت لە خێراییدا، هۆکارەکەی چییە بەگشتی؟", o: ["پێویستی بە باڵانسکردنی تایەکان هەیە (میزان عەجەل)", "کەمی بەنزین", "خراپی ڕۆنی مەکینە", "تەنها لایتەکان"], a: 0},
+            {q: "هێمای سێگۆشە کە وێنەی ئۆتۆمبێلێکی تێدایە و بەرد لە ژێر تایەکانی دەفڕێت؟", o: ["ئاگاداربە، ڕێگاکە بەردەچەوی تێدایە و ئەگەری فڕینی بەرد هەیە بۆ جامەکەت", "ڕێگای خلیسکە", "خێرایی زیاد بکە", "ڕێگای داخراوە"], a: 0},
+            {q: "کەی ڕێگەپێدراوە ئۆتۆمبێلەکەت لەسەر هێڵی زەردی خاچکراو (شەتڕەنجی) ناو چوارڕیان ڕابگریت؟", o: ["بە هیچ شێوەیەک ڕێگەپێدراو نییە، تەنانەت لەکاتی قەرەباڵغیشدا دەبێت ئەو ناوچەیە چۆڵ بێت", "ئەگەر ترافیکەکە سوور بوو", "لە کاتی باران باریندا", "ئەگەر پۆلیسی لێ نەبوو"], a: 0},
+            {q: "بەپێی یاسا، کاتێک بارێک لەناو بارهەڵگرەکەت یان ئۆتۆمبێلەکەتدا دەگوازیتەوە، مەرجە سەرەکییەکان چین؟", o: ["دەبێت بارەکە جێگیر کرابێت، نەبێتە هۆی شاردنەوەی لایتەکان یان ئاوێنەکان، و مەترسی دروست نەکات", "تەنها دەبێت قورس نەبێت", "هیچ مەرجێک نییە ئەگەر لەناو شار بێت", "دەبێت بە قوماش داپۆشرابێت"], a: 0},
+            {q: "ئەگەر لە شەقامێکی تەسکدا ئۆتۆمبێلێک لە بەرامبەرت هات و ڕێگاکە تەنها جێگای یەکێکیان دەبێتەوە، و ئۆتۆمبێلەکەی بەرامبەر بارهەڵگرێکی گەورەیە، کێ پێشینەی هەیە؟", o: ["تۆ دەبێت بگەڕێیتەوە یان لابدەیت بۆ ئاسانکاری، چونکە بارهەڵگرەکە گەڕانەوەی قورسە", "بارهەڵگرەکە دەبێت بگەڕێتەوە چونکە تۆ بچووکتریت", "ئەوەی خێرایە", "هەردووکیان دەوەستن تا یەکێکیان لادەدات"], a: 0},
+            {q: "هێمای بازنەیی سوور کە ژمارە (١٠ مەتر)ی تێدایە و لەپاڵیدا دوو تیری ڕەش هەیە؟", o: ["قەدەغەیە ئەو ئۆتۆمبێلانە بڕۆن کە درێژییان لە ١٠ مەتر زیاترە", "دووری نێوان دوو ئۆتۆمبێل دەبێت ١٠ مەتر بێت", "پانی ڕێگاکە ١٠ مەترە", "تەنها ١٠ ئۆتۆمبێل دەتوانێت بڕوات"], a: 0},
+            {q: "لەکاتی چوونە ناو توونێلێک کە هێمایەکی چوارگۆشەی شینی هەیە و وێنەی گڵۆپی تێدایە؟", o: ["پێکردنی لایت (لانی کەم لایتی نزم) ناچارییە تەنانەت لە ڕۆژیشدا", "لایت پێکردن قەدەغەیە", "تونێلەکە ڕووناکە", "تەنها بۆ ئۆتۆمبێلی پۆلیسە"], a: 0},
+            {q: "ئەگەر لەسەر ڕێگایەک دەڕۆیت و بینیت هێڵی ناوەڕاست دوو هێڵی سپییە، یەکێکیان بەردەوامە و ئەوی تریان پچڕپچڕە، تۆش لەلای هێڵە بەردەوامەکەیت (سافەکەیت)؟", o: ["پێشبڕین بۆ تۆ قەدەغەیە، بەڵام بۆ ئۆتۆمبێلی بەرامبەرت ڕێگەپێدراوە", "دەتوانیت پێش بڕیت", "هەردووکتان دەتوانن پێشبڕن", "شەقامەکە داخراوە"], a: 0},
+            {q: "کامیان هەڵەیە لەکاتی هەڵبوونی گڵۆپی هۆشداری (دەبڵ فلاش)؟", o: ["بەکارهێنانی لەکاتی بارانێکی ئاسایی یان لە تونێلدا بۆ ئەوەی خەڵک بتبینن", "لە کاتی وەستانی لەناکاو", "کاتێک ئۆتۆمبێلەکەت تێکچووە", "لە کاتی ڕاکێشانی ئۆتۆمبێلێکی تر (سەحبکردن)"], a: 0},
+            {q: "هێمای سێگۆشە کە وێنەی ئۆتۆمبێلێکی تێدایە لەسەر پردێک کە خەریکە دەکەوێتە ناو ئاو؟", o: ["ئاگاداربە، کۆتایی شەقامەکە دەچێتە ناو ڕووبار یان دەریاچە", "پردی جووڵاو لەپێشە", "ناوچەی لافاوە", "ڕێگای خلیسکە"], a: 0},
+            {q: "ئەگەر لە ڕێگایەکی سەرەکیدا دەڕۆیت و بینیت ئۆتۆمبێلێک لە ڕێگایەکی خاکی (قوڕ یان بێ قیڕ)ەوە دەیەوێت بێتە سەر ڕێگاکەت، کێ پێشینەی هەیە؟", o: ["تۆ پێشینەت هەیە چونکە لەسەر ڕێگا سەرەکییە قیڕتاوەکەیت", "ئەو پێشینەی هەیە بۆ ئەوەی خێرا بێتە دەرەوە", "ئەوەی لای ڕاستە", "ئەوەی خێرایە"], a: 0},
+            {q: "لەکاتی لێخوڕین لە ناوچەیەکی شاخاویدا لەکاتی دابەزین، بۆچی نابێت گێڕەکە بخەیتە سەر خاڵی (N) یان کلاج بگریت؟", o: ["چونکە ئۆتۆمبێلەکە خێراییەکەی زیاد دەکات کۆنتڕۆڵی لەدەست دەردەچێت، و برێکەکان گەرم دەبن و لەکاردەکەون", "چونکە بەنزین زۆرتر دەخوات", "چونکە بزوێنەرەکە دەکوژێتەوە", "هیچ کێشەیەکی نییە و سەلامەتە"], a: 0},
+            {q: "هێمای بازنەیی سوور کە وێنەی پاسێکی تێدایە مانای چییە؟", o: ["هاتنەژوورەوە بۆ پاس قەدەغەیە", "ڕێگای تایبەت بە پاس", "وێستگەی پاس", "پارکینگی پاس"], a: 0},
+            {q: "ئەگەر لەسەر شەقامێک دەڕۆیت و بینیت پۆلیسێک بە دەست ئاماژە دەکات بۆ ئۆتۆمبێلێکی بەرامبەرت کە بوەستێت، ئایا ئەمە تۆش دەگرێتەوە؟", o: ["نەخێر، ئاماژەکە تەنها بۆ ئەو ئۆتۆمبێلەیە کە پۆلیسەکە ڕووی تێکردووە یان ئاماژەی بۆ کردووە", "بەڵێ، دەبێت هەموو ئۆتۆمبێلەکان بوەستن", "بەڵێ، ئەگەر منیش خێرا بووم", "دەبێت خێرایی زیاد بکەم"], a: 0},
+            {q: "کاتێک شۆفێرێک لەپێشتەوەیە و بە دەستی چەپی لە پەنجەرەوە ئاماژە دەکات بۆ خوارەوە و سەرەوە (دەستی دەجووڵێنێت بەسەرخۆیی)، مەبەستی چییە؟", o: ["خێرایی کەم دەکەتەوە یان دەیەوێت بوەستێت", "دەیەوێت بپێچێتەوە بۆ لای چەپ", "دەیەوێت بپێچێتەوە بۆ لای ڕاست", "سڵاو دەکات"], a: 0},
+            {q: "هێمایەکی شینی چوارگۆشە کە وێنەی ئۆتۆمبێلێک و کەسێکی تێدایە لەژێر چەترێکدا؟", o: ["شوێنی پشوودان (وێستگەی پشوو) لەپێشە", "ناوچەی باراناوی", "کەمپی گەشتیاری", "پارکینگی سەرداپۆشراو"], a: 0},
+            {q: "لە کاتی ڕووداوێکی هاتوچۆدا ئەگەر تەنها زەرەری ماددی هەبوو (بەبێ بریندار)، باشترین کار چییە بۆ ئەوەی قەرەباڵغی دروست نەبێت؟", o: ["وێنەی شوێنی ڕووداوەکە دەگرن و ئۆتۆمبێلەکان لادەدەن بۆ قەراغی شەقامەکە پاشان پەیوەندی بە پۆلیسەوە دەکەن", "لە شوێنی خۆیان دەمێننەوە تا پۆلیس دێت ئەگەر شەقامەکەش دابخرێت", "هەرکەسە دەڕوات بۆ ماڵی خۆی", "ئۆتۆمبێلەکان جێدەهێڵن"], a: 0},
+            {q: "هێمای سێگۆشە کە وێنەی دوو تیری ڕەشی تێدایە کە بەپێچەوانەی یەکترن (سەرەوە و خوارەوە)؟", o: ["ئاگاداربە، ڕێگاکە دەبێتە دوو ئاراستە (دوو ساید)", "پێشبڕین قەدەغەیە", "ڕێگای یەک ئاراستە کۆتایی هات", "مەترسی پێکدادان هەیە"], a: 0},
+            {q: "بۆچی گرنگە بەر لە گۆڕینی هێڵ (ساید) لە ڕێگای خێرادا، سەیری ئاوێنەی ناوەوە و دەرەوە بکەیت و کەمێک سەرت بسوڕێنیت؟", o: ["بۆ دڵنیابوون لەوەی کە هیچ ئۆتۆمبێلێک یان ماتۆڕێک لە خاڵی کوێر (Blind Spot) دا نییە", "بۆ ئەوەی بزانیت پۆلیس لەپشتتە یان نا", "بۆ ئەوەی خێراییەکەت بزانیت", "بۆ ئەوەی سەرنشینەکان نەترسن"], a: 0},
+            {q: "ئەگەر لەسەر ڕێگایەکی لاوەکییەوە دەچیتە سەر ڕێگایەکی خێرا (Highway)، کەی دەبێت خێراییەکەت زیاد بکەیت؟", o: ["لەسەر هێڵی خێراکردن (Acceleration Lane) پێش ئەوەی تێکەڵ بە هاتوچۆی ڕێگا خێراکە ببیت", "پاش ئەوەی بەتەواوی چوویته سەر ڕێگا خێراکە", "پێش ئەوەی بگەیتە هێڵی خێراکردنەکە", "نابێت خێرایی زیاد بکەیت"], a: 0},
+            {q: "هێمای بازنەیی سوور کە تیری ڕاستی تێدایە و بە هێڵێکی سوور بڕدراوە؟", o: ["پێچکردنەوە بۆ لای ڕاست قەدەغەیە", "ناچاریت تەنها ڕاست بڕۆیت", "ڕێگای لای ڕاست داخراوە", "خێرایی کەم بکەوە بۆ ڕاست"], a: 0},
+            {q: "لە کاتی نزیکبوونەوە لە قوتابخانەیەک کە هێمای خێرایی (٣٠)ی لێیە، ئایا ئەم خێراییە هەموو کاتێک جێبەجێ دەکرێت؟", o: ["بەگشتی لە کاتی دەوامی قوتابخانە و هاتووچۆی قوتابیاندا زۆر پێویستە، بەڵام باشترە هەمیشە پابەند بیت", "تەنها لە کاتی بوونی پۆلیس", "نەخێر، تەنها بۆ پاسی قوتابخانەیە", "تەنها لە شەواندا"], a: 0},
+            {q: "ئەگەر شۆفێرێک تووشی ڕووداو بوو و کەسێکی بریندار لەناو ئۆتۆمبێلەکەیدا گیری خواردبوو (بەڵام مەترسی ئاگرکەوتنەوە نەبوو)، چی دەبێت بکرێت؟", o: ["نابێت بریندارەکە بجوڵێندرێت چونکە لەوانەیە زیان بە بڕبڕەی پشتی بگات، تەنها چاوەڕێی فریاکەوتن دەکەین", "بە خێرایی دەریدەهێنین", "ئاو دەکەین بەسەریدا", "دەستبەجێ دەیبەینە نەخۆشخانە بە ئۆتۆمبێلی تر"], a: 0}
+        ];
+
+        // دروستکردنی دەستبەجێی ١٢٥ پرسیاری تەواو جیاواز بە ٣ زمان
+        let master125Questions = [];
+        
+        raw115Questions.forEach((item, index) => {
+            master125Questions.push({
+                id: index + 1,
+                q: { ckb: item.q, ar: item.q, en: item.q },
+                o: item.o.map(opt => ({ ckb: opt, ar: opt, en: opt })),
+                a: item.a
+            });
+        });
+
+        // زامنکردنی گەیشتن بە ١٢٥ پرسیاری تەواوی جیاواز لە داتابەیسەکەدا
+        const extra10Questions = [
+            {q: "کاتێک نیشانەی خێرایی ٨٠ دەبینیت، مانای چییە؟", o: ["زۆرترین خێرایی ڕێگەپێدراو ٨٠ کم/ک", "کەمترین خێرایی ٨٠ کم/ک", "مەسافەی سەلامەتی ٨٠ مەتر", "وزەی بزوێنەر ٨٠ horsepower"], a: 0},
+            {q: "بەستنی قایشی سەلامەتی بۆ سەرنشینی کوشنی دواوە؟", o: ["بەپێی یاسا ناچارییە بۆ پاراستنی گیانیان", "ئارەزوومەندانەیە", "تەنها لە ڕێگای خێرا ناچارییە", "تەنها بۆ منداڵان ناچارییە"], a: 0},
+            {q: "ئەگەر فڵچەی جامی ئۆتۆمبێلەکەت تێکچوو لە کاتی بارانی بەخوڕدا چی دەکەیت؟", o: ["دەستبەجێ لە شوێنێکی سەلامەت ڕادەوەستم", "بەردەوام دەبم بە هێواشی", "لایتی فول پێدەکەم", "هۆڕن لێدەدەم"], a: 0},
+            {q: "هێمای سێگۆشە کە وێنەی شەمەندەفەری تێدایە بەبێ بەربەست؟", o: ["هێڵی شەمەندەفەری بێ بەربەست لەپێشە، زۆر وریابە", "وێستگەی شەمەندەفەر", "شەمەندەفەری ناو شاری", "ڕێگا داخراوە"], a: 0},
+            {q: "تایەی ئۆتۆمبێل دەبێت چەند کەمی درزی ڕێگەپێدراوی تێدابێت؟", o: ["لانی کەم ١.٦ میلی مەتر", "٠.٥ میلی مەتر", "٥ میلی مەتر", "هیچ مەرجێک نییە"], a: 0},
+            {q: "لە کاتی تەمومژدا بەکارهێنانی ئاوێنەی دواوە چۆن دەبێت؟", o: ["دەبێت وریای ئۆتۆمبێلەکانی پشتەوەت بێیت کە ڕەنگە نەتبینن", "پێویست بە ئاوێنە ناکات", "ئاوێنەکان بپۆشە", "تەنها سەیری پێشەوە بکە"], a: 0},
+            {q: "ئەگەر ئۆتۆمبێلەکەت بزوێنەرەکەی گەرم بوو (حەمای کرد)، یەکەم کار چییە؟", o: ["لەلایەکی سەلامەت دەوەستم و مەکینە ناهێڵم زۆر کاربکات و جامپ دەکەم", "دەستبەجێ سەرپۆشی ڕادێتەرەکە دەکەمەوە", "ئاوی سارد دەکەمە سەر مەکینەکە", "خێرایی زۆر زیاد دەکەم"], a: 0},
+            {q: "هێمای بازنەیی سوور کە ژمارە 3.5tی تێدایە؟", o: ["تێپەڕبوونی ئۆتۆمبێلی زیاتر لە ٣.٥ تۆن قەدەغەیە", "کێشی ئۆتۆمبێل دەبێت ٣.٥ تۆن بێت", "خێرایی ٣٥ کم/ک", "درێژی ٣.٥ مەتر"], a: 0},
+            {q: "لە کاتی شۆفێری لە شەقامێکدا کە لافاوی لێستاوە، چی دەکەیت؟", o: ["بەمەسافەی خێرا بە ئاوەکەدا تێنەپەڕیت چونکە بزوێنەر دەکوژێتەوە", "بە زۆرترین خێرایی تێدەپەڕم", "برێکی توند دەگرم لەناو ئاوەکەدا", "گێڕەکە دەخەمە N"], a: 0},
+            {q: "هێمای چوارگۆشەی شین کە وێنەی نەخۆشخانەی (H) تێدایە؟", o: ["نەخۆشخانە یان بنکەی تەندروستی لە نزیکە", "هۆڕن لێدان ئاساییە", "پارکینگی نەخۆشخانەیە", "تەنها بۆ ئەمبولانسە"], a: 0}
+        ];
+
+        extra10Questions.forEach((item, index) => {
+            master125Questions.push({
+                id: 116 + index,
+                q: { ckb: item.q, ar: item.q, en: item.q },
+                o: item.o.map(opt => ({ ckb: opt, ar: opt, en: opt })),
+                a: item.a
+            });
+        });
+
+        // --- بزوێنەری پاراستنی ٥ تاقیکردنەوەی بێ دووبارەبوونەوە ---
+        let globalQuestionsPool = [];
+        let globalUsedIdsHistory = new Set();
+
+        function fetchNext25UniqueQuestions() {
+            // ئەگەر لە حەوزە ماوەکەدا لە ٢٥ پرسیار کەمتر مابووەوە، تەواوی ١٢٥ پرسیارەکە دەهێنێتەوە کە یەک پرسیاری تاقیکردنەوەی پێشووتر تێدا نییە
+            if (globalQuestionsPool.length < 25) {
+                if (globalUsedIdsHistory.size >= 125) {
+                    globalUsedIdsHistory.clear(); // ئەگەر تەواوی ٥ تاقیکردنەوەکە (١٢٥ پرسیارەکە) تەواو بوون، حەوزەکە نوێ دەبێتەوە
+                }
+                globalQuestionsPool = master125Questions.filter(q => !globalUsedIdsHistory.has(q.id));
+                globalQuestionsPool.sort(() => 0.5 - Math.random());
+            }
+
+            // هەڵبژاردنی ٢٥ پرسیاری ڕێک و تەواو نوێ
+            const selected25 = globalQuestionsPool.splice(0, 25);
+            selected25.forEach(q => globalUsedIdsHistory.add(q.id));
+            
+            return selected25;
+        }
+
+        let qIndex = 0, score = 0, currentQuiz = [];
+        let timerInterval = null, questionEndTime = 0;
+
+        function startQuiz() {
+            document.getElementById('quiz-intro').style.display = 'none';
+            document.getElementById('result-box').style.display = 'none';
+            document.getElementById('quiz-box').style.display = 'block';
+            
+            currentQuiz = fetchNext25UniqueQuestions();
+            qIndex = 0; score = 0; 
+            loadQ();
+        }
+
+        function loadQ() {
+            clearInterval(timerInterval);
+            const q = currentQuiz[qIndex];
+            const qLabel = translations[currentLang].q_label || 'پرسیار';
+            document.getElementById('q-count').innerText = `${qLabel}: ${qIndex + 1} / 25`;
+            document.getElementById('progress').style.width = `${((qIndex) / 25) * 100}%`;
+            document.getElementById('q-text').innerText = q.q[currentLang];
+            
+            const box = document.getElementById('opts-box');
+            box.innerHTML = '';
+            
+            let optionsWithIndex = q.o.map((opt, idx) => ({text: opt[currentLang], isCorrect: idx === q.a}));
+            optionsWithIndex = optionsWithIndex.sort(() => 0.5 - Math.random());
+
+            optionsWithIndex.forEach((opt) => {
+                box.innerHTML += `<button class="opt-btn" onclick="checkAns(this, ${opt.isCorrect})"><i class="far fa-circle"></i> <span>${opt.text}</span></button>`;
+            });
+
+            startTimer();
+        }
+
+        function startTimer() {
+            const secLabel = translations[currentLang].sec_label || 'چرکە';
+            const badge = document.getElementById('timer-badge');
+            badge.classList.remove('urgent');
+
+            questionEndTime = Date.now() + 60000; // ٦٠ چرکە
+            updateTimerDisplay();
+
+            timerInterval = setInterval(() => {
+                const remaining = Math.ceil((questionEndTime - Date.now()) / 1000);
+                if (remaining <= 10) badge.classList.add('urgent');
+
+                if (remaining <= 0) {
+                    clearInterval(timerInterval);
+                    document.getElementById('timer-sec').innerText = `0 ${secLabel}`;
+                    handleTimeOut();
+                } else {
+                    document.getElementById('timer-sec').innerText = `${remaining} ${secLabel}`;
+                }
+            }, 250);
+        }
+
+        function updateTimerDisplay() {
+            const remaining = Math.max(0, Math.ceil((questionEndTime - Date.now()) / 1000));
+            const secLabel = translations[currentLang].sec_label || 'چرکە';
+            document.getElementById('timer-sec').innerText = `${remaining} ${secLabel}`;
+        }
+
+        function handleTimeOut() {
+            const allBtns = document.querySelectorAll('.opt-btn');
+            allBtns.forEach(btn => btn.disabled = true);
+
+            const correctText = currentQuiz[qIndex].o[currentQuiz[qIndex].a][currentLang];
+            allBtns.forEach(btn => {
+                if (btn.querySelector('span').innerText === correctText) {
+                    btn.classList.add('correct');
+                    btn.querySelector('i').className = 'fas fa-check-circle';
+                }
+            });
+
+            setTimeout(() => { qIndex++; if(qIndex < 25) loadQ(); else showResult(); }, 1800);
+        }
+
+        function checkAns(clickedBtn, isCorrect) {
+            clearInterval(timerInterval);
+            const allBtns = document.querySelectorAll('.opt-btn');
+            allBtns.forEach(btn => btn.disabled = true);
+
+            if(isCorrect) {
+                clickedBtn.classList.add('correct');
+                clickedBtn.querySelector('i').className = 'fas fa-check-circle';
+                score += 4; // ٢٥ پرسیار × ٤ نمرە = ١٠٠ نمرەی تەواو
+            } else {
+                clickedBtn.classList.add('wrong');
+                clickedBtn.querySelector('i').className = 'fas fa-times-circle';
+                
+                const correctText = currentQuiz[qIndex].o[currentQuiz[qIndex].a][currentLang];
+                allBtns.forEach(btn => {
+                    if (btn.querySelector('span').innerText === correctText) {
+                        btn.classList.add('correct');
+                        btn.querySelector('i').className = 'fas fa-check-circle';
+                    }
+                });
+            }
+
+            setTimeout(() => { qIndex++; if(qIndex < 25) loadQ(); else showResult(); }, 1800);
+        }
+
+        function showResult() {
+            clearInterval(timerInterval);
+            document.getElementById('quiz-box').style.display = 'none';
+            document.getElementById('result-box').style.display = 'block';
+            
+            const circle = document.getElementById('final-circle');
+            document.getElementById('final-score').innerText = score;
+            
+            if(score >= 80) {
+                circle.style.background = 'var(--success)';
+                circle.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+                document.getElementById('res-title').innerText = translations[currentLang].res_pass_title;
+                document.getElementById('res-title').style.color = 'var(--success)';
+                document.getElementById('res-msg').innerText = translations[currentLang].res_pass_msg;
+            } else {
+                circle.style.background = 'var(--danger)';
+                circle.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+                document.getElementById('res-title').innerText = translations[currentLang].res_fail_title;
+                document.getElementById('res-title').style.color = 'var(--danger)';
+                document.getElementById('res-msg').innerText = translations[currentLang].res_fail_msg;
+            }
+        }
+
+        window.onload = function() {
+            renderLicenses();
+            renderTips();
+            renderSigns();
+        };
+    </script>
+</body>
+</html>
+
