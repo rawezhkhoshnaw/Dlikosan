@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="ckb" dir="rtl">
 <head>
@@ -60,7 +58,7 @@
         .license-title { font-size: 16px; font-weight: bold; color: var(--primary); }
         .license-desc { font-size: 13px; color: var(--text-dark); line-height: 1.7; text-align: justify; margin-bottom: 12px; }
         .license-footer { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
-        .badge-info { font-size: 11px; font-weight: bold; padding: 3px 10px; border-radius: 8px; }
+        .badge-info { font-size: 12px; font-weight: bold; padding: 4px 12px; border-radius: 10px; }
         .badge-age { background: #f0fdf4; color: var(--success); border: 1px solid #bbf7d0; }
         .badge-req { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
 
@@ -71,7 +69,6 @@
         .article-card li::before { content: '✔'; position: absolute; right: 0; color: var(--danger); font-weight: bold; }
         [dir="ltr"] .article-card li::before { right: auto; left: 0; }
 
-        /* فۆرمی تۆمارکردن */
         .reg-section { max-width: 850px; margin: 30px auto 50px; padding: 0 5%; }
         .reg-card { background: var(--surface); border-radius: 30px; padding: 40px; box-shadow: var(--shadow-lg); border: 1px solid #e9d5ff; }
         .reg-title { font-size: 24px; color: var(--primary); margin-bottom: 10px; font-weight: bold; text-align: center; display: flex; align-items: center; justify-content: center; gap: 12px; }
@@ -93,7 +90,6 @@
         .feature-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
         .feature-card i { font-size: 36px; color: var(--primary); margin-bottom: 20px; background: #faf5ff; padding: 18px; border-radius: 50%; }
 
-        /* ڕێنمایی و هێماکان */
         .tips-container { max-width: 1200px; margin: 0 auto 50px; padding: 0 5%; }
         .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 25px; }
         .tip-card { display: flex; gap: 18px; align-items: flex-start; padding: 22px; background: var(--surface); border-radius: var(--radius); border-inline-start: 5px solid var(--info); box-shadow: var(--shadow-sm); transition: 0.3s; }
@@ -110,7 +106,7 @@
         
         .shape-box { height: 90px; display: flex; justify-content: center; align-items: center; margin-bottom: 12px; position: relative; }
         
-        /* چاککردنی تەواوەتی کێشەی نیشاندانی ئایکۆنی ناو سێگۆشەکان */
+        /* ڕوون و زەقکردنی ئایکۆنی ناو سێگۆشەکان */
         .triangle-container { width: 85px; height: 75px; position: relative; display: flex; align-items: center; justify-content: center; }
         .warning-triangle { position: absolute; width: 100%; height: 100%; background-color: var(--danger); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
         .warning-triangle-inner { position: absolute; width: 74%; height: 74%; background-color: var(--surface); bottom: 3px; left: 13%; clip-path: polygon(50% 0%, 0% 100%, 100% 100%); z-index: 1; }
@@ -122,7 +118,6 @@
         .circle-blue i { font-size: 22px; }
         .rect-blue { width: 80px; height: 80px; border-radius: 15px; background: var(--info); display: flex; justify-content: center; align-items: center; font-size: 28px; color: white; }
 
-        /* بەشی تاقیکردنەوە */
         .quiz-wrapper { max-width: 850px; margin: 30px auto; padding: 0 5%; }
         .quiz-card { background: var(--surface); border-radius: 30px; padding: 35px; box-shadow: var(--shadow-lg); border: 1px solid #e9d5ff; position: relative; }
         .progress-container { width: 100%; height: 10px; background: #e2e8f0; border-radius: 10px; margin-bottom: 25px; overflow: hidden; }
@@ -301,7 +296,7 @@
                 <div class="q-header">
                     <span id="q-count">پرسیار: ١ / ٢٥</span>
                     <div class="timer-badge" id="timer-badge">
-                        <i class="fas fa-clock"></i> <span id="timer-sec">60</span> <span data-i18n="sec_label">چرکە</span>
+                        <i class="fas fa-clock"></i> <span id="timer-sec">60</span> <span id="timer-unit">چرکە</span>
                     </div>
                 </div>
                 <div class="q-text" id="q-text"></div>
@@ -390,18 +385,18 @@
         };
 
         const licensesData = [
-            { code: "A", title: {ckb:"مۆڵەتی ماتۆڕسکیل", ar:"رخصة دراجة نارية", en:"Motorcycle License"}, desc: {ckb:"ڕێگە دەدات بە هەڵگرەکەی شۆفێری ماتۆڕسکیلێک بکات، کە قەبارەی هێزی بزوێنەرەکەی له (125CC) کەمتڕ نەبێت، وە ماتۆڕسکیلی وزەی دووانە (هیبرۆید - hybrid)، یاخود کارەبایی. تەمەنی (١٦) ساڵی تەواو کردبێت.", ar:"تسمح بحاملها قيادة دراجة نارية لا يقل حجم محركها عن (125CC)، والدراجات الهجينة (Hybrid) أو الكهربائية. بشرط إكمال سن 16 عاماً.", en:"Allows driving motorcycles with engine capacity >= 125CC, hybrid, or electric. Age required: 16+ years."}, age: {ckb:"تەمەن: ١٦ ساڵ", ar:"العمر: ١٦ سنة", en:"Age: 16+"}, req: {ckb:"تەواوکردنی ١٦ ساڵ", ar:"إكمال سن ١٦ سنة", en:"16 years completed"} },
-            { code: "B", title: {ckb:"مۆڵەتی تایبەت (ئۆتۆمبێلی بچووک)", ar:"رخصة خاصة (سيارات صغيرة)", en:"Private Vehicle License"}, desc: {ckb:"ڕێگە دەدات بە هەڵگرەکەی شۆفێری ئۆتۆمبێلێک بکات کە کێشی ئۆتۆمبێلەکە کۆی بە بارەوە له (٣٥٠٠) کیلو گرام زیاتر نەبێت، وە عارەبانەیەک ڕابکێشێت کە کێشی له (٧٥٠) کیلوگرام زیاتر نەبێت.", ar:"تسمح بفيادة سيارة لا يتجاوز وزنها الكلي مع الحمولة (3500) كغم، وسحب مقطورة لا تتجاوز (750) كغم.", en:"Allows driving vehicles up to 3500kg max weight, pulling trailers up to 750kg."}, age: {ckb:"تەمەن: ١٨ ساڵ", ar:"العمر: ١٨ سنة", en:"Age: 18+"}, req: {ckb:"تەواوکردنی ١٨ ساڵ", ar:"إكمال سن ١٨ سنة", en:"18 years completed"} },
-            { code: "BE", title: {ckb:"ئۆتۆمبێلی تایبەت + عارەبانەی قورس", ar:"سيارة خاصة + مقطورة ثقيلة", en:"Private Car + Heavy Trailer"}, desc: {ckb:"ڕێگە دەدات بە هەڵگرەکەی شۆفێری ئۆتۆمبێلێک بکات و عارەبانەیەک ڕابکێشێت، کە کێشی عارەبانەکە له (٧٥٠) کیلو گرام زیاتر بێت، بەو مەرجەی کێشی بە بەتاڵی له (٣٥٠٠) کیلو گرام زیاتر نەبێت.", ar:"تسمح بقيادة سيارة وسحب مقطورة يتجاوز وزنها (750) كغم، بشرط ألا يتجاوز وزن المقطورة فارغة (3500) كغم.", en:"Allows driving a category B car pulling a trailer > 750kg (trailer empty weight <= 3500kg)."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە ۱ ساڵ مۆڵەتی Bت هەبێت", ar:"حائز على رخصة B لمدة سنة", en:"Held B License for 1 year"} },
-            { code: "C1", title: {ckb:"بارهەڵگری ناوەنجی", ar:"شاحنة متوسطة", en:"Medium Truck"}, desc: {ckb:"ڕێگە دەدات بە هەڵگرەکەی شۆفێری ئۆتۆمبێلیکی بارهەڵگر بکات کە کێشی بە بارەوە لە نێوان (٣٥٠٠) بۆ (٧٥٠٠) کیلوگرام بێت و عارەبانەیەک ڕابکێشێت کە کێشی له (٧٥٠) کیلوگرام زیاتر نەبێت.", ar:"تسمح بقيادة شاحنة يتراوح وزنها مع الحمولة بين (3500) إلى (7500) كغم وسحب مقطورة لا تتجاوز (750) كغم.", en:"Allows driving trucks between 3500kg and 7500kg, pulling trailers up to 750kg."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە ۱ ساڵ مۆڵەتی Bت هەبێت", ar:"حائز على رخصة B لمدة سنة", en:"Held B License for 1 year"} },
-            { code: "C1E", title: {ckb:"بارهەڵگری ناوەنجی + عارەبانە", ar:"شاحنة متوسطة + مقطورة", en:"Medium Truck + Trailer"}, desc: {ckb:"ڕێگە دەدات بە هەڵگرەکەی شۆفێری ئۆتۆمبێلیکی بارهەڵگر بکات کە کێشی بە بارەوە لە نێوان (٣٥٠٠) بۆ (٧٥٠٠) کیلوگرام بێت و عارەبانەیەک ڕابکێشێت کە کێشی له (٧٥٠) کیلوگرام زیاتر بێت.", ar:"تسمح بقيادة شاحنة متوسطة (3500 - 7500 كغم) وسحب مقطورة يتجاوز وزنها (750) كغم.", en:"Allows driving a C1 truck with a trailer > 750kg. Permits driving BE vehicles as well."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە مۆڵەتی C1ت هەبێت", ar:"حائز على رخصة C1", en:"Must hold C1 License"} },
-            { code: "C", title: {ckb:"بارهەڵگری قورس", ar:"شاحنة ثقيلة", en:"Heavy Rigid Truck"}, desc: {ckb:"ڕێگە دەدات بە هەڵگرەکەی کە شۆفێری ئۆتۆمبێلیکی بارهەڵگر بکات. کە کێشی بە بارەوە له (٣٥٠٠) کیلوگرام زیاتر بێت، و عارەبانەیەک ڕابکێشێت کە کێشی له (٧٥٠) کیلوگرام زیاتر نەبێت.", ar:"تسمح بقيادة شاحنة ثقيلة يتجاوز وزنها الكلي (3500) كغم وسحب مقطورة لا تتجاوز (750) كغم.", en:"Allows driving heavy trucks > 3500kg pulling a trailer <= 750kg."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە ۱ ساڵ مۆڵەتی Bت هەبێت", ar:"حائز على رخصة B لمدة سنة", en:"Held B License for 1 year"} },
-            { code: "CE", title: {ckb:"ترێلە و قاطرة ومقطورة", ar:"شاحنة ثقيلة مع تريلة (مقطورة)", en:"Articulated Truck / Semi-Trailer"}, desc: {ckb:"ڕێگە دەدات بە هەڵگرەکەی کە شۆفێری ئۆتۆمبێلیکی بارهەڵگر بکات لەگەڵ جۆری ترێلە و (قاطرة و مقطورة) بکات کە کێشی له (٧٥٠) کیلوگرام زیاتر بێت.", ar:"تسمح بقيادة شاحنة ثقيلة مع قاطرة ومقطورة (تريلة) يتجاوز وزنها (750) كغم.", en:"Allows driving heavy articulated trucks & semi-trailers > 750kg."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە مۆڵەتی C و BEت هەبێت", ar:"حائز على رخصتي C و BE", en:"Must hold C & BE Licenses"} },
-            { code: "D1", title: {ckb:"مینی پاس (٩ تا ١٦ سەرنشین)", ar:"حافلة صغيرة (٩ - ١٦ راكب)", en:"Minibus (9-16 passengers)"}, desc: {ckb:"ڕێگە دەدات بە هەڵگرەکەی شۆفێری پاس بکات، کە ژمارەی سەرنشینەکانی لە (١٦) کەس زیاتر نەبێت و درێژی پاسەکە لە (٨) مەتر زیاتر نەبێت.", ar:"تسمح بقيادة حافلة لا يتجاوز عدد ركابها مع السائق (16) شخصاً وطولها لا يتجاوز (8) أمتار.", en:"Allows driving minibuses up to 16 seats and max 8m length."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە ۱ ساڵ مۆڵەتی Bت هەبێت", ar:"حائز على رخصة B لمدة سنة", en:"Held B License for 1 year"} },
-            { code: "D1E", title: {ckb:"مینی پاس + عارەبانەی قورس", ar:"حافلة صغيرة + مقطورة ثقيلة", en:"Minibus + Heavy Trailer"}, desc: {ckb:"ڕێگە دەدات بە هەڵگرەکەی شۆفێری پاس بکات، کە سەرنشینەکانی له (١٦) کەس زیاتر نەبێت، و عارەبانەیەک ڕابکێشێت کە کێشی له (٧٥٠) کیلوگرام زیاتر بێت.", ar:"تسمح بقيادة حافلة صغيرة (حتى 16 راكب) وسحب مقطورة يتجاوز وزنها (750) كغم.", en:"Allows driving a D1 minibus with a trailer > 750kg."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە مۆڵەتی D1ت هەبێت", ar:"حائز على رخصة D1", en:"Must hold D1 License"} },
-            { code: "D", title: {ckb:"پاسی گەورەی سەرنشینان", ar:"حافلة ركاب كبيرة", en:"Large Passenger Bus"}, desc: {ckb:"ڕێگە دەدات بە هەڵگرەکەی کە شۆفێری ئۆتۆمبێلیکی پاس بکات و عارەبانەیەک ڕابکێشێت کە کێشی له (٧٥٠) کیلوگرام زیاتر نەبێت.", ar:"تسمح بقيادة حافلة ركاب كبيرة وسحب مقطورة لا تتجاوز (750) كغم.", en:"Allows driving large passenger buses pulling a trailer <= 750kg."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە ۱ ساڵ مۆڵەتی Bت هەبێت", ar:"حائز على رخصة B لمدة سنة", en:"Held B License for 1 year"} },
-            { code: "DE", title: {ckb:"پاسی گەورە + عارەبانەی قورس", ar:"حافلة كبيرة + مقطورة ثقيلة", en:"Large Bus + Heavy Trailer"}, desc: {ckb:"ڕێگە دەدات بە هەڵگرەکەی کە شۆفێری ئۆتۆمبێلیکی پاس بکات، و عارەبانەیەک ڕابکێشێت کە کێشی له (٧٥٠) کیلوگرام زیاتر بێت.", ar:"تسمح بقيادة حافلة كبيرة وسحب مقطورة يتجاوز وزنها (750) كغم.", en:"Allows driving large buses pulling a heavy trailer > 750kg."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە مۆڵەتی Dت هەبێت", ar:"حائز على رخصة D", en:"Must hold D License"} },
-            { code: "T", title: {ckb:"ئامێرەکانی کێڵگە و بیناسازی", ar:"الآليات الزراعية والإنشائية", en:"Agricultural & Construction Tractors"}, desc: {ckb:"ڕێگە دەدات بە هەڵگرەکەی شۆفێری ئامێری کشتوکاڵی و بیناسازی بکات، کە خێراییەکەی له (٦٠) کیلو‌مەتر زیاتر نەبێت.", ar:"تسمح بقيادة الآليات الزراعية والإنشائية التي لا تتجاوز سرعتها (60) كم/ساعة.", en:"Allows driving agricultural and construction tractors with speed <= 60 km/h."}, age: {ckb:"تەمەن: ١٨ ساڵ", ar:"العمر: ١٨ سنة", en:"Age: 18+"}, req: {ckb:"تەواوکردنی ١٨ ساڵ", ar:"إكمال سن ١٨ سنة", en:"18 years completed"} }
+            { code: "A", title: {ckb:"مۆڵەتی ماتۆڕسکیل", ar:"رخصة دراجة نارية", en:"Motorcycle License"}, desc: {ckb:"ڕێگە دەدات بە شۆفێری ماتۆڕسکیلێک کە بزوێنەرەکەی له (125CC) کەمتڕ نەبێت، وە هیبرۆید یان کارەبایی.", ar:"تسمح بحاملها قيادة دراجة نارية لا يقل حجم محركها عن (125CC)، والدراجات الهجينة أو الكهربائية.", en:"Allows driving motorcycles with engine capacity >= 125CC, hybrid, or electric."}, age: {ckb:"تەمەن: ١٦ ساڵ", ar:"العمر: ١٦ سنة", en:"Age: 16+"}, req: null },
+            { code: "B", title: {ckb:"مۆڵەتی تایبەت (ئۆتۆمبێلی بچووک)", ar:"رخصة خاصة (سيارات صغيرة)", en:"Private Vehicle License"}, desc: {ckb:"ڕێگە دەدات بە شۆفێری ئۆتۆمبێلێک کە کێشی کۆی بە بارەوە له (٣٥٠٠) کگم زیاتر نەبێت، وە عارەبانەی لێدان تا (٧٥٠) کگم.", ar:"تسمح بفيادة سيارة لا يتجاوز وزنها الكلي مع الحمولة (3500) كغم، وسحب مقطورة لا تتجاوز (750) كغم.", en:"Allows driving vehicles up to 3500kg max weight, pulling trailers up to 750kg."}, age: {ckb:"تەمەن: ١٨ ساڵ", ar:"العمر: ١٨ سنة", en:"Age: 18+"}, req: null },
+            { code: "BE", title: {ckb:"ئۆتۆمبێلی تایبەت + عارەبانەی قورس", ar:"سيارة خاصة + مقطورة ثقيلة", en:"Private Car + Heavy Trailer"}, desc: {ckb:"ڕێگە دەدات بە شۆفێریکردنی ئۆتۆمبێلێک بە عارەبانەی زیاتر له (٧٥٠) کگرام.", ar:"تسمح بقيادة سيارة وسحب مقطورة يتجاوز وزنها (750) كغم.", en:"Allows driving a category B car pulling a trailer > 750kg."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە ۱ ساڵ مۆڵەتی Bت هەبێت", ar:"حائز على رخصة B لمدة سنة", en:"Held B License for 1 year"} },
+            { code: "C1", title: {ckb:"بارهەڵگری ناوەنجی", ar:"شاحنة متوسطة", en:"Medium Truck"}, desc: {ckb:"ڕێگە دەدات بە شۆفێریکردنی بارهەڵگرێک کە کێشی لە نێوان (٣٥٠٠) بۆ (٧٥٠٠) کگرام بێت.", ar:"تسمح بقيادة شاحنة يتراوح وزنها بين (3500) إلى (7500) كغم.", en:"Allows driving trucks between 3500kg and 7500kg."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە ۱ ساڵ مۆڵەتی Bت هەبێت", ar:"حائز على رخصة B لمدة سنة", en:"Held B License for 1 year"} },
+            { code: "C1E", title: {ckb:"بارهەڵگری ناوەنجی + عارەبانە", ar:"شاحنة متوسطة + مقطورة", en:"Medium Truck + Trailer"}, desc: {ckb:"ڕێگە دەدات بە شۆفێری بارهەڵگری C1 بە عارەبانەی زیاتر له (٧٥٠) کگرام.", ar:"تسمح بقيادة شاحنة متوسطة C1 وسحب مقطورة يتجاوز وزنها (750) كغم.", en:"Allows driving a C1 truck with a trailer > 750kg."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە مۆڵەتی C1ت هەبێت", ar:"حائز على رخصة C1", en:"Must hold C1 License"} },
+            { code: "C", title: {ckb:"بارهەڵگری قورس", ar:"شاحنة ثقيلة", en:"Heavy Rigid Truck"}, desc: {ckb:"ڕێگە دەدات بە شۆفێری بارهەڵگرێک کە کێشی لە (٣٥٠٠) کگرام زیاتر بێت.", ar:"تسمح بقيادة شاحنة ثقيلة يتجاوز وزنها الكلي (3500) كغم.", en:"Allows driving heavy trucks > 3500kg."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە ۱ ساڵ مۆڵەتی Bت هەبێت", ar:"حائز على رخصة B لمدة سنة", en:"Held B License for 1 year"} },
+            { code: "CE", title: {ckb:"ترێلە و قاطرة ومقطورة", ar:"شاحنة ثقيلة مع تريلة", en:"Articulated Truck / Semi-Trailer"}, desc: {ckb:"ڕێگە دەدات بە شۆفێری بارهەڵگری گەورە لەگەڵ جۆری ترێلە و (قاطرة و مقطورة).", ar:"تسمح بقيادة شاحنة ثقيلة مع قاطرة ومقطورة (تريلة).", en:"Allows driving heavy articulated trucks & semi-trailers."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە مۆڵەتی C و BEت هەبێت", ar:"حائز على رخصتي C و BE", en:"Must hold C & BE Licenses"} },
+            { code: "D1", title: {ckb:"مینی پاس (٩ تا ١٦ سەرنشین)", ar:"حافلة صغيرة (٩ - ١٦ راكب)", en:"Minibus (9-16 passengers)"}, desc: {ckb:"ڕێگە دەدات بە شۆفێری پاسێک کە سەرنشینەکانی لە (١٦) کەس زیاتر نەبێت.", ar:"تسمح بقيادة حافلة لا يتجاوز عدد ركابها (16) شخصاً.", en:"Allows driving minibuses up to 16 seats."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە ۱ ساڵ مۆڵەتی Bت هەبێت", ar:"حائز على رخصة B لمدة سنة", en:"Held B License for 1 year"} },
+            { code: "D1E", title: {ckb:"مینی پاس + عارەبانەی قورس", ar:"حافلة صغيرة + مقطورة ثقيلة", en:"Minibus + Heavy Trailer"}, desc: {ckb:"ڕێگە دەدات بە شۆفێری پاسی D1 بە عارەبانەی زیاتر لە (٧٥٠) کگرام.", ar:"تسمح بقيادة حافلة صغيرة وسحب مقطورة يتجاوز وزنها (750) كغم.", en:"Allows driving a D1 minibus with a trailer > 750kg."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە مۆڵەتی D1ت هەبێت", ar:"حائز على رخصة D1", en:"Must hold D1 License"} },
+            { code: "D", title: {ckb:"پاسی گەورەی سەرنشینان", ar:"حافلة ركاب كبيرة", en:"Large Passenger Bus"}, desc: {ckb:"ڕێگە دەدات بە شۆفێریکردنی پاسی گەورەی سەرنشینان.", ar:"تسمح بقيادة حافلة ركاب كبيرة.", en:"Allows driving large passenger buses."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە ۱ ساڵ مۆڵەتی Bت هەبێت", ar:"حائز على رخصة B لمدة سنة", en:"Held B License for 1 year"} },
+            { code: "DE", title: {ckb:"پاسی گەورە + عارەبانەی قورس", ar:"حافلة كبيرة + مقطورة ثقيلة", en:"Large Bus + Heavy Trailer"}, desc: {ckb:"ڕێگە دەدات بە شۆفێری پاسی گەورە بە عارەبانەی زیاتر لە (٧٥٠) کگرام.", ar:"تسمح بقيادة حافلة كبيرة وسحب مقطورة يتجاوز وزنها (750) كغم.", en:"Allows driving large buses pulling a heavy trailer > 750kg."}, age: {ckb:"تەمەن: ٢٠ ساڵ", ar:"العمر: ٢٠ سنة", en:"Age: 20+"}, req: {ckb:"پێویستە مۆڵەتی Dت هەبێت", ar:"حائز على رخصة D", en:"Must hold D License"} },
+            { code: "T", title: {ckb:"ئامێرەکانی کێڵگە و بیناسازی", ar:"الآليات الزراعية والإنشائية", en:"Agricultural & Construction Tractors"}, desc: {ckb:"ڕێگە دەدات بە شۆفێری ئامێری کشتوکاڵی و بیناسازی کە خێراییەکەی لە (٦٠) کم/ک زیاتر نەبێت.", ar:"تسمح بقيادة الآليات الزراعية والإنشائية التي لا تتجاوز سرعتها (60) كم/ساعة.", en:"Allows driving agricultural and construction tractors with speed <= 60 km/h."}, age: {ckb:"تەمەن: ١٨ ساڵ", ar:"العمر: ١٨ سنة", en:"Age: 18+"}, req: null }
         ];
 
         function renderLicenses() {
@@ -419,7 +414,7 @@
                         </div>
                         <div class="license-footer">
                             <span class="badge-info badge-age">${item.age[currentLang]}</span>
-                            <span class="badge-info badge-req">${item.req[currentLang]}</span>
+                            ${item.req ? `<span class="badge-info badge-req">${item.req[currentLang]}</span>` : ''}
                         </div>
                     </div>
                 `;
@@ -455,6 +450,8 @@
                 const key = el.getAttribute('data-i18n');
                 if (translations[lang] && translations[lang][key]) el.innerHTML = translations[lang][key];
             });
+
+            document.getElementById('timer-unit').innerText = translations[currentLang].sec_label;
 
             renderLicenses(); renderTips(); renderSigns();
             if (document.getElementById('quiz-box').style.display === 'block') loadQ();
@@ -577,7 +574,7 @@
             infoSigns.forEach(s => iBox.innerHTML += `<div class="sign-card"><div class="shape-box"><div class="rect-blue">${s.i}</div></div><h3>${s.t[currentLang]}</h3><p>${s.d[currentLang]}</p></div>`);
         }
 
-        // --- ٤. داتابەیسی دروست ڕێک ١٢٥ پرسیاری ئەکادیمی جیاواز بۆ ٥ تاقیکردنەوەی سەراپای بێ دووبارەبوونەوە ---
+        // --- ٤. داتابەیسی ڕێک ١٢٥ پرسیاری ڕاستەقینەی شۆفێری ---
         const raw115Questions = [
             {q: "لە چوارڕیانی بێ هێمای هاتوچۆ، یاسای ئەولەویەت بۆ کێیە؟", o: ["ئەوەی دەکەوێتە لای ڕاستی ئەوانی ترەوە", "ئەوەی خێرایە", "ئەوەی لای چەپە", "بارهەڵگرەکان"], a: 0},
             {q: "لەناو فلکە، کێ مافی پێشینەی هەیە؟", o: ["ئەو ئۆتۆمبێلەی کە پێشتر لەناو فلکەدایە", "من، ئەگەر لای ڕاستی بم", "هەردووکیان دەتوانن بڕۆن", "ئەوەی خێرایە"], a: 0},
@@ -681,19 +678,6 @@
             {q: "ئەگەر شۆفێرێک تووشی ڕووداو بوو و کەسێکی بریندار لەناو ئۆتۆمبێلەکەیدا گیری خواردبوو (بەڵام مەترسی ئاگرکەوتنەوە نەبوو)، چی دەبێت بکرێت؟", o: ["نابێت بریندارەکە بجوڵێندرێت چونکە لەوانەیە زیان بە بڕبڕەی پشتی بگات، تەنها چاوەڕێی فریاکەوتن دەکەین", "بە خێرایی دەریدەهێنین", "ئاو دەکەین بەسەریدا", "دەستبەجێ دەیبەینە نەخۆشخانە بە ئۆتۆمبێلی تر"], a: 0}
         ];
 
-        // دروستکردنی دەستبەجێی ١٢٥ پرسیاری تەواو جیاواز بە ٣ زمان
-        let master125Questions = [];
-        
-        raw115Questions.forEach((item, index) => {
-            master125Questions.push({
-                id: index + 1,
-                q: { ckb: item.q, ar: item.q, en: item.q },
-                o: item.o.map(opt => ({ ckb: opt, ar: opt, en: opt })),
-                a: item.a
-            });
-        });
-
-        // زامنکردنی گەیشتن بە ١٢٥ پرسیاری تەواوی جیاواز لە داتابەیسەکەدا
         const extra10Questions = [
             {q: "کاتێک نیشانەی خێرایی ٨٠ دەبینیت، مانای چییە؟", o: ["زۆرترین خێرایی ڕێگەپێدراو ٨٠ کم/ک", "کەمترین خێرایی ٨٠ کم/ک", "مەسافەی سەلامەتی ٨٠ مەتر", "وزەی بزوێنەر ٨٠ horsepower"], a: 0},
             {q: "بەستنی قایشی سەلامەتی بۆ سەرنشینی کوشنی دواوە؟", o: ["بەپێی یاسا ناچارییە بۆ پاراستنی گیانیان", "ئارەزوومەندانەیە", "تەنها لە ڕێگای خێرا ناچارییە", "تەنها بۆ منداڵان ناچارییە"], a: 0},
@@ -701,27 +685,37 @@
             {q: "هێمای سێگۆشە کە وێنەی شەمەندەفەری تێدایە بەبێ بەربەست؟", o: ["هێڵی شەمەندەفەری بێ بەربەست لەپێشە، زۆر وریابە", "وێستگەی شەمەندەفەر", "شەمەندەفەری ناو شاری", "ڕێگا داخراوە"], a: 0},
             {q: "تایەی ئۆتۆمبێل دەبێت چەند کەمی درزی ڕێگەپێدراوی تێدابێت؟", o: ["لانی کەم ١.٦ میلی مەتر", "٠.٥ میلی مەتر", "٥ میلی مەتر", "هیچ مەرجێک نییە"], a: 0},
             {q: "لە کاتی تەمومژدا بەکارهێنانی ئاوێنەی دواوە چۆن دەبێت؟", o: ["دەبێت وریای ئۆتۆمبێلەکانی پشتەوەت بێیت کە ڕەنگە نەتبینن", "پێویست بە ئاوێنە ناکات", "ئاوێنەکان بپۆشە", "تەنها سەیری پێشەوە بکە"], a: 0},
-            {q: "ئەگەر ئۆتۆمبێلەکەت بزوێنەرەکەی گەرم بوو (حەمای کرد)، یەکەم کار چییە؟", o: ["لەلایەکی سەلامەت دەوەستم و مەکینە ناهێڵم زۆر کاربکات و جامپ دەکەم", "دەستبەجێ سەرپۆشی ڕادێتەرەکە دەکەمەوە", "ئاوی سارد دەکەمە سەر مەکینەکە", "خێرایی زۆر زیاد دەکەم"], a: 0},
+            {q: "ئەگەر ئۆتۆمبێلەکەت بزوێنەرەکەی گەرم بوو (حەمای کرد)، یەکەم کار چییە؟", o: ["لەلایەکی سەلامەت دەوەستم و بزوێنەرەکە لەکار دەخەم", "دەستبەجێ سەرپۆشی ڕادێتەرەکە دەکەمەوە", "ئاوی سارد دەکەمە سەر مەکینەکە", "خێرایی زۆر زیاد دەکەم"], a: 0},
             {q: "هێمای بازنەیی سوور کە ژمارە 3.5tی تێدایە؟", o: ["تێپەڕبوونی ئۆتۆمبێلی زیاتر لە ٣.٥ تۆن قەدەغەیە", "کێشی ئۆتۆمبێل دەبێت ٣.٥ تۆن بێت", "خێرایی ٣٥ کم/ک", "درێژی ٣.٥ مەتر"], a: 0},
             {q: "لە کاتی شۆفێری لە شەقامێکدا کە لافاوی لێستاوە، چی دەکەیت؟", o: ["بەمەسافەی خێرا بە ئاوەکەدا تێنەپەڕیت چونکە بزوێنەر دەکوژێتەوە", "بە زۆرترین خێرایی تێدەپەڕم", "برێکی توند دەگرم لەناو ئاوەکەدا", "گێڕەکە دەخەمە N"], a: 0},
             {q: "هێمای چوارگۆشەی شین کە وێنەی نەخۆشخانەی (H) تێدایە؟", o: ["نەخۆشخانە یان بنکەی تەندروستی لە نزیکە", "هۆڕن لێدان ئاساییە", "پارکینگی نەخۆشخانەیە", "تەنها بۆ ئەمبولانسە"], a: 0}
         ];
 
-        extra10Questions.forEach((item, index) => {
+        let master125Questions = [];
+        
+        raw115Questions.forEach((item, index) => {
             master125Questions.push({
-                id: 116 + index,
-                q: { ckb: item.q, ar: item.q, en: item.q },
-                o: item.o.map(opt => ({ ckb: opt, ar: opt, en: opt })),
+                id: index + 1,
+                q: item.q,
+                o: item.o,
                 a: item.a
             });
         });
 
-        // --- بزوێنەری پاراستنی ٥ تاقیکردنەوەی بێ دووبارەبوونەوە ---
+        extra10Questions.forEach((item, index) => {
+            master125Questions.push({
+                id: 116 + index,
+                q: item.q,
+                o: item.o,
+                a: item.a
+            });
+        });
+
+        // --- بزوێنەری زامنکردنی ٥ تاقیکردنەوەی تەواوی بێ دووبارەبوونەوە (٥ × ٢٥ = ١٢٥) ---
         let globalQuestionsPool = [];
         let globalUsedIdsHistory = new Set();
 
         function fetchNext25UniqueQuestions() {
-            // ئەگەر لە حەوزە ماوەکەدا لە ٢٥ پرسیار کەمتر مابووەوە، تەواوی ١٢٥ پرسیارەکە دەهێنێتەوە کە یەک پرسیاری تاقیکردنەوەی پێشووتر تێدا نییە
             if (globalQuestionsPool.length < 25) {
                 if (globalUsedIdsHistory.size >= 125) {
                     globalUsedIdsHistory.clear(); // ئەگەر تەواوی ٥ تاقیکردنەوەکە (١٢٥ پرسیارەکە) تەواو بوون، حەوزەکە نوێ دەبێتەوە
@@ -730,10 +724,8 @@
                 globalQuestionsPool.sort(() => 0.5 - Math.random());
             }
 
-            // هەڵبژاردنی ٢٥ پرسیاری ڕێک و تەواو نوێ
             const selected25 = globalQuestionsPool.splice(0, 25);
             selected25.forEach(q => globalUsedIdsHistory.add(q.id));
-            
             return selected25;
         }
 
@@ -756,12 +748,12 @@
             const qLabel = translations[currentLang].q_label || 'پرسیار';
             document.getElementById('q-count').innerText = `${qLabel}: ${qIndex + 1} / 25`;
             document.getElementById('progress').style.width = `${((qIndex) / 25) * 100}%`;
-            document.getElementById('q-text').innerText = q.q[currentLang];
+            document.getElementById('q-text').innerText = q.q;
             
             const box = document.getElementById('opts-box');
             box.innerHTML = '';
             
-            let optionsWithIndex = q.o.map((opt, idx) => ({text: opt[currentLang], isCorrect: idx === q.a}));
+            let optionsWithIndex = q.o.map((optText, idx) => ({text: optText, isCorrect: idx === q.a}));
             optionsWithIndex = optionsWithIndex.sort(() => 0.5 - Math.random());
 
             optionsWithIndex.forEach((opt) => {
@@ -772,11 +764,10 @@
         }
 
         function startTimer() {
-            const secLabel = translations[currentLang].sec_label || 'چرکە';
             const badge = document.getElementById('timer-badge');
             badge.classList.remove('urgent');
 
-            questionEndTime = Date.now() + 60000; // ٦٠ چرکە
+            questionEndTime = Date.now() + 60000; // ٦٠ چرکەی تەواو
             updateTimerDisplay();
 
             timerInterval = setInterval(() => {
@@ -785,25 +776,25 @@
 
                 if (remaining <= 0) {
                     clearInterval(timerInterval);
-                    document.getElementById('timer-sec').innerText = `0 ${secLabel}`;
+                    document.getElementById('timer-sec').innerText = '0';
                     handleTimeOut();
                 } else {
-                    document.getElementById('timer-sec').innerText = `${remaining} ${secLabel}`;
+                    document.getElementById('timer-sec').innerText = `${remaining}`;
                 }
             }, 250);
         }
 
         function updateTimerDisplay() {
             const remaining = Math.max(0, Math.ceil((questionEndTime - Date.now()) / 1000));
-            const secLabel = translations[currentLang].sec_label || 'چرکە';
-            document.getElementById('timer-sec').innerText = `${remaining} ${secLabel}`;
+            document.getElementById('timer-sec').innerText = `${remaining}`;
         }
 
         function handleTimeOut() {
             const allBtns = document.querySelectorAll('.opt-btn');
             allBtns.forEach(btn => btn.disabled = true);
 
-            const correctText = currentQuiz[qIndex].o[currentQuiz[qIndex].a][currentLang];
+            // نیشاندانی وەڵامی ڕاست (بەبێ ئەژمارکردنی هیچ نمرەیەک - ٠ نمرە)
+            const correctText = currentQuiz[qIndex].o[currentQuiz[qIndex].a];
             allBtns.forEach(btn => {
                 if (btn.querySelector('span').innerText === correctText) {
                     btn.classList.add('correct');
@@ -822,12 +813,12 @@
             if(isCorrect) {
                 clickedBtn.classList.add('correct');
                 clickedBtn.querySelector('i').className = 'fas fa-check-circle';
-                score += 4; // ٢٥ پرسیار × ٤ نمرە = ١٠٠ نمرەی تەواو
+                score += 4; // ٤ نمرە بۆ هەر وەڵامێکی ڕاست (٢٥ × ٤ = ١٠٠)
             } else {
                 clickedBtn.classList.add('wrong');
                 clickedBtn.querySelector('i').className = 'fas fa-times-circle';
                 
-                const correctText = currentQuiz[qIndex].o[currentQuiz[qIndex].a][currentLang];
+                const correctText = currentQuiz[qIndex].o[currentQuiz[qIndex].a];
                 allBtns.forEach(btn => {
                     if (btn.querySelector('span').innerText === correctText) {
                         btn.classList.add('correct');
